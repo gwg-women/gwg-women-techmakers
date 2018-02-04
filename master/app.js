@@ -198,8 +198,8 @@ var Place = function(data){
    this.address = ko.observable(data.formatted_address);
    
 }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDri8OfjRinRNoXedZ4r4VnBW01NhTVXGI&libraries=places&callback=initAutocomplete"
-         async defer></script>
+//Add Maps API key here
+    <script src="https://maps.googleapis.com/maps/api/js?key=key&libraries=places&callback=initAutocomplete"
+         async defer>
 
 

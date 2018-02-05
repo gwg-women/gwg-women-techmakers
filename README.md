@@ -4,4 +4,5 @@ This is a Grow with Google project for an offline first app that provides inform
 Need to decide:
 Whether we use geolocation or use the search box instead
 
-(link)[https://script.google.com/macros/s/AKfycbyeAP8n-wwIYmGGqStDIRcxnVa8QtA-RDKpgsiPCudzWVA7VByd/exec]
+Working version demo
+https://script.google.com/macros/s/AKfycbyeAP8n-wwIYmGGqStDIRcxnVa8QtA-RDKpgsiPCudzWVA7VByd/exec

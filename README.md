@@ -34,7 +34,7 @@ c) Click Continue to enable the Google Maps API (https://console.developers.goog
 d) On the Credentials page, get an API key. 
 Detailed instructions/more (https://developers.google.com/maps/documentation/android-api/signup)
 
-4) In the file master->app.js replace mykey with your Google Maps key
-    "https://maps.googleapis.com/maps/api/js?key=key&libraries=places&callback=initAutocomplete"
+4) In the file master->index.html replace mykey with your Google Maps key
+    "https://maps.googleapis.com/maps/api/js?key=mykey&libraries=places&callback=initAutocomplete"
 5) Run the app
 6) You should be able to see it run on localhost

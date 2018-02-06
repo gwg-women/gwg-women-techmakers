@@ -3,7 +3,7 @@ var places;
 
 
 
-    <script>
+
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
       // pick list containing a mix of places and predicted search terms.
@@ -14,13 +14,11 @@ var places;
 
       function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: ‎38.889931, lng: -77.0435},
-          //center: {lat: 38.9212, lng: -77.0435},
+          center: {lat: 38.889931, lng: -77.0435},
           zoom: 14,
           mapTypeId: 'roadmap'
         });
-        //Lusaka -15.40669, 28.28713 Nanga Latitude:  	-15.786270	Longitude:  	27.913389
-        //DC Latitude‎: ‎38.889931	Longitude‎: ‎-77.009003	
+
         var markers = [{position: {lat: -15.786270, lng: 27.913389},
         map: map,
         draggable:true,
@@ -198,8 +196,7 @@ var Place = function(data){
    this.address = ko.observable(data.formatted_address);
    
 }
+
 //Add Maps API key here
-    <script src="https://maps.googleapis.com/maps/api/js?key=key&libraries=places&callback=initAutocomplete"
-         async defer>
 
 

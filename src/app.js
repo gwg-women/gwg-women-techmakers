@@ -80,11 +80,8 @@ var places;
           }
 
           // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
+          markers.map(marker => marker.setMap(null) );
           markers = [];
-
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {

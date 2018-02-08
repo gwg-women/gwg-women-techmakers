@@ -8,6 +8,21 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/dist'
     },
+     module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['env']
+                        }
+                    }
+                ]
+            }
+        ]
+    },
     plugins: [
         new webpack.ProvidePlugin({
         $: 'jQuery',

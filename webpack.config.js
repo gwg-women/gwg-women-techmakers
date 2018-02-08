@@ -8,5 +8,10 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/dist'
     },
-    
+    plugins: [
+        new webpack.ProvidePlugin({
+        $: 'jQuery',
+        jQuery: 'jQuery'
+        })
+    ]
 };

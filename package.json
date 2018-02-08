@@ -5,8 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "webpack-dev-server",
-    "build:prod" : "webpack -p"
+    "build": "webpack-dev-server",
+    "build:prod": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/gwg-women/gwg-women-techmakers#readme",
   "devDependencies": {
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }

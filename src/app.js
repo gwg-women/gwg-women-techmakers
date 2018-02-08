@@ -1,4 +1,4 @@
-
+import 'jQuery';
 var places;
 
 

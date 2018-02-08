@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# bundle.js created by webpack in dist directory
+dist/bundle.js

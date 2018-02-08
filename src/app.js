@@ -1,4 +1,4 @@
-
+import 'jQuery';
 var places;
 
 
@@ -12,7 +12,7 @@ var places;
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      function initAutocomplete() {
+      export function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 38.889931, lng: -77.0435},
           zoom: 14,
@@ -80,11 +80,8 @@ var places;
           }
 
           // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
+          markers.map(marker => marker.setMap(null) );
           markers = [];
-
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
@@ -196,7 +193,7 @@ var Place = function(data){
    this.address = ko.observable(data.formatted_address);
    
 }
-
+window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
 

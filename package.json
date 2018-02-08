@@ -1,0 +1,34 @@
+{
+  "name": "gwg-women-techmakers",
+  "version": "0.0.1",
+  "description": "This is a Grow with Google project for an offline first app that provides information based on geolocation",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack-dev-server",
+    "build:prod": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwg-women/gwg-women-techmakers.git"
+  },
+  "contributors": [
+    "Tanya Gupta (https://github.com/tanyagupta)",
+    "Khusbu Chandra (https://github.com/khusbuchandra)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gwg-women/gwg-women-techmakers/issues"
+  },
+  "homepage": "https://github.com/gwg-women/gwg-women-techmakers#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",    
+    "jquery": "^3.3.1"
+  }
+}

@@ -25,7 +25,7 @@ Otherwise skip to 2)
 
     e) While the first creates a remote that uses ssh authentication, the latter uses https, so it'll always prompt you to enter your username and password to authenticate the connection. (credit)
 
-2) Go to where the directory of package.json is and type npm install This will install all the dependencies
+2) Go to where the directory of package.json is and type `npm install` This will install all the dependencies
 
 3) Get a Google Maps API key
 a) Go to the Google API Console.
@@ -34,7 +34,7 @@ c) Click Continue to enable the Google Maps API (https://console.developers.goog
 d) On the Credentials page, get an API key. 
 Detailed instructions/more (https://developers.google.com/maps/documentation/android-api/signup)
 
-4) In the file master->index.html replace mykey with your Google Maps key
+4) In the file master->index.html replace myKey with your Google Maps key
     "https://maps.googleapis.com/maps/api/js?key=mykey&libraries=places&callback=initAutocomplete"
-5) Run the app
+5) Run the app -> `npm run build`
 6) You should be able to see it run on localhost

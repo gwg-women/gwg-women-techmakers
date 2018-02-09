@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",    
-    "jquery": "^3.3.1"
+    "babel-loader": "^7.1.2",
+    "jquery": "^3.3.1",
+    "knockout": "^3.5.0-beta"
   }
 }

@@ -1,8 +1,7 @@
 import 'jQuery';
+import ko from 'knockout';
+
 var places;
-
-
-
 
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a

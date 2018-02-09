@@ -37,4 +37,4 @@ Detailed instructions/more (https://developers.google.com/maps/documentation/and
 4) In the file master->index.html replace myKey with your Google Maps key
     "https://maps.googleapis.com/maps/api/js?key=mykey&libraries=places&callback=initAutocomplete"
 5) Run the app -> `npm run build`
-6) You should be able to see it run on localhost
+6) You should be able to see it run on localhost:8080

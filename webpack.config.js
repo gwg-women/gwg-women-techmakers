@@ -9,6 +9,7 @@ module.exports = {
         publicPath: '/dist'
     },
      module: {
+        noParse: /node_modules\/knockout\/build\/output\/*.js/,
         rules: [
             {
                 test: /\.js$/,

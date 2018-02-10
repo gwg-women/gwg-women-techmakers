@@ -14,7 +14,8 @@
   },
   "contributors": [
     "Tanya Gupta (https://github.com/tanyagupta)",
-    "Khusbu Chandra (https://github.com/khusbuchandra)"
+    "Khusbu Chandra (https://github.com/khusbuchandra)",
+    "Amy Carney (https://github.com/digilou)"
   ],
   "license": "MIT",
   "bugs": {
@@ -29,6 +30,7 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "dotenv-webpack": "^1.5.4",
     "jquery": "^3.3.1",
     "knockout": "^3.5.0-beta"
   }

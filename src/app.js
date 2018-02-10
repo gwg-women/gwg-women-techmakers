@@ -1,7 +1,9 @@
 import 'jQuery';
 import ko from 'knockout';
 
-var places;
+var places,
+    secret_api = process.env.GOOGLE_KEY,
+    google_api = `https://maps.googleapis.com/maps/api/js?key=${secret_api}&libraries=places&callback=initAutocomplete`;
 
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a

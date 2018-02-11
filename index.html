@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8"> 
-   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="./src/style/style.css">    
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style/style.css">
     <script src="./dist/bundle.js"></script>
-    <script src=`https://maps.googleapis.com/maps/api/js?key=${secret_api}&libraries=places&callback=initAutocomplete`
-         async defer></script>
-   <head>
+    <script src="https://maps.googleapis.com/maps/api/js?key=${google_api}&libraries=places&callback=initAutocomplete"  async defer></script>
+
     <base target="_top">
+    <title>Places Search</title>
+  </head>
 
-     <title>Places Searchbox</title>
-
-    </head>
-
-   <body>
-
+  <body>
 
     <div class="sidebar" id="place_area">
-        <h2>Place List</h2>
-        <p>Click on place for wiki info</p>
-        <ul id="plist" >
-              <div data-bind="template:{ name: 'place-template',foreach: placeList }"></div>
-              <script type="text/html" id="place-template"><li data-bind="text: name,click: $parent.setCurrentPlace"></li></script>
+      <h2>Place List</h2>
+      <p>Click on place for wiki info</p>
+      <ul id="plist">
 
-        </ul>
+        <div data-bind="template:{ name: 'place-template',foreach: placeList }"></div>
+        <script type="text/html" id="place-template">
+          <li data-bind="text: name,click: $parent.setCurrentPlace"></li>
+        </script>
 
-        <div id="side_info">
-          <div  data-bind="with: currentPlace">
+      </ul>
 
-                  <h2 id="selected" data-bind="text: name"></h2>
-                  <h3 data-bind="text: address"></h3>
-                  <h5>First Wiki result:</h5><h5  data-bind="text: $parent.wiki_title"></h5>
-                  Wiki info:
-                  <div  data-bind="text: $parent.wiki_content">
-                  </div>
-         </div>
+      <div id="side_info">
+        <div data-bind="with: currentPlace">
 
-          <img alt="place" data-bind="attr:{src: wiki_url}">
-       </div>
+          <h2 id="selected" data-bind="text: name"></h2>
+          <h3 data-bind="text: address"></h3>
+          <h5>First Wiki result:</h5>
+          <h5 data-bind="text: $parent.wiki_title"></h5>
+          Wiki info:
+          <div data-bind="text: $parent.wiki_content">
+          </div>
 
+        </div>
 
-   </div>
+        <img alt="place" data-bind="attr:{src: wiki_url}">
+      </div>
 
-       <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="map"></div>
+    </div>
 
+    <input id="pac-input" class="controls" type="text" placeholder="Search Places" autofocus role="search" aria-label="Search Places">
+
+    <div id="map"></div>
 
   </body>
 </html>

@@ -1,4 +1,6 @@
-font-family: 'Open Sans', sans-serif;
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 #content {
     position: relative;
     width: 100%;
@@ -24,11 +26,11 @@ font-family: 'Open Sans', sans-serif;
         float: right;
       }
       /* Optional: Makes the sample page fill the window. */
-<!--      html, body {
+     /* html, body {
         height: 100%;ff
         margin: 0;ff
         padding: 0;ff
-      }-->
+      } */
       #description {
         font-family: Roboto;
         font-size: 15px;

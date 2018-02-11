@@ -32,7 +32,7 @@ module.exports = {
         }),
         new Dotenv({
             path: '.env',
-            safe: true
+            safe: false
         })
     ]
 };

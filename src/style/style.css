@@ -26,11 +26,11 @@ body {
         float: right;
       }
       /* Optional: Makes the sample page fill the window. */
-     /* html, body {
-        height: 100%;ff
-        margin: 0;ff
-        padding: 0;ff
-      } */
+     html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
       #description {
         font-family: Roboto;
         font-size: 15px;

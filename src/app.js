@@ -1,7 +1,16 @@
 import 'jQuery';
 import ko from 'knockout';
+import Handlebars from 'handlebars'
 
-var places;
+
+
+var places,
+    google_api = process.env.GOOGLE_KEY;
+
+var template = require("../index.handlebars");
+var context = { googleApi: `https://maps.googleapis.com/maps/api/js?key=${google_api}&libraries=places&callback=initAutocomplete` };
+var html = template(context);
+$('head').append(html);
 
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a

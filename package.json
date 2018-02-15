@@ -14,7 +14,8 @@
   },
   "contributors": [
     "Tanya Gupta (https://github.com/tanyagupta)",
-    "Khusbu Chandra (https://github.com/khusbuchandra)"
+    "Khusbu Chandra (https://github.com/khusbuchandra)",
+    "Amy Carney (https://github.com/digilou)"
   ],
   "license": "MIT",
   "bugs": {
@@ -23,13 +24,16 @@
   "homepage": "https://github.com/gwg-women/gwg-women-techmakers#readme",
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
-    "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "dotenv-webpack": "^1.5.4",
+    "handlebars": "^4.0.11",
+    "handlebars-loader": "^1.6.0",
     "jquery": "^3.3.1",
-    "knockout": "^3.5.0-beta"
+    "knockout": "^3.5.0-beta",
+    "webpack": "^3.10.0"
   }
 }

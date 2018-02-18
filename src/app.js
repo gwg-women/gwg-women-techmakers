@@ -2,6 +2,25 @@ import 'jQuery';
 import ko from 'knockout';
 import Handlebars from 'handlebars'
 
+import loadScripts from '../js/utils/loadScripts';
+import IndexController from '../js/main/IndexController';
+
+const polyfillsNeeded = [];
+
+if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
+
+try {
+  new URL('b', 'http://a');
+}
+catch (e) {
+  polyfillsNeeded.push('../polyfills/url.js');
+}
+
+loadScripts(polyfillsNeeded, function () {
+  console.log('in loadscripts');
+
+  new IndexController(document.querySelector('.main'));
+});
 
 
 var places,

@@ -6,6 +6,8 @@ import loadScripts from '../js/utils/loadScripts';
 import IndexController from '../js/main/IndexController';
 
 const polyfillsNeeded = [];
+const http = require('http');
+//const request = require('request');
 
 if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
 
@@ -24,7 +26,8 @@ loadScripts(polyfillsNeeded, function () {
 
 
 var places,
-    google_api = process.env.GOOGLE_KEY;
+    google_api = process.env.GOOGLE_KEY,
+    weather_api = process.env.WEATHER_KEY;
 
 var template = require("../index.handlebars");
 var context = { googleApi: `https://maps.googleapis.com/maps/api/js?key=${google_api}&libraries=places&callback=initAutocomplete` };
@@ -45,6 +48,13 @@ $('head').append(html);
           zoom: 14,
           mapTypeId: 'roadmap'
         });
+
+        // ask user for permission to use location services
+        if (navigator.geolocation) {    
+          navigator.geolocation.getCurrentPosition(currentLocation);
+          } else {    
+          alert('Sorry your browser doesn\'t support the Geolocation API');    
+          }
 
         var markers = [{position: {lat: -15.786270, lng: 27.913389},
         map: map,
@@ -224,3 +234,50 @@ window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
 
+function currentLocation(position){
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  getCity(latitude, longitude);
+  getWeather(latitude, longitude);
+}
+
+function getCity(lat, lng){
+  var city;
+  var url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+  http.get(url, (res) => {
+    if(res.statusCode == '200'){
+      res.setEncoding('utf8');
+      res.on('data', (data) => {
+        data = JSON.parse(data);
+        for (var i = 0; i < data.results.length; i++) {
+          if(data.results[i].types[0] == 'locality'){
+            city = data.results[i].formatted_address;
+            console.log("Current City: ", city);
+          }
+        }
+      })
+    }
+  })
+}
+
+function getWeather(lat, lng){
+  var weather;
+  var url = `http://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
+  
+  const req = http.get(url, (res) => {
+    res.setEncoding('utf8');
+    res.on('data', (data) => {
+      data = JSON.parse(data);
+      weather = data.main.temp;
+      console.log("Current temperature: ", weather, "°F");
+    })
+  });
+
+  // to be removed - possible code if using request node module
+  // request.get(url, (err, res, body) => {
+  //     body = JSON.parse(body);
+  //     weather = body.main.temp;
+  //     console.log("The temperature is: ", weather);
+  // });
+
+}

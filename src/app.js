@@ -49,13 +49,6 @@ $('head').append(html);
           mapTypeId: 'roadmap'
         });
 
-        // ask user for permission to use location services
-        if (navigator.geolocation) {    
-          navigator.geolocation.getCurrentPosition(currentLocation);
-          } else {    
-          alert('Sorry your browser doesn\'t support the Geolocation API');    
-          }
-
         var markers = [{position: {lat: -15.786270, lng: 27.913389},
         map: map,
         draggable:true,
@@ -233,17 +226,23 @@ var Place = function(data){
 window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
+// ask user for permission to use location services
+if (navigator.geolocation) {    
+  navigator.geolocation.getCurrentPosition(currentLocation);
+} else {    
+  alert('Sorry your browser doesn\'t support the Geolocation API');    
+}
 
 function currentLocation(position){
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
   getCity(latitude, longitude);
   getWeather(latitude, longitude);
 }
 
 function getCity(lat, lng){
-  var city;
-  var url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+  let city;
+  const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
   http.get(url, (res) => {
     if(res.statusCode == '200'){
       res.setEncoding('utf8');
@@ -261,8 +260,8 @@ function getCity(lat, lng){
 }
 
 function getWeather(lat, lng){
-  var weather;
-  var url = `http://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
+  let weather;
+  const url = `http://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
   
   const req = http.get(url, (res) => {
     res.setEncoding('utf8');

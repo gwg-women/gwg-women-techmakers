@@ -13,7 +13,6 @@ export function getCity(lat, lng){
           for (var i = 0; i < data.results.length; i++) {
             if(data.results[i].types[0] == 'locality'){
               city = data.results[i].formatted_address;
-              // return console.log("Current City: ", city);
               resolve(city);
             }
           }

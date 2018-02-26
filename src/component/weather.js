@@ -16,17 +16,9 @@ export function getWeather(lat, lng){
                 res.on('data', (data) => {
                     data = JSON.parse(data);
                     weather = data.main.temp;
-                    // return console.log("Current temperature: ", weather, "°F");
                     resolve(weather);
                 })
             });
         }
     })
-
-    // to be removed - possible code if using request node module
-    // request.get(url, (err, res, body) => {
-    //     body = JSON.parse(body);
-    //     weather = body.main.temp;
-    //     console.log("The temperature is: ", weather);
-    // });
 }

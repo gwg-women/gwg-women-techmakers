@@ -12,11 +12,14 @@
 
 ## Checklist:
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
-<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-🚨Please review the [guidelines for contributing] to this repository.
+<!--- If you're unsur e about any of these, don't hesitate to ask. We're here to help! -->
+🚨Please review the [contribution guidelines](https://github.com/gwg-women/gwg-women-techmakers/wiki/Contribution-Guidelines) to this repository.
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
+- [ ] Created a new branch from 'dev' and PR is targeting the project's 'dev' branch.
 - [ ] The issue can be closed.
+
+ Provide a descriptive branch name and once the pull request is approved and merged to dev, the branch can be deleted.
 
 💔Thank you!

@@ -5,6 +5,9 @@ import Handlebars from 'handlebars'
 import loadScripts from '../js/utils/loadScripts';
 import IndexController from '../js/main/IndexController';
 
+import {getCity} from './component/geolocation.js';
+import {getWeather} from './component/weather.js';
+
 const polyfillsNeeded = [];
 
 if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
@@ -223,4 +226,37 @@ var Place = function(data){
 window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
+const getMyLocation = () => {
+  let currentCity, currentWeather
+  const currentLocation = (position) =>{
 
+    const pos = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    }
+    
+    getCity(pos.latitude, pos.longitude).then(function(city){
+      currentCity = city;
+      console.log("Current city: ", currentCity);
+    }).catch(function(err) {
+      console.log('Error retrieving the current city: ', err);
+    });
+
+    getWeather(pos.latitude, pos.longitude).then(function(weather){
+      currentWeather = weather;
+      console.log("Current weather: ", currentWeather, "°F");
+    }).catch(function(err){
+      console.log('Error retrieving the current weather: ', err);
+    })  
+  }
+
+  // Ask user for permission to use location services
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(currentLocation);
+  } else {    
+    alert('Sorry your browser doesn\'t support the Geolocation API');    
+  }
+
+}
+
+getMyLocation();

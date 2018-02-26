@@ -5,11 +5,13 @@ import Handlebars from 'handlebars'
 import loadScripts from '../js/utils/loadScripts';
 import IndexController from '../js/main/IndexController';
 
+import {getCity} from './component/geolocation.js';
+import {getWeather} from './component/weather.js';
+
 const polyfillsNeeded = [];
-const http = require('http');
-//const request = require('request');
 
 if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
+
 
 try {
   new URL('b', 'http://a');
@@ -25,9 +27,8 @@ loadScripts(polyfillsNeeded, function () {
 });
 
 
-var places,
-    google_api = process.env.GOOGLE_KEY,
-    weather_api = process.env.WEATHER_KEY;
+var places, 
+    google_api = process.env.GOOGLE_KEY;
 
 var template = require("../index.handlebars");
 var context = { googleApi: `https://maps.googleapis.com/maps/api/js?key=${google_api}&libraries=places&callback=initAutocomplete` };
@@ -226,57 +227,37 @@ var Place = function(data){
 window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
-// ask user for permission to use location services
-if (navigator.geolocation) {    
-  navigator.geolocation.getCurrentPosition(currentLocation);
-} else {    
-  alert('Sorry your browser doesn\'t support the Geolocation API');    
-}
+const getMyLocation = () => {
+  let currentCity, currentWeather
+  const currentLocation = (position) =>{
 
-function currentLocation(position){
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-  getCity(latitude, longitude);
-  getWeather(latitude, longitude);
-}
-
-function getCity(lat, lng){
-  let city;
-  const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
-  http.get(url, (res) => {
-    if(res.statusCode == '200'){
-      res.setEncoding('utf8');
-      res.on('data', (data) => {
-        data = JSON.parse(data);
-        for (var i = 0; i < data.results.length; i++) {
-          if(data.results[i].types[0] == 'locality'){
-            city = data.results[i].formatted_address;
-            console.log("Current City: ", city);
-          }
-        }
-      })
+    const pos = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
     }
-  })
+    
+    getCity(pos.latitude, pos.longitude).then(function(city){
+      currentCity = city;
+      console.log("Current city: ", currentCity);
+    }).catch(function(err) {
+      console.log('Error retrieving the current city: ', err);
+    });
+
+    getWeather(pos.latitude, pos.longitude).then(function(weather){
+      currentWeather = weather;
+      console.log("Current weather: ", currentWeather, "°F");
+    }).catch(function(err){
+      console.log('Error retrieving the current weather: ', err);
+    })  
+  }
+
+  // Ask user for permission to use location services
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(currentLocation);
+  } else {    
+    alert('Sorry your browser doesn\'t support the Geolocation API');    
+  }
+
 }
 
-function getWeather(lat, lng){
-  let weather;
-  const url = `http://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
-  
-  const req = http.get(url, (res) => {
-    res.setEncoding('utf8');
-    res.on('data', (data) => {
-      data = JSON.parse(data);
-      weather = data.main.temp;
-      console.log("Current temperature: ", weather, "°F");
-    })
-  });
-
-  // to be removed - possible code if using request node module
-  // request.get(url, (err, res, body) => {
-  //     body = JSON.parse(body);
-  //     weather = body.main.temp;
-  //     console.log("The temperature is: ", weather);
-  // });
-
-}
+getMyLocation();

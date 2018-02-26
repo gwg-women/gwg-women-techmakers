@@ -1,0 +1,25 @@
+const http = require('http');
+
+export function getCity(lat, lng){
+  let city;
+  const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+
+  return new Promise(function(resolve, reject){
+    http.get(url, (res) => {
+      if(res.statusCode == '200'){
+        res.setEncoding('utf8');
+        res.on('data', (data) => {
+          data = JSON.parse(data);
+          for (var i = 0; i < data.results.length; i++) {
+            if(data.results[i].types[0] == 'locality'){
+              city = data.results[i].formatted_address;
+              // return console.log("Current City: ", city);
+              resolve(city);
+            }
+          }
+        })
+      } else reject();
+    })
+  }) 
+
+}

@@ -12,7 +12,6 @@ const polyfillsNeeded = [];
 
 if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
 
-
 try {
   new URL('b', 'http://a');
 }
@@ -27,7 +26,7 @@ loadScripts(polyfillsNeeded, function () {
 });
 
 
-var places, 
+var places,
     google_api = process.env.GOOGLE_KEY;
 
 var template = require("../index.handlebars");

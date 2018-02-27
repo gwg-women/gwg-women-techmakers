@@ -4,16 +4,27 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
     <link rel="stylesheet" href="./src/style/style.css">
-    <script src="./dist/bundle.js"></script>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+
+   
 
     <base target="_top">
     <title>Places Search</title>
   </head>
 
   <body>
-    <div class="main"></div>
+      <noscript>
+          You need to enable JavaScript to run this app.
+        </noscript>
+        <div id="root"></div>
+
+
+
+    <!-- <div class="main"></div>
     <div class="sidebar" id="place_area">
       <h2>Place List</h2>
       <p>Click on place for wiki info</p>
@@ -46,7 +57,7 @@
 
     <input id="pac-input" class="controls" type="text" placeholder="Search Places" autofocus role="search" aria-label="Search Places">
 
-    <div id="map"></div>
+    <div id="map"></div> -->
 
   </body>
 </html>

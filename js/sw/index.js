@@ -1,4 +1,4 @@
-var staticCacheName = 'gwgapp-static-v1';
+/*var staticCacheName = 'gwgapp-static-v1';
 var allCaches = [
   staticCacheName,
 ];
@@ -32,7 +32,7 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function(event) {
   var requestUrl = new URL(event.request.url);
   console.log(event);
-  
+
 
   if (requestUrl.origin === location.origin) {
     if (requestUrl.pathname === '/') {
@@ -47,3 +47,6 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+
+*/

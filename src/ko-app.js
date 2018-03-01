@@ -1,8 +1,38 @@
+import 'jQuery';
+import ko from 'knockout';
+import Handlebars from 'handlebars'
 
-var places;
+import loadScripts from '../js/utils/loadScripts';
+import IndexController from '../js/main/IndexController';
+
+import {getCity} from './component/geolocation.js';
+import {getWeather} from './component/weather.js';
+
+const polyfillsNeeded = [];
+
+if (!('Promise' in self)) polyfillsNeeded.push('../polyfills/promise.js');
+
+try {
+  new URL('b', 'http://a');
+}
+catch (e) {
+  polyfillsNeeded.push('../polyfills/url.js');
+}
+
+loadScripts(polyfillsNeeded, function () {
+  console.log('in loadscripts');
+
+  new IndexController(document.querySelector('.main'));
+});
 
 
+var places,
+    google_api = process.env.GOOGLE_KEY;
 
+var template = require("../index.handlebars");
+var context = { googleApi: `https://maps.googleapis.com/maps/api/js?key=${google_api}&libraries=places&callback=initAutocomplete` };
+var html = template(context);
+$('head').append(html);
 
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
@@ -12,7 +42,7 @@ var places;
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      function initAutocomplete() {
+      export function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 38.889931, lng: -77.0435},
           zoom: 14,
@@ -80,11 +110,8 @@ var places;
           }
 
           // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
+          markers.map(marker => marker.setMap(null) );
           markers = [];
-
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
@@ -196,7 +223,40 @@ var Place = function(data){
    this.address = ko.observable(data.formatted_address);
    
 }
-
+window.initAutocomplete = initAutocomplete;
 //Add Maps API key here
 
+const getMyLocation = () => {
+  let currentCity, currentWeather
+  const currentLocation = (position) =>{
 
+    const pos = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    }
+    
+    getCity(pos.latitude, pos.longitude).then(function(city){
+      currentCity = city;
+      console.log("Current city: ", currentCity);
+    }).catch(function(err) {
+      console.log('Error retrieving the current city: ', err);
+    });
+
+    getWeather(pos.latitude, pos.longitude).then(function(weather){
+      currentWeather = weather;
+      console.log("Current weather: ", currentWeather, "°F");
+    }).catch(function(err){
+      console.log('Error retrieving the current weather: ', err);
+    })  
+  }
+
+  // Ask user for permission to use location services
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(currentLocation);
+  } else {    
+    alert('Sorry your browser doesn\'t support the Geolocation API');    
+  }
+
+}
+
+getMyLocation();

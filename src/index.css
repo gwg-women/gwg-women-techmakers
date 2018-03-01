@@ -111,3 +111,10 @@ body {
 #target {
   width: 345px;
 }
+
+#footer {
+  padding: 15px 15px 15px 15px;
+  background-color: #D8E83D;
+  text-align: left;
+  font-size: 12px;
+}

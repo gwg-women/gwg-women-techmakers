@@ -5,6 +5,11 @@ import SearchBox from "react-google-maps/lib/components/places/SearchBox"
 import _ from "lodash";
 import { compose, withProps, lifecycle } from 'recompose'
 
+import {getCity} from '../services/geolocation.js';
+import {getWeather} from '../services/weather.js';
+
+
+
 const InitialMap = compose(
     withProps({
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GKEY}&v=3.exp&libraries=places,geometry,drawing`,
@@ -15,6 +20,42 @@ const InitialMap = compose(
     lifecycle({
       componentWillMount() {
         const refs = {}
+
+        const getMyLocation = () => {
+          const currentLocation = (position) =>{
+        
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+
+            this.setState({
+              currentPosition: pos
+            })
+            
+            getCity(pos.lat, pos.lng).then((city) => {
+              this.setState({currentCity: city})
+            }).catch(function(err) {
+              console.log('Error retrieving the current city: ', err);
+            });
+        
+            getWeather(pos.lat, pos.lng).then((weather) => {
+              this.setState({currentWeather: weather})
+            }).catch(function(err){
+              console.log('Error retrieving the current weather: ', err);
+            })  
+          }
+        
+          // Ask user for permission to use location services
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(currentLocation);
+          } else {    
+            alert('Sorry your browser doesn\'t support the Geolocation API');    
+          }
+        
+        }
+        
+        getMyLocation();
   
         this.setState({
           bounds: null,
@@ -61,11 +102,13 @@ const InitialMap = compose(
     }),
     withScriptjs,
     withGoogleMap
-  )(props =>
-    <GoogleMap
+  )(props => <div>
+    <h3>Here is your location: {props.currentCity}</h3>
+    <h3>Here is the weather: {props.currentWeather} °F</h3>
+<GoogleMap
       ref={props.onMapMounted}
       defaultZoom={15}
-      center={props.center}
+      center={props.currentPosition ? props.currentPosition : props.center}
       onBoundsChanged={props.onBoundsChanged}
     >
       <SearchBox
@@ -96,6 +139,7 @@ const InitialMap = compose(
         <Marker key={index} position={marker.position} />
       )}
     </GoogleMap>
+    </div>
   );
 
 

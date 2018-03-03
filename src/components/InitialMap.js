@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import SearchBox from "react-google-maps/lib/components/places/SearchBox"
 import _ from "lodash";
-import { compose, withProps, lifecycle,  } from 'recompose'
+import { compose, withProps, lifecycle } from 'recompose'
 
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
@@ -140,7 +140,6 @@ const InitialMap = compose(
       )}
     </GoogleMap>
     </div>
-    
   );
 
 

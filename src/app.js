@@ -1,15 +1,49 @@
 import React, { Component } from 'react';
-import './App.css';
-import MapContainer from './components/InitialMap.js'
-
+import MapContainer from './components/InitialMap';
+import Sidebar from './components/Sidebar';
+import Search from './components/Search'
+import 'milligram';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      places: ["place1", "place2"],
+      searchTerm: '' 
+    }; 
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    console.log(event.target.value)
+    this.setState({searchTerm: event.target.value})
+  }
+
+  handleSubmit() {
+    console.log("submitted word")
+    console.log(this.state.searchTerm)
+  }
+
+  
+  
   render() {
     return (
-      <div className="App">  
-        <h1> Mappa</h1>
-        <MapContainer />
+      <div className="App container">
+        <h1> Mappa </h1>
+        <div className="row">
+          <Search submit={this.handleSubmit} input={this.handleChange} />
+        </div>  
+        <div className="row">
+          <div className="column column-75">
+              <MapContainer />
+          </div>
+          <div className="column column-25">
+            <Sidebar places={this.state.places}/>
+          </div>
+        </div>
       </div>
     );
   }

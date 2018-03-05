@@ -2,7 +2,7 @@ const http = require('http');
   
 export function getWeather(lat, lng){
     let weather;
-    const weather_api = process.env.WEATHER_KEY;
+    const weather_api = process.env.REACT_APP_WEATHERKEY;
 
     return new Promise(function(resolve, reject){
         if(typeof weather_api === 'undefined'){

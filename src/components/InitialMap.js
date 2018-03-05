@@ -4,6 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import SearchBox from "react-google-maps/lib/components/places/SearchBox"
 import _ from "lodash";
 import { compose, withProps, lifecycle } from 'recompose'
+import CurrentLocation from './CurrentLocation';
 
 const InitialMap = compose(
     withProps({
@@ -15,7 +16,7 @@ const InitialMap = compose(
     lifecycle({
       componentWillMount() {
         const refs = {}
-  
+
         this.setState({
           bounds: null,
           center: {
@@ -33,6 +34,11 @@ const InitialMap = compose(
           },
           onSearchBoxMounted: ref => {
             refs.searchBox = ref;
+          },
+          onPositionChange: pos => {
+            this.setState({
+              currentPosition: pos
+            })
           },
           onPlacesChanged: () => {
             const places = refs.searchBox.getPlaces();
@@ -61,19 +67,19 @@ const InitialMap = compose(
     }),
     withScriptjs,
     withGoogleMap
-  )(props =>
+  )(props => <div>
     <GoogleMap
-      ref={props.onMapMounted}
-      defaultZoom={15}
-      center={props.center}
-      onBoundsChanged={props.onBoundsChanged}
-    >
-      <SearchBox
-        ref={props.onSearchBoxMounted}
-        bounds={props.bounds}
-        controlPosition={google.maps.ControlPosition.TOP_LEFT}
-        onPlacesChanged={props.onPlacesChanged}
-      >
+          ref={props.onMapMounted}
+          defaultZoom={15}
+          center={props.currentPosition ? props.currentPosition : props.center}
+          onBoundsChanged={props.onBoundsChanged}
+        >
+          <SearchBox
+            ref={props.onSearchBoxMounted}
+            bounds={props.bounds}
+            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+            onPlacesChanged={props.onPlacesChanged}
+          >
         <input
           type="text"
           placeholder="Customized your placeholder"
@@ -96,6 +102,8 @@ const InitialMap = compose(
         <Marker key={index} position={marker.position} />
       )}
     </GoogleMap>
+    <CurrentLocation positionCallback={props.onPositionChange}/>
+    </div>
   );
 
 

@@ -4,11 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import SearchBox from "react-google-maps/lib/components/places/SearchBox"
 import _ from "lodash";
 import { compose, withProps, lifecycle } from 'recompose'
-
-import {getCity} from '../services/geolocation.js';
-import {getWeather} from '../services/weather.js';
-
-
+import CurrentLocation from './CurrentLocation';
 
 const InitialMap = compose(
     withProps({
@@ -21,42 +17,6 @@ const InitialMap = compose(
       componentWillMount() {
         const refs = {}
 
-        const getMyLocation = () => {
-          const currentLocation = (position) =>{
-        
-            const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            }
-
-            this.setState({
-              currentPosition: pos
-            })
-            
-            getCity(pos.lat, pos.lng).then((city) => {
-              this.setState({currentCity: city})
-            }).catch(function(err) {
-              console.log('Error retrieving the current city: ', err);
-            });
-        
-            getWeather(pos.lat, pos.lng).then((weather) => {
-              this.setState({currentWeather: weather})
-            }).catch(function(err){
-              console.log('Error retrieving the current weather: ', err);
-            })  
-          }
-        
-          // Ask user for permission to use location services
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(currentLocation);
-          } else {    
-            alert('Sorry your browser doesn\'t support the Geolocation API');    
-          }
-        
-        }
-        
-        getMyLocation();
-  
         this.setState({
           bounds: null,
           center: {
@@ -74,6 +34,11 @@ const InitialMap = compose(
           },
           onSearchBoxMounted: ref => {
             refs.searchBox = ref;
+          },
+          onPositionChange: pos => {
+            this.setState({
+              currentPosition: pos
+            })
           },
           onPlacesChanged: () => {
             const places = refs.searchBox.getPlaces();
@@ -103,20 +68,18 @@ const InitialMap = compose(
     withScriptjs,
     withGoogleMap
   )(props => <div>
-    <h3>Here is your location: {props.currentCity}</h3>
-    <h3>Here is the weather: {props.currentWeather} °F</h3>
-<GoogleMap
-      ref={props.onMapMounted}
-      defaultZoom={15}
-      center={props.currentPosition ? props.currentPosition : props.center}
-      onBoundsChanged={props.onBoundsChanged}
-    >
-      <SearchBox
-        ref={props.onSearchBoxMounted}
-        bounds={props.bounds}
-        controlPosition={google.maps.ControlPosition.TOP_LEFT}
-        onPlacesChanged={props.onPlacesChanged}
-      >
+    <GoogleMap
+          ref={props.onMapMounted}
+          defaultZoom={15}
+          center={props.currentPosition ? props.currentPosition : props.center}
+          onBoundsChanged={props.onBoundsChanged}
+        >
+          <SearchBox
+            ref={props.onSearchBoxMounted}
+            bounds={props.bounds}
+            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+            onPlacesChanged={props.onPlacesChanged}
+          >
         <input
           type="text"
           placeholder="Customized your placeholder"
@@ -139,6 +102,7 @@ const InitialMap = compose(
         <Marker key={index} position={marker.position} />
       )}
     </GoogleMap>
+    <CurrentLocation positionCallback={props.onPositionChange}/>
     </div>
   );
 

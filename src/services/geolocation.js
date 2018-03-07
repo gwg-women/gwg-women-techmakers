@@ -10,12 +10,23 @@ export function getCity(lat, lng){
       if(res.statusCode == '200'){
         res.setEncoding('utf8');
         res.on('data', (data) => {
-          data = JSON.parse(data);
-          for (var i = 0; i < data.results.length; i++) {
-            // eslint-disable-next-line
-            if(data.results[i].types[0] == 'locality'){
-              city = data.results[i].formatted_address;
-              resolve(city);
+          if(data.includes('error_message')){
+            console.log('Error grabbing key');
+            reject();
+          }
+          else {
+            try {
+              data = JSON.parse(data);
+              for (var i = 0; i < data.results.length; i++) {
+                // eslint-disable-next-line
+                if(data.results[i].types[0] == 'locality'){
+                  city = data.results[i].formatted_address;
+                  resolve(city.replace(/,.*/g, ""));
+                }
+              }
+            } catch (e){
+              console.log('Error parsing JSON response');
+              reject();
             }
           }
         })

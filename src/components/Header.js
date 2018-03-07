@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 
-export default class CurrentLocation extends Component {
+export default class HeaderContainer extends Component {
   state = {
   }
 
@@ -15,10 +15,10 @@ export default class CurrentLocation extends Component {
         lng: position.coords.longitude
       }
 
-      positionCallback(pos);
-      this.setState({
-        currentPosition: pos
-      })
+      // positionCallback(pos);
+      // this.setState({
+      //   currentPosition: pos
+      // })
       
       getCity(pos.lat, pos.lng).then((city) => {
         this.setState({currentCity: city})
@@ -47,9 +47,8 @@ export default class CurrentLocation extends Component {
   }
 
   render () {
-    return <div>
-      <h4>Here is your location: {this.state.currentCity} </h4>
-      <h4>The current temperature (°F) is: {this.state.currentWeather}</h4>
-    </div>
+    return (
+        <h2 style={{background: `#D8E83D`, padding: `30px`, fontWeight: `200`, textAlign: `center`}}> Welcome - You are in {this.state.currentCity} and the temperature is {this.state.currentWeather} °F</h2>
+    )
   }
 }

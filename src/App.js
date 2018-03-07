@@ -3,7 +3,8 @@ import MapContainer from './components/InitialMap';
 import Sidebar from './components/Sidebar';
 import Search from './components/Search'
 import 'milligram';
-
+import './App.css';
+import HeaderContainer from './components/Header.js'
 
 class App extends Component {
   constructor(props) {

@@ -38,7 +38,7 @@ class App extends Component {
         </div>  
         <div className="row">
           <div className="column column-75">
-              <MapContainer />
+              <MapContainer searchTerm={this.state.searchTerm} />
           </div>
           <div className="column column-25">
             <Sidebar places={this.state.places}/>

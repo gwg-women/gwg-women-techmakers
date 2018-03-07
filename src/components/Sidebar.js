@@ -15,17 +15,12 @@ class Sidebar extends Component {
    
    render() {
         return (
-          <Map google={this.props.google}
-          className={'map'}
-          onReady={this.onMapReady}
-          visible={false}>
-            <div style={{width:`100%`, height:`600px`, border: `1px black solid`, padding: `3%`}}>
-                <h2>Here are some places near you:</h2>
-                <ul>
-                    {this.renderList()}
-                </ul>
-            </div>
-            </Map>
+          <div style={{height:`600px`, border: `1px black solid`, padding: `3%`}}>
+              <h4>Here are some places near you:</h4>
+              <ul>
+                  {this.renderList()}
+              </ul>
+          </div>
         )
     }
 }

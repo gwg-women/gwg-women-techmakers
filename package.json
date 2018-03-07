@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "cra-append-sw": "^2.1.1",
+    "google-maps-react": "^1.1.2",
     "install": "^0.10.4",
+    "milligram": "^1.3.0",
     "npm": "^5.7.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-google-maps": "^9.4.5",
     "react-scripts": "1.1.1",
     "serve": "^6.5.0"
   },

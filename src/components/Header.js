@@ -7,7 +7,6 @@ export default class HeaderContainer extends Component {
   };
 
   getMyLocation = () => {
-    console.log('running')
     const currentLocation = (position) =>{
   
       const pos = {
@@ -16,14 +15,12 @@ export default class HeaderContainer extends Component {
       }
       
       getCity(pos.lat, pos.lng).then((city) => {
-        console.log('got the city', city)
         this.setState({currentCity: city})
       }).catch(function(err) {
         console.log('Error retrieving the current city: ', err);
       });
   
       getWeather(pos.lat, pos.lng).then((weather) => {
-        console.log('got the weather', weather)
         this.setState({currentWeather: weather})
       }).catch(function(err){
         console.log('Error retrieving the current weather: ', err);
@@ -32,7 +29,6 @@ export default class HeaderContainer extends Component {
   
     // Ask user for permission to use location services
     if (navigator.geolocation) {
-      console.log('here')
       navigator.geolocation.getCurrentPosition(currentLocation);
     } else {    
       alert('Sorry your browser doesn\'t support the Geolocation API');    

@@ -4,7 +4,6 @@ import HeaderContainer from './components/Header'
 import Sidebar from './components/Sidebar';
 import Search from './components/Search'
 import 'milligram';
-import './App.css';
 
 class App extends Component {
   constructor(props) {

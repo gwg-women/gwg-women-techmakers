@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import MapContainer from './components/InitialMap';
+import HeaderContainer from './components/Header'
 import Sidebar from './components/Sidebar';
 import Search from './components/Search'
 import 'milligram';
 import './App.css';
-import HeaderContainer from './components/Header.js'
 
 class App extends Component {
   constructor(props) {
@@ -32,17 +32,19 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App container">
-        <h1> Mappa </h1>
-        <div className="row">
-          <Search submit={this.handleSubmit} input={this.handleChange} />
-        </div>  
-        <div className="row">
-          <div className="column column-75">
-              <MapContainer searchTerm={this.state.searchTerm} />
-          </div>
-          <div className="column column-25">
-            <Sidebar places={this.state.places}/>
+      <div>
+        <HeaderContainer />
+        <div className="App container">
+          <div className="row">
+            <Search submit={this.handleSubmit} input={this.handleChange} />
+          </div>  
+          <div className="row">
+            <div className="column column-75">
+                <MapContainer searchTerm={this.state.searchTerm} />
+            </div>
+            <div className="column column-25">
+              <Sidebar places={this.state.places}/>
+            </div>
           </div>
         </div>
       </div>

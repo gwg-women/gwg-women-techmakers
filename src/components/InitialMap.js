@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import SearchBox from "react-google-maps/lib/components/places/SearchBox"
-import _ from "lodash";
-import { compose, withProps, lifecycle } from 'recompose'
-import HeaderContainer from './Header';
+
 
 
 class MapContainer extends Component {

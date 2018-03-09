@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MapContainer from './components/InitialMap';
+import HeaderContainer from './components/Header'
 //import Sidebar from './components/Sidebar';
-import Search from './components/Search';
+import Search from './components/Search'
 // import getPlaces from './services/googlePlaces';
 import Container from './components/Places'
 import 'milligram';
@@ -42,17 +43,19 @@ class App extends Component {
     //  <Sidebar places={this.state.places}/>
 
     return (
-      <div className="App container">
-        <h1> Mappa </h1>
-        <div className="row">
-          <Search submit={this.handleSubmit} input={this.handleChange} />
-        </div>
-        <div className="row">
-          <div className="column column-75">
-              <MapContainer searchTerm={this.state.searchTerm} />
-          </div>
-          <div className="column column-25">
-            <Container {...this.state} />
+      <div>
+        <HeaderContainer />
+        <div className="App container">
+          <div className="row">
+            <Search submit={this.handleSubmit} input={this.handleChange} />
+          </div>  
+          <div className="row">
+            <div className="column column-75">
+                <MapContainer searchTerm={this.state.searchTerm} />
+            </div>
+            <div className="column column-25">
+              <Container {...this.state} />
+            </div>
           </div>
         </div>
       </div>

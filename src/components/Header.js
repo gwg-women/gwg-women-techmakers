@@ -7,13 +7,15 @@ export default class HeaderContainer extends Component {
   };
 
   getMyLocation = () => {
+    const {handleLocationChange} = this.props;
     const currentLocation = (position) =>{
   
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      
+      handleLocationChange(pos);
+
       getCity(pos.lat, pos.lng).then((city) => {
         this.setState({currentCity: city})
       }).catch(function(err) {

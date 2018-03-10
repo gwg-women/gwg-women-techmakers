@@ -26,6 +26,12 @@ class App extends Component {
     this.setState({searchTerm: event.target.value})
   }
 
+  handleLocationChange = (pos) => {
+    this.setState({
+      pos
+    })
+  }
+
   handleSubmit() {
     console.log("submitted word")
     console.log(this.state.searchTerm)
@@ -41,17 +47,16 @@ class App extends Component {
 
   render() {
     //  <Sidebar places={this.state.places}/>
-
     return (
       <div>
-        <HeaderContainer />
+        <HeaderContainer handleLocationChange={this.handleLocationChange}/>
         <div className="App container">
           <div className="row">
             <Search submit={this.handleSubmit} input={this.handleChange} />
           </div>  
           <div className="row">
             <div className="column column-75">
-                <MapContainer searchTerm={this.state.searchTerm} />
+                <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} />
             </div>
             <div className="column column-25">
               <Container {...this.state} />

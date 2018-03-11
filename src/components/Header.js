@@ -45,12 +45,7 @@ export default class HeaderContainer extends Component {
     `Welcome - You are in ${this.state.currentCity} and the temperature is ${this.state.currentWeather} °F` :
     `Welcome`;
     return(
-        <h3 
-        style={{
-          background: `#D8E83D`, 
-          padding: `30px`, 
-          fontWeight: `200`, 
-          textAlign: `center`}}> 
+        <h3 className="header">
           {message}
       </h3>
     );

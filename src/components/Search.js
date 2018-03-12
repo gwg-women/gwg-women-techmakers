@@ -5,23 +5,11 @@ class Search extends Component {
 
     render() {
         return (
-            <div>
+            <div className="search">
                 <input
                     type="text"
                     placeholder="I'm looking for...."
-                    style={{
-                        boxSizing: `border-box`,
-                        border: `1px solid transparent`,
-                        width: `100%`,
-                        height: `60px`,
-                        marginTop: `27px`,
-                        padding: `0 12px`,
-                        borderRadius: `3px`,
-                        boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                        fontSize: `20px`,
-                        outline: `none`,
-                        textOverflow: `ellipses`,
-                        }}
+                    className="search-box"
                     onChange = {this.props.input}
                 />
                 <button onClick = {this.props.submit}>Submit</button>

@@ -45,24 +45,31 @@ class App extends Component {
   }
 */
 
+/* The original css style names "App container", "row", "column column-75", "column column-25" */
   render() {
     //  <Sidebar places={this.state.places}/>
     return (
-      <div>
+
+      <div className="fullContainer">
         <HeaderContainer handleLocationChange={this.handleLocationChange}/>
-        <div className="App container">
-          <div className="row">
-            <Search submit={this.handleSubmit} input={this.handleChange} />
-          </div>  
-          <div className="row">
-            <div className="column column-75">
-                <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} />
-            </div>
-            <div className="column column-25">
-              <Container {...this.state} />
-            </div>
-          </div>
-        </div>
+          <div className="contentContainer">
+              <div className="searchContainer">
+              <Search submit={this.handleSubmit} input={this.handleChange} />
+              </div>  
+              <div className="mapContainer">
+                    <div className="map">
+                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} />
+                    </div>
+                    <div className="mapDescription">
+                    The Description
+                    </div>
+                    <div className="mapPlaces">
+                    <Container {...this.state} />
+                    </div>               
+               </div>
+           </div>
+           <div className="footer"> footer </div>
+
       </div>
     );
   }

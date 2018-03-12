@@ -15,7 +15,7 @@ class Sidebar extends Component {
    
    render() {
         return (
-          <div style={{height:`600px`, border: `1px black solid`, padding: `3%`}}>
+          <div className="sidebar">
               <h4>Here are some places near you:</h4>
               <ul>
                   {this.renderList()}

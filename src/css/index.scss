@@ -1,6 +1,7 @@
 
 :root {
     --header-color: #D8E83D;
+    --text-color: #202020;
     --button-color: #84347c;
     --button-color-hover: #6f6f6f;
 }
@@ -10,27 +11,65 @@ body {
 }
 
 
-//main container 
-.whole {
+/* This is the main content */
+
+.fullContainer {
     position: relative;
     display:grid;
     width: 100%;
-    height: 1fr;
-    background:blue;
-}
-
-
-
-
-// ////////////////////////////////Header
-.header {
-    background: var(--header-color);
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr 100px;
+    grid-gap: 10px;
     padding: 30px;
-    font-weight: 200;
-    text-align: center;
+    height: auto !important;
+
+}
+/* This is the map part of the content */
+.mapContainer {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template: 2fr 1fr;
+    grid-gap: 10px;
 
 }
 
+/*this is the sidebar*/
+
+.sidebar { //this sidebar doesn't show yet.
+    height: 600px;
+    border: 1px black solid;
+    padding: 3%;
+    }
+
+.mapPlaces {
+    color: var(--text-color);
+    display: grid;
+    grid-row: span 1 / -1;
+    grid-column-start: 2;
+    position: relative !important;
+    & div {
+        width: auto !important;
+        height: auto !important;
+        padding-left: 50px;
+    }
+    & li {
+        list-style: none;
+    }
+}
+.mapDescription {
+    background: white;
+    display: grid;
+    grid-row-start: 2;
+    height: 150px;
+    
+}
+
+/* This is the Search area */
+.searchContainer {
+    display: grid;
+    grid-template-columns: 550px 40px;
+
+}
 .search {
     display: grid;
     grid-template-columns: 1fr 125px;
@@ -47,11 +86,11 @@ body {
         }
     }
 }
-.search-box
-{
+
+    .search-box
+    {
     box-sizing: border-box;
     border: 1px solid transparent;
-    width: 100%;
     height: 60px;
     border-radius: 3px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -62,10 +101,27 @@ body {
  
     }
 
-    //sidebar 
+/* This is the header section */
+.header {
+    background: var(--header-color);
+    padding: 30px;
+    font-weight: 200;
+    text-align: center;
+    display: grid;
+    grid-column: 1 / -1;
 
-    .sidebar {
-    height: 600px;
-    border: 1px black solid;
-    padding: 3%;
+}
+
+
+
+
+/*footer*/
+
+.footer {
+    display: grid;
+    background: var(--header-color);
+    & div {
+        height: auto !important;
     }
+
+}

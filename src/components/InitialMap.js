@@ -21,6 +21,7 @@ class MapContainer extends Component {
         zoom={15}
         containerStyle={containerStyle}
         center={pos}
+        // onGoogleApiLoaded={this.initGeocoder}
       >
 
       <Marker
@@ -35,5 +36,6 @@ class MapContainer extends Component {
 
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
-  libraries: ['places']
+  libraries: ['places'],
+  version: '3'
 })(MapContainer)

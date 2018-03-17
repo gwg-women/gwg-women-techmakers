@@ -4,11 +4,12 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 class MapContainer extends Component {
 
   render() {
+    const containerStyle = {position: 'relative', width: '100%', height:'600px'}
     return (
-      <div className="theMap">
       <Map
         google={this.props.google}
         zoom={8}
+        containerStyle={containerStyle}
         initialCenter={{
           lat: 40.854885,
           lng: -88.081807
@@ -20,14 +21,12 @@ class MapContainer extends Component {
         <Marker />
 
       </Map>
-      </div>
     );
   }
 }
 
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
-  libraries: ['places'],
-  version: 3.31
+  libraries: ['places']
 })(MapContainer)
 

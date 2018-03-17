@@ -62,3 +62,9 @@ dist/bundle.js
 
 build/
 dist/
+
+# vs code
+.vscode/
+
+# yarn 
+yarn.lock

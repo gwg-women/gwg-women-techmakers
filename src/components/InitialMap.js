@@ -7,7 +7,6 @@ class MapContainer extends Component {
   }
 
   render() {
-    const containerStyle = {position: 'relative', width: '100%', height:'600px'}
 
     const {pos} = this.props;
 
@@ -15,11 +14,11 @@ class MapContainer extends Component {
       return <div>loading...</div>
     }
     return (
+      <div className = "theMap">
       <Map
         ref={this.onGoogleMapLoad}
         google={this.props.google}
         zoom={15}
-        containerStyle={containerStyle}
         center={pos}
       >
 
@@ -29,11 +28,13 @@ class MapContainer extends Component {
       <Marker />
 
       </Map>
+      </div>
     );
   }
 }
 
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
-  libraries: ['places']
+  libraries: ['places'],
+  version: 3.31
 })(MapContainer)

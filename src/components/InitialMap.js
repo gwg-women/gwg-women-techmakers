@@ -4,10 +4,9 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 class MapContainer extends Component {
   onGoogleMapLoad = map => {
     this.map = map;
-  }
+  }  
 
   render() {
-
     const {pos} = this.props;
 
     if(!this.props.loaded){
@@ -19,14 +18,14 @@ class MapContainer extends Component {
         ref={this.onGoogleMapLoad}
         google={this.props.google}
         zoom={15}
+      initialCenter={pos}
         center={pos}
       >
 
-      <Marker
-        name={'Current Location'}
-        position={pos} />
-      <Marker />
 
+      <Marker
+        name={'Current Location'}        
+        position={pos} />
       </Map>
       </div>
     );

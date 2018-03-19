@@ -4,7 +4,7 @@ import {getWeather} from '../services/weather.js';
 
 // import { GoogleApiWrapper } from 'google-maps-react';
 
-class HeaderContainer extends Component {
+export default class HeaderContainer extends Component {
   state = {
   };
   // onGoogleMapLoad = map => {

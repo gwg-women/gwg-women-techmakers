@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 
-export default class HeaderContainer extends Component {
+class HeaderContainer extends Component {
   state = {
   };
  
   getCityWeather(latitude, longitude) {
 
-    getCity(latitude, longitude).then((city) => {                
+    getCity(latitude, longitude).then((city) => {
       this.setState({currentCity: city})
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
@@ -20,21 +21,21 @@ export default class HeaderContainer extends Component {
       console.log('Error retrieving the current weather: ', err);
     })
   }
-
-  getMyLocation = () => {    
-    const {handleLocationChange} = this.props;
-    const pos = {
-        lat: parseFloat(localStorage.getItem('lat')),
-        lng: parseFloat(localStorage.getItem('lng'))
-      }
     
+  getMyLocation = () => {   
+    const {handleLocationChange} = this.props;  
+    const pos = {
+      lat: parseFloat(localStorage.getItem('lat')),
+      lng: parseFloat(localStorage.getItem('lng'))
+    }
+
     handleLocationChange(pos);
 
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
       console.log('get location from cache');
-       this.getCityWeather(pos.lat, pos.lng);     
-    }    
+      this.getCityWeather(pos.lat, pos.lng);
+    }  
     
     const errorLocation = (err) => {
       console.log("error retrieving current position, " + err);
@@ -62,10 +63,17 @@ export default class HeaderContainer extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getMyLocation();
   }
 
+  componentWillUpdate() {
+    const {props} = this;   
+    if (this.props.google && !this.state.currentCity &&!this.state.currentWeather) {
+      this.getMyLocation();
+    } 
+  }
+          
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?
     `Welcome - You are in ${this.state.currentCity} and the temperature is ${this.state.currentWeather} °F` :
@@ -78,6 +86,8 @@ export default class HeaderContainer extends Component {
   }
 }
 
-
-// WEBPACK FOOTER //
-// src/components/Header.js
+export default GoogleApiWrapper({
+  apiKey: (process.env.REACT_APP_GKEY),
+  libraries: ['places'],
+  version: '3'
+})(HeaderContainer)

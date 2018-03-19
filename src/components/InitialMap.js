@@ -18,7 +18,7 @@ class MapContainer extends Component {
         ref={this.onGoogleMapLoad}
         google={this.props.google}
         zoom={15}
-      initialCenter={pos}
+        initialCenter={pos}
         center={pos}
       >
 

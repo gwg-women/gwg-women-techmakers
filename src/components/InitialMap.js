@@ -7,6 +7,7 @@ class MapContainer extends Component {
   }
 
   render() {
+    console.log('rendering initial', window)
     const containerStyle = {position: 'relative', width: '100%', height:'600px'}
 
     const {pos} = this.props;
@@ -21,7 +22,6 @@ class MapContainer extends Component {
         zoom={15}
         containerStyle={containerStyle}
         center={pos}
-        // onGoogleApiLoaded={this.initGeocoder}
       >
 
       <Marker

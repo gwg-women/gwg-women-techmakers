@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 
-export default class HeaderContainer extends Component {
+// import { GoogleApiWrapper } from 'google-maps-react';
+
+class HeaderContainer extends Component {
   state = {
   };
+  // onGoogleMapLoad = map => {
+  //   this.map = map;
+  // }
  
   getCityWeather(latitude, longitude) {
     getCity(latitude, longitude).then((city) => {                
@@ -22,7 +27,8 @@ export default class HeaderContainer extends Component {
     
   getMyLocation = () => {    
     const cachedLatitude = localStorage.getItem('lat');
-    const cachedLongitude = localStorage.getItem('lng');    
+    const cachedLongitude = localStorage.getItem('lng');  
+    const {handleLocationChange} = this.props;  
 
     if (cachedLatitude && cachedLongitude) {
        this.getCityWeather(cachedLatitude, cachedLongitude);     
@@ -38,6 +44,7 @@ export default class HeaderContainer extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
+      handleLocationChange(pos);
 
       localStorage.setItem('lat', pos.lat);
       localStorage.setItem('lng', pos.lng); 
@@ -52,11 +59,22 @@ export default class HeaderContainer extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getMyLocation();
   }
 
+  // componentWillReceiveProps() {
+  //   console.log('this is happening  ')
+  //   const {props} = this;
+  //   console.log(props, this.state)
+    
+  // }
+
   render () {
+    // if (this.props.google && !this.state.currentCity && !this.state.currentWeather) {
+    //   console.log('now we')
+    //   this.getMyLocation();
+    // }
     const message = (this.state.currentCity && this.state.currentWeather) ?
     `Welcome - You are in ${this.state.currentCity} and the temperature is ${this.state.currentWeather} °F` :
     `Welcome`;
@@ -67,3 +85,9 @@ export default class HeaderContainer extends Component {
     );
   }
 }
+
+// export default GoogleApiWrapper({
+//   apiKey: (process.env.REACT_APP_GKEY),
+//   libraries: ['places'],
+//   version: '3'
+// })(HeaderContainer)

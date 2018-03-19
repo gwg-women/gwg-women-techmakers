@@ -4,32 +4,30 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 class MapContainer extends Component {
   onGoogleMapLoad = map => {
     this.map = map;
-  }
+  }  
 
   render() {
-    console.log('rendering initial', window)
-    const containerStyle = {position: 'relative', width: '100%', height:'600px'}
-
     const {pos} = this.props;
 
     if(!this.props.loaded){
       return <div>loading...</div>
     }
     return (
+      <div className = "theMap">
       <Map
         ref={this.onGoogleMapLoad}
         google={this.props.google}
         zoom={15}
-        containerStyle={containerStyle}
+        initialCenter={pos}
         center={pos}
       >
 
-      <Marker
-        name={'Current Location'}
-        position={pos} />
-      <Marker />
 
+      <Marker
+        name={'Current Location'}        
+        position={pos} />
       </Map>
+      </div>
     );
   }
 }
@@ -37,5 +35,5 @@ class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
   libraries: ['places'],
-  version: '3'
+  version: 3.31
 })(MapContainer)

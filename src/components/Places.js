@@ -20,70 +20,17 @@ class Container extends Component {
     super(props);
     this.state = {
       places: [],
+      pos:{}
     }
-  }
-
-  onMapReady = (mapProps, map) => {
-    console.log('center : ' + map.center)
-    //this.searchNearby(map, map.center)
-    this.searchText(map,map.center,this.props.searchTerm)
-  }
-
- /* searchNearby = (map, center) =>{
-    const {google} = this.props;
-    const service = new google.maps.places.PlacesService(map);
-    // Specify location, radius and place types for your Places API search.
-    const request = {
-       location: center,
-       radius: '500',
-       type: ['food']
-     }
-
-    service.nearbySearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({
-          places: results,
-          center: center,
-        })
-      }
-    })
-  }
-  */
-
-  searchText = (map, center, query) => {
-    const {google} = this.props
-    const service = new google.maps.places.PlacesService(map)
-    const request ={
-      location: center,
-       radius: '500',
-       query: query
-    }
-
-    service.textSearch(request,(results, status)=>{
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({
-          places: results,
-          center: center,
-        })
-      }
-    })
-
   }
 
   render(){
-    if (!this.props.loaded) {
+    if (!this.props.pos) {
       return <div>Loading...</div>
     }
 
     return (
-      <Map google={this.props.google}
-          className={'map'}
-          onReady={this.onMapReady}
-          visible={false}>
-
-          <Listing places={this.state.places} />
-
-      </Map>
+         <Listing places={this.props.places} />     
     )
   }
 

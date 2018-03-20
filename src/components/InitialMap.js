@@ -5,7 +5,33 @@ class MapContainer extends Component {
   onGoogleMapLoad = map => {
     this.map = map;
   }  
+  onMapReady = (mapProps, map) => {
+    this.setState({map});
+    console.log('center : ' + map.center)
+    //this.searchNearby(map, map.center)
+    this.searchText(map,map.center,this.props.searchTerm)
+  }
+  searchText = (map, center, query) => {
+    const {google} = this.props
+    const service = new google.maps.places.PlacesService(map)
+    const request ={
+      location: center,
+       radius: '500',
+       query: query
+    }
 
+    service.textSearch(request,(results, status)=>{
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
+        this.setState({
+          places: results,
+          center: center,
+        })
+        this.props.onLoad(results);
+      }
+    })
+
+  }
   render() {
     const {pos} = this.props;
 
@@ -20,6 +46,7 @@ class MapContainer extends Component {
         zoom={15}
       initialCenter={pos}
         center={pos}
+        onReady={this.onMapReady}
       >
 
 

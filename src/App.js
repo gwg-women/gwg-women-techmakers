@@ -29,6 +29,8 @@ class App extends Component {
   }
 
   handleLocationChange = (pos) => {
+    console.log('In App');
+    console.log(pos);
     this.setState({
       pos
     })
@@ -39,6 +41,14 @@ class App extends Component {
     console.log(this.state.searchTerm)
   }
 
+  
+  handleLoad = (places) => {
+    console.log('In App');
+    console.log(places);
+    this.setState({
+      places
+    })
+  }
  /* componentDidMount(){
     console.log("getPlaces")
      getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
@@ -60,7 +70,7 @@ class App extends Component {
               </div>  
               <div className="mapContainer">
                     <div className="map">
-                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} />
+                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
                     <Wiki pos={this.state.currentCity}/>

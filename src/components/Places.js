@@ -20,7 +20,7 @@ class Container extends Component {
     super(props);
     this.state = {
       places: [],
-      pos:{}
+     // pos:{}
     }
   }
 
@@ -30,7 +30,7 @@ class Container extends Component {
     }
 
     return (
-         <Listing places={this.props.places} />     
+         <Listing places={this.props.places} />
     )
   }
 

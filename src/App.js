@@ -11,10 +11,10 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      places: ["place1", "place2"],
+      places: [],
       searchTerm: 'food',
-      mapCenter: {lat: 40.854885,
-                  lng: -88.081807}
+      pos: {},
+      query: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,7 +23,7 @@ class App extends Component {
 
   handleChange(event) {
     console.log(event.target.value)
-    this.setState({searchTerm: event.target.value})
+    this.setState({query: event.target.value})
   }
 
   handleLocationChange = (pos) => {
@@ -35,14 +35,16 @@ class App extends Component {
   }
 
   handleSubmit() {
-    console.log("submitted word")
+    this.setState({searchTerm: this.state.query })
+    console.log("the submitted word")
     console.log(this.state.searchTerm)
+
   }
 
-  
+
   handleLoad = (places) => {
-    console.log('In App');
-    console.log(places);
+    //console.log('In App');
+    //console.log(places);
     this.setState({
       places
     })
@@ -65,17 +67,17 @@ class App extends Component {
           <div className="contentContainer">
               <div className="searchContainer">
               <Search submit={this.handleSubmit} input={this.handleChange} />
-              </div>  
+              </div>
               <div className="mapContainer">
                     <div className="map">
-                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} onLoad={this.handleLoad} />
+                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
                     The Description
                     </div>
                     <div className="mapPlaces">
                     <Container {...this.state} />
-                    </div>               
+                    </div>
                </div>
            </div>
            <div className="footer"> footer </div>

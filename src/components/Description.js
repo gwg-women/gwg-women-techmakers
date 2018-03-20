@@ -10,23 +10,24 @@ const apiUrl = currentCity =>
 export class Wiki extends Component {
     constructor(props){
         super(props);
+
       this.state = {
-        currentCity: 'new york city, new york',
         requestFailed: false,
         title: '',
-        description: [],
+        description: []
 
       }
-      console.log('hello');
 
-      getCity(0, 0);
+      console.log('is there a current city here?' + this.currentCity);
       this.getData();
 
     }
-
-
-
-  
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.currentCity !== this.state.currentCity) {
+        this.props.updateCurrentCity(this.state.currentCity);
+      }
+    }
+    
 
   // the callback for fetching the information
     getData(){
@@ -41,7 +42,6 @@ export class Wiki extends Component {
         .then(data =>   
           {
             this.setState({
-
                 title: data.titles,
                 description: data.extract_html,
             })
@@ -52,6 +52,7 @@ export class Wiki extends Component {
         })
     }
     render(){
+      
 
         if (this.state.requestFailed === true) return <h1>Request Failed</h1>
 

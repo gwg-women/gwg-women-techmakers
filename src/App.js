@@ -5,6 +5,7 @@ import HeaderContainer from './components/Header'
 import Search from './components/Search'
 // import getPlaces from './services/googlePlaces';
 import Container from './components/Places'
+import Wiki from './components/Description'
 import 'milligram';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     super(props)
     this.state = {
       places: ["place1", "place2"],
+      currentCity: 'New York City',
       searchTerm: 'food',
       mapCenter: {lat: 40.854885,
                   lng: -88.081807}
@@ -61,7 +63,7 @@ class App extends Component {
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} />
                     </div>
                     <div className="mapDescription">
-                    The Description
+                    <Wiki pos={this.state.currentCity}/>
                     </div>
                     <div className="mapPlaces">
                     <Container {...this.state} />

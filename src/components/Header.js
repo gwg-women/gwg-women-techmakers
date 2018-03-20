@@ -10,6 +10,7 @@ export default class HeaderContainer extends Component {
 
     getCity(latitude, longitude).then((city) => {                
       this.setState({currentCity: city})
+      console.log('this is the city that is in header' + city)
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
     });
@@ -22,11 +23,12 @@ export default class HeaderContainer extends Component {
   }
 
   getMyLocation = () => {    
-    const {handleLocationChange} = this.props;
-    const pos = {
+    let {handleLocationChange} = this.props;
+    let pos = {
         lat: parseFloat(localStorage.getItem('lat')),
         lng: parseFloat(localStorage.getItem('lng'))
       }
+      
     
     handleLocationChange(pos);
 
@@ -34,6 +36,7 @@ export default class HeaderContainer extends Component {
     if (pos.lat && pos.lng) {
       console.log('get location from cache');
        this.getCityWeather(pos.lat, pos.lng);     
+       console.log('what is this' + pos.lat)
     }    
     
     const errorLocation = (err) => {

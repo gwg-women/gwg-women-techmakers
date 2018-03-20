@@ -49,9 +49,9 @@ class App extends Component {
     })
   }
 
-  updateCurrentCity = (city) => {
-    this.setState({ currentCity: city });
-    console.log('what is the current city?' + city)
+  updateCurrentCity = (currentCity) => {
+    this.setState({ currentCity });
+    console.log('what is the current city?' + currentCity)
   }
  /* componentDidMount(){
     console.log("getPlaces")
@@ -78,7 +78,7 @@ class App extends Component {
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
-                    <Wiki city={this.state.currentCity}/>
+                    <Wiki currentCity={this.state.currentCity}/>
                     </div>
                     <div className="mapPlaces">
                     <Container {...this.state} />

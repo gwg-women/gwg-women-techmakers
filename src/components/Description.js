@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {getCity} from '../services/geolocation';
+import HeaderComponent from './Header'
 
 
 
@@ -18,20 +19,12 @@ export class Wiki extends Component {
 
       }
 
-      console.log('is there a current city here?' + this.currentCity);
-      this.getData();
+    }
 
-    }
-    componentDidUpdate(prevProps, prevState) {
-      if (prevState.currentCity !== this.state.currentCity) {
-        this.props.updateCurrentCity(this.state.currentCity);
-      }
-    }
-    
 
   // the callback for fetching the information
     getData(){
-        fetch(apiUrl(this.state.currentCity))
+        fetch(apiUrl(this.props.currentCity))
         .then(response => {
             if(!response.ok){
                 throw Error("Unable to fetch wiki information")
@@ -42,6 +35,7 @@ export class Wiki extends Component {
         .then(data =>   
           {
             this.setState({
+                currentCity: this.props.currentCity,
                 title: data.titles,
                 description: data.extract_html,
             })
@@ -52,12 +46,12 @@ export class Wiki extends Component {
         })
     }
     render(){
-      
+      this.getData();
 
         if (this.state.requestFailed === true) return <h1>Request Failed</h1>
 
         const description = String(this.state.description);
-        const title = this.state.currentCity;
+        const title = this.props.currentCity;
         const together = title + description;
         return (
 

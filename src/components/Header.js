@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 
+let city = '';
 export default class HeaderContainer extends Component {
   state = {
   };
- 
+  
   getCityWeather(latitude, longitude) {
 
     getCity(latitude, longitude).then((city) => {                
-      this.setState({currentCity: city})
+      this.setState({currentCity: city});
+
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
     });

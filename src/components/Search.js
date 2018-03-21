@@ -5,7 +5,7 @@ class Search extends Component {
 
     render() {
         return (
-            <div className="search">
+            <div className="search" role="search">
                 <input
                     type="text"
                     placeholder="I'm looking for...."

@@ -1,12 +1,4 @@
 import React, { Component } from 'react';
-import {getCity} from '../services/geolocation';
-import HeaderComponent from './Header'
-
-
-
-const apiUrl = currentCity => 
-`https://en.wikipedia.org/api/rest_v1/page/summary/${currentCity}`
-
 
 export class Wiki extends Component {
     constructor(props){
@@ -14,51 +6,53 @@ export class Wiki extends Component {
 
       this.state = {
         requestFailed: false,
-        title: '',
-        description: []
-
       }
 
     }
 
-
   // the callback for fetching the information
     getData(){
-        fetch(apiUrl(this.props.currentCity))
+
+        const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${this.props.currentCity}`;
+
+        fetch(url)
         .then(response => {
             if(!response.ok){
-                throw Error("Unable to fetch wiki information")
+                
+                  this.setState({
+                    requestFailed: true
+                  })
+                
+                console.log('error retrieving wiki information')
             }
             return response
         })
-        .then(data => data.json())
-        .then(data =>   
+        .then(data => data.json()).then(data =>
           {
             this.setState({
                 currentCity: this.props.currentCity,
-                title: data.titles,
-                description: data.extract_html,
+                description: data.extract,
             })
-        }, ()=>{
-          this.setState({
-            requestFailed: true
-          })
         })
+        
     }
-    render(){
+    componentWillReceiveProps() {
       this.getData();
+}
 
-        if (this.state.requestFailed === true) return <h1>Request Failed</h1>
+    
+    render(){
+      
 
-        const description = String(this.state.description);
-        const title = this.props.currentCity;
-        const together = title + description;
+        if (this.state.requestFailed === true) return <h1>Wiki Request Failed</h1>
+
+        const description = this.state.description;
+    
         return (
 
           <p>
- 
-            {together} 
-          </p>
+          {description}
+          </p> 
           
 
         )

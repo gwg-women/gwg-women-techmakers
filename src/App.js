@@ -51,7 +51,6 @@ class App extends Component {
 
   updateCurrentCity = (currentCity) => {
     this.setState({ currentCity });
-    console.log('what is the current city?' + currentCity)
   }
  /* componentDidMount(){
     console.log("getPlaces")
@@ -64,7 +63,6 @@ class App extends Component {
 /* The original css style names "App container", "row", "column column-75", "column column-25" */
   render() {
     //  <Sidebar places={this.state.places}/>
-
     return (
 
       <div className="fullContainer">
@@ -78,6 +76,8 @@ class App extends Component {
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
+                    {this.state.currentCity} Coordinates: {this.state.mapCenter.lat}, {this.state.mapCenter.lng}
+
                     <Wiki currentCity={this.state.currentCity}/>
                     </div>
                     <div className="mapPlaces">

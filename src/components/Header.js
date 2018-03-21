@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 
-let city = '';
+
 export default class HeaderContainer extends Component {
   state = {
   };
@@ -11,7 +11,6 @@ export default class HeaderContainer extends Component {
 
     getCity(latitude, longitude).then((city) => {                
       this.setState({currentCity: city});
-
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
     });
@@ -46,7 +45,7 @@ export default class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      console.log('get location from getcurrentposition');
+      console.log('get location from getcurrent position');
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -73,6 +72,7 @@ export default class HeaderContainer extends Component {
       this.props.updateCurrentCity(this.state.currentCity);
     }
   }
+  
   componentWillMount() {
     this.getMyLocation();
 

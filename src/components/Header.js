@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 
+
 export default class HeaderContainer extends Component {
   state = {
   };
- 
+  
   getCityWeather(latitude, longitude) {
 
     getCity(latitude, longitude).then((city) => {                
-      this.setState({currentCity: city})
+      this.setState({currentCity: city});
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
     });
@@ -22,11 +23,12 @@ export default class HeaderContainer extends Component {
   }
 
   getMyLocation = () => {    
-    const {handleLocationChange} = this.props;
-    const pos = {
+    let {handleLocationChange} = this.props;
+    let pos = {
         lat: parseFloat(localStorage.getItem('lat')),
         lng: parseFloat(localStorage.getItem('lng'))
       }
+      
     
     handleLocationChange(pos);
 
@@ -34,6 +36,7 @@ export default class HeaderContainer extends Component {
     if (pos.lat && pos.lng) {
       console.log('get location from cache');
        this.getCityWeather(pos.lat, pos.lng);     
+
     }    
     
     const errorLocation = (err) => {
@@ -42,7 +45,7 @@ export default class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      console.log('get location from getcurrentposition');
+      console.log('get location from getcurrent position');
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -62,9 +65,19 @@ export default class HeaderContainer extends Component {
     }
   }
 
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentCity !== this.state.currentCity) {
+      this.props.updateCurrentCity(this.state.currentCity);
+    }
+  }
+  
   componentWillMount() {
     this.getMyLocation();
+
   }
+
 
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?
@@ -77,7 +90,6 @@ export default class HeaderContainer extends Component {
     );
   }
 }
-
 
 // WEBPACK FOOTER //
 // src/components/Header.js

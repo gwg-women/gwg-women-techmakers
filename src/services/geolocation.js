@@ -2,6 +2,7 @@ const http = require('http');
 
 export function getCity(lat, lng){
   let city;
+
   const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
 
   return new Promise(function(resolve, reject){
@@ -19,9 +20,14 @@ export function getCity(lat, lng){
               data = JSON.parse(data);
               for (var i = 0; i < data.results.length; i++) {
                 // eslint-disable-next-line
-                if(data.results[i].types[0] == 'locality'){
+                
+                if(data.results[i].types[0] === 'locality'){
                   city = data.results[i].formatted_address;
-                  resolve(city.replace(/,.*/g, ""));
+                  let citystate = city.split(',');
+                  let finalcitystate = [citystate[0], citystate[1]];
+                  
+                  resolve(finalcitystate);
+                  
                 }
               }
             } catch (e){

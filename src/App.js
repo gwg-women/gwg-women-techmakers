@@ -78,7 +78,7 @@ class App extends Component {
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
-                    {this.state.currentCity} Coordinates: {this.state.mapCenter.lat}, {this.state.mapCenter.lng}
+                    {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
 
                     <Wiki currentCity={this.state.currentCity}/>
                     </div>

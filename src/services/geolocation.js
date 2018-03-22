@@ -27,7 +27,7 @@ export function getCity(lat, lng){
                   let finalcitystate = [citystate[0], citystate[1]];
                   
                   resolve(finalcitystate);
-                  
+
                 }
               }
             } catch (e){
@@ -38,6 +38,6 @@ export function getCity(lat, lng){
         })
       } else reject();
     })
-  }) 
+  })
 
 }

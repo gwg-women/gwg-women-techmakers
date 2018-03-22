@@ -5,6 +5,7 @@ import HeaderContainer from './components/Header'
 import Search from './components/Search'
 // import getPlaces from './services/googlePlaces';
 import Container from './components/Places'
+import Wiki from './components/Description'
 import 'milligram';
 
 class App extends Component {
@@ -49,6 +50,10 @@ class App extends Component {
       places
     })
   }
+
+  updateCurrentCity = (currentCity) => {
+    this.setState({ currentCity });
+  }
  /* componentDidMount(){
     console.log("getPlaces")
      getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
@@ -63,7 +68,7 @@ class App extends Component {
     return (
 
       <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange}/>
+        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
           <div className="contentContainer">
               <div className="searchContainer">
               <Search submit={this.handleSubmit} input={this.handleChange} />
@@ -73,7 +78,9 @@ class App extends Component {
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
                     </div>
                     <div className="mapDescription">
-                    The Description
+                    {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
+
+                    <Wiki currentCity={this.state.currentCity}/>
                     </div>
                     <div className="mapPlaces">
                     <Container {...this.state} />

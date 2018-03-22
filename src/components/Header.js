@@ -11,6 +11,7 @@ export default class HeaderContainer extends Component {
 
     getCity(latitude, longitude).then((city) => {
       this.setState({currentCity: city})
+
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
     });
@@ -21,6 +22,7 @@ export default class HeaderContainer extends Component {
       console.log('Error retrieving the current weather: ', err);
     })
   }
+
 
   getMyLocation = () => {
     const {handleLocationChange} = this.props;
@@ -37,13 +39,14 @@ export default class HeaderContainer extends Component {
        this.getCityWeather(pos.lat, pos.lng);
     }
 
+
     const errorLocation = (err) => {
       console.log("error retrieving current position, " + err);
     }
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      console.log('get location from getcurrentposition');
+      console.log('get location from getcurrent position');
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -63,9 +66,19 @@ export default class HeaderContainer extends Component {
     }
   }
 
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentCity !== this.state.currentCity) {
+      this.props.updateCurrentCity(this.state.currentCity);
+    }
+  }
+  
   componentWillMount() {
     this.getMyLocation();
+
   }
+
 
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?
@@ -78,7 +91,6 @@ export default class HeaderContainer extends Component {
     );
   }
 }
-
 
 // WEBPACK FOOTER //
 // src/components/Header.js

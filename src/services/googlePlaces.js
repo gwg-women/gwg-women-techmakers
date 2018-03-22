@@ -8,7 +8,8 @@ export default function getPlaces(lat, lng, query){
   location.longitide=lng;
    console.log('in get places');
 
-  const google_api = 'AIzaSyAR9_HMLChf4WdyDIX3ZuDF6pZYqi9aZDI'//process.env.GOOGLE_KEY
+  const google_api = process.env.REACT_APP_GKEY;
+
   const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${google_api}&location=${lat},${lng}&radius=5000`;
 
 

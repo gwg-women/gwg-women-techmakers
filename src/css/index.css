@@ -125,3 +125,23 @@ body {
   height: auto !important;
 }
 /*# sourceMappingURL=index.css.map */
+.listings{
+  text-align: left !important;
+}
+.listings-icon {
+  height: 15px;
+  width: 15px;
+}
+
+.listings-heading {
+  font-weight: 200;
+}
+
+.listings-info {
+  text-align: left !important;
+  font-size: 12px;
+}
+
+.markerTitle{
+  font-weight: 200 !important;
+}

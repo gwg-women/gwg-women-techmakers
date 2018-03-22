@@ -20,8 +20,10 @@ export function getCity(lat, lng){
               for (var i = 0; i < data.results.length; i++) {
                 // eslint-disable-next-line
                 if(data.results[i].types[0] == 'locality'){
+
                   city = data.results[i].formatted_address;
-                  resolve(city.replace(/,.*/g, ""));
+                  resolve(city);
+                  //resolve(city.replace(/,.*/g, ""));
                 }
               }
             } catch (e){
@@ -32,6 +34,6 @@ export function getCity(lat, lng){
         })
       } else reject();
     })
-  }) 
+  })
 
 }

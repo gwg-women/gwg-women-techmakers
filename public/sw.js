@@ -3,9 +3,11 @@ const doCache = true;
 
 const CACHE_NAME = 'maapa-cache-v1';
 
-const urlsToCache = [
+const urlsToCache =[
   '/',
   '/static/js/',
+  '/src/style/style.css',
+  '/static/js/bundle.js',
   '/index.js',
   '/static/css',
   '/index.html',

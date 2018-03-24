@@ -1,3 +1,4 @@
+
 # gwg-women-techmakers
 This is a Grow with Google project for an offline first app that provides information based on location and search.
 
@@ -9,3 +10,4 @@ Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women
 
 ## Pending
 - Whether we use geolocation or use the search box instead
+

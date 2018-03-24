@@ -23,29 +23,23 @@ class App extends Component {
   }
 
   handleChange(event) {
-    console.log(event.target.value)
     this.setState({query: event.target.value})
   }
 
   handleLocationChange = (pos) => {
-    console.log('In App');
-    console.log(pos);
+    console.log('coordinates: ', pos);
     this.setState({
       pos
     })
   }
 
   handleSubmit() {
+    console.log('submitted word: ', this.state.query)
     this.setState({searchTerm: this.state.query })
-    console.log("the submitted word")
-    console.log(this.state.searchTerm)
-
   }
 
 
   handleLoad = (places) => {
-    //console.log('In App');
-    //console.log(places);
     this.setState({
       places
     })

@@ -60,3 +60,11 @@ typings/
 # bundle.js created by webpack in dist directory
 dist/bundle.js
 
+build/
+dist/
+
+# vs code
+.vscode/
+
+# yarn 
+yarn.lock

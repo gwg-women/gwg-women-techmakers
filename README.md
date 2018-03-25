@@ -10,7 +10,7 @@ Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women
 
 ## The repository uses the following files :
 
-* **public/index.html **: The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asyncronously.
+* **public/index.html ** : The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asyncronously.
 
 * **src/index.js**: is the JavaScript entry point.
 
@@ -28,7 +28,7 @@ Get's and displays the map with markers to the search results.
 Displays the searchResults in the form of a list on the leftside of the app.
 
 ***PlacesListItem.js***
-Contains the ListItems control that displays all the list items. It displays the name address and opening hpurs of a place.
+Contains the ListItems control that displays all the list items. It displays the name address and opening hours of a place.
 
 ***Search.js***
 Get's the user Input for search query.
@@ -37,7 +37,9 @@ Get's the user Input for search query.
 Contains the styles of the App
 
 * **src/services** folder has the code that makes calls to the location, map and weather API's and fetches their results.
+
 ***geolocation.js***
+
 ***weather.js***
 
 * **registerServiceWorker.js** checks for and registers the service worker for the application.
@@ -58,12 +60,11 @@ Contains the styles of the App
 
 ## Motivation
 
-This project is made for practicing
+This project is made as part of the GROW With GOOGLE Challenge for practicing
 * Creating Progressive web apllications
 * Registering and create a service worker
 * Creatinf a REACT web application
 * Colaborationg using GIT
 * Interacting with API servers
 * Use of third-party libraries and APIs
-* Asynchronous programming
 * Use Google Maps

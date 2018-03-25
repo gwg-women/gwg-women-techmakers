@@ -13,18 +13,19 @@ class MapContainer extends Component {
       }
 
     // binding this to event-handler functions
-    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMarkerOver = this.onMarkerOver.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
    // this.onMapReady=this.onMapReady.bind(this)
 
     }
 
-    onMarkerClick= (props, marker, e) => {
+    onMarkerOver= (props, marker, e) => {
       this.setState({
         selectedPlace: props,
         activeMarker: marker,
         showingInfoWindow: true
       });
+      this.state.activeMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
     }
 
    onMapClicked= (props) => {
@@ -100,7 +101,7 @@ class MapContainer extends Component {
         priceLevel = {''}
         reference = {""}
         icon = {{
-                  url: "https://developers.google.com/maps/documentation/javascript/images/circle.png",
+                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
@@ -147,7 +148,8 @@ class MapContainer extends Component {
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
-              onMouseover={this.onMarkerClick} />
+              onMouseover={this.onMarkerOver}
+              onMouseout = {this.onMapClicked}/>
           )
           })}
 
@@ -178,4 +180,3 @@ export default GoogleApiWrapper({
   libraries: ['places'],
   version: 3.31
 })(MapContainer)
-

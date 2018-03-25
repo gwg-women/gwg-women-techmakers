@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   handleLocationChange = (pos) => {
-    console.log('coordinates: ', pos);
+    //console.log('coordinates: ', pos);
     this.setState({
       pos
     })

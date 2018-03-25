@@ -12,7 +12,7 @@ class MapContainer extends Component {
           selectedPlace: {}
       }
 
-       // binding this to event-handler functions
+    // binding this to event-handler functions
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
    // this.onMapReady=this.onMapReady.bind(this)
@@ -69,11 +69,11 @@ class MapContainer extends Component {
   }
 
   render() {
-    const google_api = process.env.REACT_APP_GKEY;
+    //const google_api = process.env.REACT_APP_GKEY;
     const {pos} = this.props
     const {places} = this.props
     const {google} = this.props
-    const markerImageUrl = "../src/img/circleMarker.png"
+    // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if(!this.props.loaded){
       return <div>loading...</div>
@@ -156,7 +156,7 @@ class MapContainer extends Component {
               visible={this.state.showingInfoWindow}>
                 <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
                   <div>
-                     <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${this.state.selectedPlace.reference}&key=${google_api}`} alt="No Photos" />
+                     <img src={`http://via.placeholder.com/40x40`} alt="No Photos" />
                   </div>
                   <div>
                   <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>{this.state.selectedPlace.name}</div>

@@ -10,7 +10,7 @@ Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women
 
 ## The repository uses the following files :
 
-* **public/index.html ** : The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asyncronously.
+* **public/index.html** : The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asyncronously.
 
 * **src/index.js**: is the JavaScript entry point.
 

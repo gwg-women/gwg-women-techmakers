@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import jsonData from '../services/contributors.JSON';
+// import jsonData from '../services/contributors.JSON';
 
 
 export class Footer extends Component {
@@ -18,7 +18,7 @@ export class Footer extends Component {
     getData() {
         
 
-        var json_data = json_data= [
+        var json_data = [
             {
               "login": "khusbuchandra",
               "id": 35678241,
@@ -205,11 +205,8 @@ export class Footer extends Component {
         let names = [];
         for(var i = 0; i < json_data.length; i++) {
             let sets = json_data[i].login;
-            let linkstart = '<a href="https://github.com/';
 
-            names.push([
-                `${linkstart}${sets}">${sets}</a> `]
-            )
+            names.push([`<a href="http://github.com/${sets}">${sets}</a> `])
             // names.push(json_data[i].login);
 
 

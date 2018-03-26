@@ -4,7 +4,6 @@
     --text-color: #202020;
     --button-color: #84347c;
     --button-color-hover: #6f6f6f;
-    --border-color: #c2c2c2;
 }
 
 body {
@@ -19,95 +18,55 @@ body {
     display:grid;
     width: 100%;
     grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr 100px;
+    grid-gap: 10px;
     padding: 30px;
     height: auto !important;
-    width: 100% !important;
+
 }
 /* This is the map part of the content */
 .mapContainer {
     display: grid;
-    grid-column: span 3;
-    background: white;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 100px 1fr 200px;
+    grid-template: 2fr 1fr;
     grid-gap: 10px;
 }
 
 /* Style for the actual map! */
-.map {
-    background: black;
-    display: grid;
-    grid-row-start: 2;
-    min-width: 200px;
-    height: 600px;
-}
+
 .theMap {
     position: relative;
     width: 100%;
     height: 600px;
 }
 
-/*******************this is the sidebar*/
+/*this is the sidebar*/
 
+.sidebar { //this sidebar doesn't show yet.
+    height: 600px;
+    border: 1px black solid;
+    padding: 3%;
+    }
 
 .mapPlaces {
     color: var(--text-color);
-    grid-gap: 10px;
     display: grid;
-    margin-left: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: -1;
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: 850px;
+    grid-row: 1 / 3;
+    grid-column-start: 2 ;
     
     position: relative !important;
     & div {
         width: auto !important;
         height: auto !important;
+        padding-left: 50px;
     }
     & li {
         list-style: none;
     }
-    & .listings {
-        border-bottom: var(--border-color) 1px solid;
-        display: grid;
-        grid-column: auto;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        align-items: center;
-
-        & .listing-description {
-            display: grid;
-            grid-template-columns: minmax(100px, 300px);
-            grid-template-rows: 1fr 2fr;
-        }
-
-        & .listings-icon {
-            display: grid;
-            grid-template-rows: span 2;
-            width: 100%;
-            grid-column-start: 2;
-            grid-row-start: 1;
-        }
-        & .listing-name {
-            display: grid;
-
-        }
-        & .listings-info {
-
-            display: grid;
-        }
-    }
 }
-
-
-
-/****description bottom of the map */
 .mapDescription {
     display: grid;
-    grid-row-start: 3;
+    grid-row-start: 2;
     height: 150px;
     
 }
@@ -115,10 +74,7 @@ body {
 /* This is the Search area */
 .searchContainer {
     display: grid;
-    grid-column: span 2;
-    grid-row: span 1;
-    grid-column-start: 1;
-    max-width: 500px;
+    grid-template-columns: 550px 40px;
 
 }
 .search {
@@ -164,6 +120,8 @@ body {
 }
 
 
+
+
 /*footer*/
 
 .footer {
@@ -171,62 +129,6 @@ body {
     background: var(--header-color);
     & div {
         height: auto !important;
-        padding: 5px;
-        padding-top: 10px;
-    }
-
-    & a {
-        color: black;
-        padding: 5px;
-        margin: 2px;
-        transition: .5s;
-        &:hover {
-            background: white;
-            color: black;
-            border-radius: 10px;
-        }
-    }
-
-}
-
-@media screen and (max-width: 800px) {
-    .fullContainer {
-        position:relative;
-        display: grid;
-        min-width: 400px;
-        grid-template-columns: 1fr;
-
-    }
-
-    .mapContainer {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 100px 1fr 1fr 1fr 1fr 200px;
-    }
-
-    .map {
-        display: grid;
-        grid-row-start: 2;
-        grid-column: span 1 / -1;
-    }
-    .searchContainer {
-        display: grid;
-        grid-row-start: 1;
-        grid-column: span 1 / -1;
-    }
-    .mapPlaces {
-        display: grid;
-        grid-auto-rows: auto;
-        grid-row-start: 3;
-        grid-column: span 1 / -1;
-        margin-left: 0px;
-        overflow: visible;
-        height: auto;
-    }
-    .mapDescription {
-        display: grid;
-        grid-row-start: 6;
-        grid-column: span 1 / -1;
     }
 
 }

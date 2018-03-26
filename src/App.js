@@ -6,6 +6,7 @@ import Search from './components/Search'
 // import getPlaces from './services/googlePlaces';
 import Container from './components/Places'
 import Wiki from './components/Description'
+import Footer from './components/Footer'
 import 'milligram';
 
 class App extends Component {
@@ -81,7 +82,7 @@ class App extends Component {
                     </div>
                </div>
            </div>
-           <div className="footer"> footer </div>
+           <div className="footer"><Footer /></div>
 
       </div>
     );

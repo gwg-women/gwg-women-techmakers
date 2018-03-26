@@ -39,8 +39,10 @@ body {
 /*this is the sidebar*/
 .sidebar {
   height: 600px;
-  border: 1px black solid;
   padding: 3%;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 750px;
 }
 
 .mapPlaces {
@@ -124,23 +126,3 @@ body {
   height: auto !important;
 }
 /*# sourceMappingURL=index.css.map */
-.listings{
-  text-align: left !important;
-}
-.listings-icon {
-  height: 15px;
-  width: 15px;
-}
-
-.listings-heading {
-  font-weight: 200;
-}
-
-.listings-info {
-  text-align: left !important;
-  font-size: 12px;
-}
-
-.markerTitle{
-  font-weight: 200 !important;
-}

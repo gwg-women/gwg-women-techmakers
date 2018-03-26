@@ -64,11 +64,12 @@ class App extends Component {
 
       <div className="fullContainer">
         <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
-          <div className="contentContainer">
-              <div className="searchContainer">
-              <Search submit={this.handleSubmit} input={this.handleChange} />
-              </div>
+
+
               <div className="mapContainer">
+                    <div className="searchContainer">
+                    <Search submit={this.handleSubmit} input={this.handleChange} />
+                    </div>
                     <div className="map">
                     <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
                     </div>
@@ -81,7 +82,7 @@ class App extends Component {
                     <Container {...this.state} />
                     </div>
                </div>
-           </div>
+
            <div className="footer"><Footer /></div>
 
       </div>

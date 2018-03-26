@@ -15,7 +15,7 @@ class Sidebar extends Component {
    
    render() {
         return (
-          <div className="sidebar">
+          <div>
               <h4>Here are some places near you:</h4>
               <ul>
                   {this.renderList()}

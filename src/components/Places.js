@@ -30,7 +30,7 @@ class Container extends Component {
     }
 
     return (
-         <div className="sidebar"><Listing places={this.props.places} /></div>
+         <Listing places={this.props.places} />
     )
   }
 

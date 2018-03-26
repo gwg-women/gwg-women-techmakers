@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
+import {GoogleApiWrapper} from 'google-maps-react';
 
 
-export default class HeaderContainer extends Component {
+class HeaderContainer extends Component {
   state = {
   };
 
@@ -68,13 +69,13 @@ export default class HeaderContainer extends Component {
 
 
 
-  componentDidUpdate(prevProps, prevState) {
+  componentWillUpdate(prevProps, prevState) {
     if (prevState.currentCity !== this.state.currentCity) {
       this.props.updateCurrentCity(this.state.currentCity);
     }
   }
   
-  componentWillMount() {
+  componentDidMount() {
     this.getMyLocation();
 
   }
@@ -92,5 +93,8 @@ export default class HeaderContainer extends Component {
   }
 }
 
-// WEBPACK FOOTER //
-// src/components/Header.js
+export default GoogleApiWrapper({
+  apiKey: (process.env.REACT_APP_GKEY),
+  libraries: ['places'],
+  version: '3'
+})(HeaderContainer) 

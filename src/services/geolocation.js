@@ -1,43 +1,31 @@
-const http = require('http');
-
 export function getCity(lat, lng){
   let city;
+  return new Promise(function (resolve, reject) {
+    
+    const latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
 
-  const url = `http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+    if (!window.google) {
+      resolve();
+    }
 
-  return new Promise(function(resolve, reject){
-    http.get(url, (res) => {
-      // eslint-disable-next-line
-      if(res.statusCode == '200'){
-        res.setEncoding('utf8');
-        res.on('data', (data) => {
-          if(data.includes('error_message')){
-            console.log('Error grabbing key');
-            reject();
-          }
-          else {
-            try {
-              data = JSON.parse(data);
-              for (var i = 0; i < data.results.length; i++) {
-                // eslint-disable-next-line
-                
-                if(data.results[i].types[0] === 'locality'){
-                  city = data.results[i].formatted_address;
-                  let citystate = city.split(',');
-                  let finalcitystate = [citystate[0], citystate[1]];
-                  
-                  resolve(finalcitystate);
+    const geocoder = new window.google.maps.Geocoder();
 
-                }
-              }
-            } catch (e){
-              console.log('Error parsing JSON response');
-              reject();
-            }
-          }
-        })
-      } else reject();
-    })
+    geocoder.geocode({'location': latlng}, function(results, status) {
+      if (status === 'OK') {
+        if (results[0]) {
+          city = results[0].formatted_address;
+            let citystate = city.split(',');
+            citystate[2] = citystate[2].replace(/[\d]*/g,"");
+            citystate = [citystate[1], citystate[2]];
+            resolve(citystate);
+          } else {
+          window.alert('No results found');
+          reject();
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+        reject();
+      }
+    });
   })
-
 }

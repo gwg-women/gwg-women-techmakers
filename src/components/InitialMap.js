@@ -13,20 +13,43 @@ class MapContainer extends Component {
       }
 
     // binding this to event-handler functions
-    this.onMarkerOver = this.onMarkerOver.bind(this);
+     this.onMarkerClick = this.onMarkerClick.bind(this)
+    this.onMarkerOver = this.onMarkerOver.bind(this)
+    this.onMarkerOut = this.onMarkerOut.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this);
    // this.onMapReady=this.onMapReady.bind(this)
 
     }
 
+    // change marker image to green on mouse over
     onMarkerOver= (props, marker, e) => {
+        const {google} = this.props
+          marker.setIcon ({
+                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  anchor:  google.maps.Point(10, 10),
+                  scaledSize: google.maps.Size(10, 17)
+                })
+    }
+
+    // change the marker image to red when mouse out
+    onMarkerOut= (props, marker, e) => {
+       const {google} = this.props
+       marker.setIcon ({
+                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  anchor:  google.maps.Point(10, 10),
+                  scaledSize: google.maps.Size(10, 17)
+                })
+    }
+
+    // show Infowindow when a marker is clicked and make it the active marker
+    onMarkerClick= (props, marker, e) => {
       this.setState({
         selectedPlace: props,
         activeMarker: marker,
         showingInfoWindow: true
       });
-      this.state.activeMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
     }
+
 
    onMapClicked= (props) => {
     if (this.state.showingInfoWindow) {
@@ -144,12 +167,13 @@ class MapContainer extends Component {
               reference = {""+p.place_id}
               position={p.geometry.location}
                icon = {{
-                  url: "https://developers.google.com/maps/documentation/javascript/images/circle.png",
+                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
+              onClick = {this.onMarkerClick}
               onMouseover={this.onMarkerOver}
-              onMouseout = {this.onMapClicked}/>
+              onMouseout = {this.onMarkerOut}/>
           )
           })}
 

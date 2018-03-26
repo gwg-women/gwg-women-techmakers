@@ -12,19 +12,20 @@ class MapContainer extends Component {
           selectedPlace: {}
       }
 
-       // binding this to event-handler functions
-    this.onMarkerClick = this.onMarkerClick.bind(this);
+    // binding this to event-handler functions
+    this.onMarkerOver = this.onMarkerOver.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
    // this.onMapReady=this.onMapReady.bind(this)
 
     }
 
-    onMarkerClick= (props, marker, e) => {
+    onMarkerOver= (props, marker, e) => {
       this.setState({
         selectedPlace: props,
         activeMarker: marker,
         showingInfoWindow: true
       });
+      this.state.activeMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
     }
 
    onMapClicked= (props) => {
@@ -69,11 +70,11 @@ class MapContainer extends Component {
   }
 
   render() {
-    const google_api = process.env.REACT_APP_GKEY;
+    //const google_api = process.env.REACT_APP_GKEY;
     const {pos} = this.props
     const {places} = this.props
     const {google} = this.props
-    const markerImageUrl = "../src/img/circleMarker.png"
+    // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if(!this.props.loaded){
       return <div>loading...</div>
@@ -100,7 +101,7 @@ class MapContainer extends Component {
         priceLevel = {''}
         reference = {""}
         icon = {{
-                  url: "https://developers.google.com/maps/documentation/javascript/images/circle.png",
+                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
@@ -147,7 +148,8 @@ class MapContainer extends Component {
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
-              onMouseover={this.onMarkerClick} />
+              onMouseover={this.onMarkerOver}
+              onMouseout = {this.onMapClicked}/>
           )
           })}
 
@@ -156,7 +158,7 @@ class MapContainer extends Component {
               visible={this.state.showingInfoWindow}>
                 <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
                   <div>
-                     <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${this.state.selectedPlace.reference}&key=${google_api}`} alt="No Photos" />
+                     <img src={`http://via.placeholder.com/40x40`} alt="No Photos" />
                   </div>
                   <div>
                   <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>{this.state.selectedPlace.name}</div>
@@ -178,4 +180,3 @@ export default GoogleApiWrapper({
   libraries: ['places'],
   version: 3.31
 })(MapContainer)
-

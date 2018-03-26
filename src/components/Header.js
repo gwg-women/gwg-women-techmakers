@@ -36,7 +36,7 @@ class HeaderContainer extends Component {
 
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
-      console.log('get location from cache');
+     // console.log('get location from cache');
        this.getCityWeather(pos.lat, pos.lng);
     }
 
@@ -47,7 +47,7 @@ class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      console.log('get location from getcurrent position');
+     // console.log('get location from getcurrent position');
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude

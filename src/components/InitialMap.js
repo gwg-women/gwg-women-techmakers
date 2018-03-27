@@ -73,6 +73,7 @@ class MapContainer extends Component {
   searchText = (map, center, query) => {
     const {google} = this.props
     const service = new google.maps.places.PlacesService(map)
+    //const detailsService = new google.maps.places.PlaceService(map)
     const request ={
       location: center,
        radius: '500',
@@ -82,15 +83,33 @@ class MapContainer extends Component {
     service.textSearch(request,(results, status)=>{
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         //console.log(results);
+       /* get PlaceDetails for each place, getting bad request and overlimit errors
+        results.map(place => {
+          let placeRequest = {
+            placeId: place.id
+          }
+
+          service.getDetails(placeRequest, (placeDetailsResult,status)=>{
+             if (status === google.maps.places.PlacesServiceStatus.OK) {
+               place.details = placeDetailsResult
+               console.log(JSON.stringify(placeDetailsResult))
+             }
+             console.log(status)
+          })
+        })
+       */
         this.setState({
           places: results,
           //center: center,
         })
+
+        //console.log("results= " + JSON.stringify(results))
         this.props.onLoad(results);
       }
     })
 
   }
+
 
   render() {
     //const google_api = process.env.REACT_APP_GKEY;
@@ -137,6 +156,7 @@ class MapContainer extends Component {
           let isOpenNow = "";
           let priceLevel = "";
           let rating = "";
+
           const priceLevelDesc = { 0 : "Free",
                                     1 : "Inexpensive",
                                     2 : "Moderate",
@@ -156,6 +176,7 @@ class MapContainer extends Component {
             priceLevel = priceLevelDesc[p.price_level]
           }
 
+
           return (
             <Marker
               key={p.id}
@@ -166,6 +187,8 @@ class MapContainer extends Component {
               priceLevel = {priceLevel}
               reference = {""+p.place_id}
               position={p.geometry.location}
+              //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
+              photo={p.photos === undefined ? `http://via.placeholder.com/50x50` : p.photos[0].getUrl({'maxWidth': 50, 'maxHeight': 50})}
                icon = {{
                   url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                   anchor:  google.maps.Point(10, 10),
@@ -179,16 +202,17 @@ class MapContainer extends Component {
 
           <InfoWindow
               marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}>
-                <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-                  <div>
-                     <img src={`http://via.placeholder.com/40x40`} alt="No Photos" />
+              visible={this.state.showingInfoWindow}
+              >
+                <div id="info" style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px`, }}>
+                  <div >
+                     <img src={this.state.selectedPlace.photo} alt="" />
                   </div>
-                  <div>
-                  <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>{this.state.selectedPlace.name}</div>
-                   <div>Ratings : <span style={{ fontWeight: `bold`}}> {this.state.selectedPlace.rating?this.state.selectedPlace.rating:""} </span>  Price Level : <span style={{ fontWeight: `bold`}} > {this.state.selectedPlace.priceLevel}  </span> </div>
-                   <div> {this.state.selectedPlace.address}</div>
-                    <div>{this.state.selectedPlace.openNow} </div>
+                  <div >
+                     <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>{this.state.selectedPlace.name}</div>
+                     <div>Ratings : <span style={{ fontWeight: `bold`}}> {this.state.selectedPlace.rating?this.state.selectedPlace.rating:""} </span>  Price Level : <span style={{ fontWeight: `bold`}} > {this.state.selectedPlace.priceLevel}  </span> </div>
+                     <div> {this.state.selectedPlace.address}</div>
+                     <div>{this.state.selectedPlace.openNow} </div>
 
                   </div>
                 </div>

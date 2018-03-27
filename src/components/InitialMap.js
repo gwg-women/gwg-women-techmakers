@@ -188,7 +188,7 @@ class MapContainer extends Component {
               reference = {""+p.place_id}
               position={p.geometry.location}
               //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
-              photo={p.photos === undefined ? `http://via.placeholder.com/50x50` : p.photos[0].getUrl({'maxWidth': 50, 'maxHeight': 50})}
+              photo={p.photos === undefined ? `http://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
                icon = {{
                   url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                   anchor:  google.maps.Point(10, 10),
@@ -204,7 +204,7 @@ class MapContainer extends Component {
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
               >
-                <div id="info" style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px`, }}>
+                <div id="info" style={{ backgroundColor: `yellow`, opacity: 0.75,  }}>
                   <div >
                      <img src={this.state.selectedPlace.photo} alt="" />
                   </div>

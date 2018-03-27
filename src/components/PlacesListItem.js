@@ -4,7 +4,7 @@ const PlacesListItem = (props) => {
 
     return <li >
                 <div className="listings">
-                    <div className="listings-icon"><img src={props.place.icon} alt= ""/></div>
+                    <div className="listings-icon">{props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="" />}</div>
                     <div className="listing-description">
                         <div className="listing-name">{ props.place.name }</div>
                         <div className="listings-info">

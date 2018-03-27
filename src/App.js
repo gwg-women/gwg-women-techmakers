@@ -16,7 +16,7 @@ class App extends Component {
       places: [],
       searchTerm: 'food',
       pos: {},
-      query: ''
+      query: '',
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -46,9 +46,13 @@ class App extends Component {
     })
   }
 
-  updateCurrentCity = (currentCity) => {
-    this.setState({ currentCity });
+  // call method to read currentCity from header
+  
+  callMethod = (receivedData) => {
+    console.log(receivedData, 'callMethod');
+    this.setState({ currentCity: receivedData})
   }
+
  /* componentDidMount(){
     console.log("getPlaces")
      getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
@@ -63,7 +67,7 @@ class App extends Component {
     return (
 
       <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
+        <HeaderContainer handleLocationChange={this.handleLocationChange} callMethod={this.callMethod}/>
 
 
               <div className="mapContainer">

@@ -5,8 +5,16 @@ import {GoogleApiWrapper} from 'google-maps-react';
 
 
 class HeaderContainer extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentCity: ''
   };
+
+
+  }
+  
+
 
   getCityWeather(latitude, longitude) {
 
@@ -68,18 +76,19 @@ class HeaderContainer extends Component {
   }
 
 
-
-  componentWillUpdate(prevProps, prevState) {
-    if (prevState.currentCity !== this.state.currentCity) {
-      this.props.updateCurrentCity(this.state.currentCity);
-    }
-  }
-  
   componentDidMount() {
     this.getMyLocation();
-
+    this.liftState();
   }
 
+  //  The main issue is that it doesn't read this.state.currentCity. 
+  // if you give let city = 'any value you want' wiki will read it no problem.
+  // we just now need to figure out how to give this.state.currentCity the same
+  // as this site. It must be a scope issue.
+  liftState = () => {
+    let city = this.state.currentCity;
+    this.props.callMethod(city);
+  }
 
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?

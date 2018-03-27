@@ -27,13 +27,12 @@ body {
   grid-column: span 3;
   background: white;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 100px 1fr 200px;
+  grid-template-rows: 50px 1fr 200px;
   grid-gap: 10px;
 }
 
 /* Style for the actual map! */
 .map {
-  background: black;
   display: grid;
   grid-row-start: 2;
   min-width: 200px;
@@ -52,7 +51,7 @@ body {
   grid-gap: 10px;
   display: grid;
   margin-left: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: 1fr;
   grid-column-start: 2;
   grid-row-start: 1;
   grid-row-end: -1;
@@ -74,8 +73,9 @@ body {
 .mapPlaces .listings {
   border-bottom: var(--border-color) 1px solid;
   display: grid;
+  grid-template-columns: 1fr 149px;
   grid-column: auto;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding-bottom: 5px;
   align-items: center;
 }
 
@@ -85,29 +85,37 @@ body {
   grid-template-rows: 1fr 2fr;
 }
 
-.mapPlaces .listings .listings-icon {
+.mapPlaces .listings .listing-icon-div {
   display: grid;
-  grid-template-rows: span 2;
-  width: 100%;
   grid-column-start: 2;
   grid-row-start: 1;
+  min-height: 135px;
+  min-width: 135px;
+  align-items: center;
+  justify-items: center;
+}
+
+.mapPlaces .listings .listings-icon {
+  width: 135px;
+  height: 135px;
 }
 
 .mapPlaces .listings .listing-name {
   display: grid;
+  color: #323232;
+  font-weight: 400;
 }
 
 .mapPlaces .listings .listings-info {
+  color: #336282;
   display: grid;
-}
-/**** infoWindow ****/
-#info{
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 10px;
 }
 
-/*****/
+.mapPlaces .listings .listing-open {
+  font-weight: bold;
+  display: grid;
+}
+
 /****description bottom of the map */
 .mapDescription {
   display: grid;
@@ -129,9 +137,8 @@ body {
   grid-template-columns: 1fr 125px;
   grid-template-rows: 1fr;
   grid-gap: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
   justify-content: center;
-  padding: 10px;
 }
 
 .search button {
@@ -200,30 +207,27 @@ body {
   .mapContainer {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 100px 1fr 1fr 1fr 1fr 200px;
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
   }
   .map {
     display: grid;
-    grid-row-start: 2;
+    grid-row: 2;
     grid-column: span 1 / -1;
   }
   .searchContainer {
     display: grid;
-    grid-row-start: 1;
+    grid-row: 1;
     grid-column: span 1 / -1;
   }
   .mapPlaces {
     display: grid;
-    grid-auto-rows: auto;
-    grid-row-start: 3;
+    grid-row: 3;
     grid-column: span 1 / -1;
     margin-left: 0px;
-    overflow: visible;
-    height: auto;
   }
   .mapDescription {
     display: grid;
-    grid-row-start: 6;
+    grid-row: 4;
     grid-column: span 1 / -1;
   }
 }

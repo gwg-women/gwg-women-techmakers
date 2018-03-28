@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
+import StaticMap from './StaticMap'
+
 
 class MapContainer extends Component {
   constructor(props){
@@ -119,7 +121,7 @@ class MapContainer extends Component {
     // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if(!this.props.loaded){
-      return <div>loading...</div>
+        return  <StaticMap pos={pos} />
     }
     return (
       <div className = "theMap">

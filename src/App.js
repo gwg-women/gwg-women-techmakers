@@ -46,14 +46,9 @@ class App extends Component {
   }
 
   // call method to read currentCity from header
-  
-  callMethod = (receivedData) => {
-    console.log(receivedData, 'callMethod');
-    this.setState({ currentCity: receivedData})
-  }
 
   setCurrentCity = (city) => {
-    city = city !== undefined ? city[0] : city;
+    city = city !== undefined ? `${city[0]},  ${city[1]}` : city;
     this.setState({ city });
   }
 
@@ -72,7 +67,7 @@ class App extends Component {
     return (
 
       <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity} setCurrentCity = {this.setCurrentCity}/>
+        <HeaderContainer handleLocationChange={this.handleLocationChange} setCurrentCity = {this.setCurrentCity}/>
 
         <main className="mapContainer">
           <div className="searchContainer">
@@ -83,9 +78,9 @@ class App extends Component {
             <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
           </div>
 
-          <div className="mapDescription">
+          <div className="mapDescription"><p>
             {this.state.city}  Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
-
+            </p>
             {this.state.city && <Wiki currentCity={this.state.city}/>}
 
           </div>

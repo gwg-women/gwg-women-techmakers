@@ -43,7 +43,7 @@ h3 {
     grid-column: span 3;
     background: white;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 50px 1fr 200px;
+    grid-template-rows: 50px 1fr auto;
     grid-gap: 10px;
     margin: .5em;
 }
@@ -141,8 +141,8 @@ h3 {
 .mapDescription {
     display: grid;
     grid-row-start: 3;
-    height: 150px;
-    
+    height: auto;
+    padding:10px;
 }
 
 /* This is the Search area */

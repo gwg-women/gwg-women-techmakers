@@ -36,8 +36,7 @@ self.addEventListener('fetch', function(event) {
 
 
 
-//This is caching the static map on the first load
-//Called "Cache then network" recipe
+//This is caching the static map on the first load, Called "Cache then network" recipe
 self.addEventListener('fetch', function (event) {
 
   const requestUrl = new URL(event.request.url)
@@ -71,7 +70,8 @@ self.addEventListener('fetch', function(event) {
   }
 })
 
-// console.log('in service-worker')
+
+
 self.addEventListener("activate", event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(

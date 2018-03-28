@@ -28,7 +28,6 @@ class App extends Component {
   }
 
   handleLocationChange = (pos) => {
-    //console.log('coordinates: ', pos);
     this.setState({
       pos
     })
@@ -53,6 +52,12 @@ class App extends Component {
     this.setState({ currentCity: receivedData})
   }
 
+  setCurrentCity = (city) => {
+    city = city !== undefined ? city[0] : city;
+    this.setState({ city });
+  }
+
+
  /* componentDidMount(){
     console.log("getPlaces")
      getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
@@ -67,27 +72,30 @@ class App extends Component {
     return (
 
       <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange} callMethod={this.callMethod}/>
+        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity} setCurrentCity = {this.setCurrentCity}/>
 
+        <main className="mapContainer">
+          <div className="searchContainer">
+            <Search submit={this.handleSubmit} input={this.handleChange} />
+          </div>
 
-              <div className="mapContainer">
-                    <div className="searchContainer">
-                    <Search submit={this.handleSubmit} input={this.handleChange} />
-                    </div>
-                    <div className="map">
-                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
-                    </div>
-                    <div className="mapDescription">
-                    {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
+          <div className="map">
+            <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
+          </div>
 
-                    <Wiki currentCity={this.state.currentCity}/>
-                    </div>
-                    <div className="mapPlaces">
-                    <Container {...this.state} />
-                    </div>
-               </div>
+          <div className="mapDescription">
+            {this.state.city}  Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
 
-           <div className="footer"><Footer /></div>
+            {this.state.city && <Wiki currentCity={this.state.city}/>}
+
+          </div>
+
+          <div className="mapPlaces">
+            <Container {...this.state} />
+          </div>
+        </main>
+
+        <footer className="footer"><Footer /></footer>
 
       </div>
     );

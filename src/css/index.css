@@ -3,23 +3,32 @@
   --text-color: #202020;
   --button-color: #84347c;
   --button-color-hover: #6f6f6f;
-  --border-color: #c2c2c2;
-}
+  --border-color: #c2c2c2; }
 
-body {
+/******* Normalize *******/
+* {
   margin: 0;
-}
+  padding: 0;
+  box-sizing: border-box; }
+
+/****** Typography ******/
+h1 {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 1.6rem; }
+
+h2 {
+  font-size: 1.4rem; }
+
+h3 {
+  font-size: 1.2rem; }
 
 /* This is the main content */
 .fullContainer {
-  position: relative;
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
-  padding: 30px;
   height: auto !important;
-  width: 100% !important;
-}
+  width: 100% !important; }
 
 /* This is the map part of the content */
 .mapContainer {
@@ -29,21 +38,19 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 50px 1fr 200px;
   grid-gap: 10px;
-}
+  margin: .5em; }
 
 /* Style for the actual map! */
 .map {
   display: grid;
   grid-row-start: 2;
   min-width: 200px;
-  height: 600px;
-}
+  height: 600px; }
 
 .theMap {
   position: relative;
   width: 100%;
-  height: 600px;
-}
+  height: 600px; }
 
 /*******************this is the sidebar*/
 .mapPlaces {
@@ -58,97 +65,70 @@ body {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 850px;
-  position: relative !important;
-}
-
-.mapPlaces div {
-  width: auto !important;
-  height: auto !important;
-}
-
-.mapPlaces li {
-  list-style: none;
-}
-
-.mapPlaces .listings {
-  border-bottom: var(--border-color) 1px solid;
-  display: grid;
-  grid-template-columns: 1fr 149px;
-  grid-column: auto;
-  padding-bottom: 5px;
-  align-items: center;
-}
-
-.mapPlaces .listings .listing-description {
-  display: grid;
-  grid-template-columns: minmax(100px, 300px);
-  grid-template-rows: 1fr 2fr;
-}
-
-.mapPlaces .listings .listing-icon-div {
-  display: grid;
-  grid-column-start: 2;
-  grid-row-start: 1;
-  min-height: 135px;
-  min-width: 135px;
-  align-items: center;
-  justify-items: center;
-}
-
-.mapPlaces .listings .listings-icon {
-  width: 135px;
-  height: 135px;
-}
-
-.mapPlaces .listings .listing-name {
-  display: grid;
-  color: #323232;
-  font-weight: 400;
-}
-
-.mapPlaces .listings .listings-info {
-  color: #336282;
-  display: grid;
-}
-
-.mapPlaces .listings .listing-open {
-  font-weight: bold;
-  display: grid;
-}
+  position: relative !important; }
+  .mapPlaces div {
+    width: auto !important;
+    height: auto !important; }
+  .mapPlaces li {
+    list-style: none; }
+  .mapPlaces .listings {
+    border-bottom: var(--border-color) 1px solid;
+    display: grid;
+    grid-template-columns: 1fr 149px;
+    grid-column: auto;
+    padding-bottom: 5px;
+    align-items: center; }
+    .mapPlaces .listings .listing-description {
+      display: grid;
+      grid-template-columns: minmax(100px, 300px);
+      grid-template-rows: 1fr 2fr; }
+    .mapPlaces .listings .listing-icon-div {
+      display: grid;
+      grid-column-start: 2;
+      grid-row-start: 1;
+      min-height: 135px;
+      min-width: 135px;
+      align-items: center;
+      justify-items: center; }
+    .mapPlaces .listings .listings-icon {
+      width: 135px;
+      height: 135px; }
+    .mapPlaces .listings .listing-name {
+      display: grid;
+      color: #323232;
+      font-weight: 400; }
+    .mapPlaces .listings .listings-info {
+      color: #336282;
+      display: grid; }
+    .mapPlaces .listings .listing-open {
+      font-weight: bold;
+      display: grid; }
 
 /****description bottom of the map */
 .mapDescription {
   display: grid;
   grid-row-start: 3;
-  height: 150px;
-}
+  height: 150px; }
 
 /* This is the Search area */
 .searchContainer {
   display: grid;
   grid-column: span 2;
   grid-row: span 1;
-  grid-column-start: 1;
-  max-width: 500px;
-}
+  grid-column-start: 1; }
 
 .search {
   display: grid;
   grid-template-columns: 1fr 125px;
   grid-template-rows: 1fr;
-  grid-gap: 20px;
-  margin-top: 5px;
-  justify-content: center;
-}
-
-.search button {
-  background: var(--button-color);
-  transition: .3s;
-}
-
-.search button:hover {
-  background: var(--button-color-hover);
-}
+  grid-gap: 1.4em;
+  padding: 0 .3em;
+  justify-content: center; }
+  .search button {
+    background: var(--button-color);
+    transition: .3s; }
+    .search button:hover, .search button:focus {
+      background: var(--button-color-hover); }
 
 .search-box {
   box-sizing: border-box;
@@ -157,10 +137,8 @@ body {
   border-radius: 3px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   font-size: 20px;
-  outline: none;
   text-overflow: ellipses;
-  display: grid;
-}
+  display: grid; }
 
 /* This is the header section */
 .header {
@@ -170,65 +148,59 @@ body {
   text-align: center;
   display: grid;
   grid-column: 1 / -1;
-}
+  min-height: 3.5em;
+  align-items: center; }
 
 /*footer*/
 .footer {
   display: grid;
   background: var(--header-color);
-}
-
-.footer div {
-  height: auto !important;
-  padding: 5px;
-  padding-top: 10px;
-}
-
-.footer a {
   color: black;
-  padding: 5px;
-  margin: 2px;
-  transition: .5s;
-}
-
-.footer a:hover {
-  background: white;
-  color: black;
-  border-radius: 10px;
-}
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  padding: 1em .5em; }
+  .footer div {
+    height: auto !important;
+    padding: 5px; }
+  .footer a {
+    color: black;
+    padding: 5px;
+    margin: 2px;
+    transition: .5s; }
+    .footer a:hover, .footer a:focus {
+      background: white;
+      color: black;
+      border-radius: 10px; }
 
 @media screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.3rem; }
+  h2 {
+    font-size: 1.2rem; }
+  h3 {
+    font-size: 1.1rem; }
   .fullContainer {
     position: relative;
     display: grid;
     min-width: 400px;
-    grid-template-columns: 1fr;
-  }
+    grid-template-columns: 1fr; }
   .mapContainer {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
-  }
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); }
   .map {
     display: grid;
     grid-row: 2;
-    grid-column: span 1 / -1;
-  }
+    grid-column: span 1 / -1; }
   .searchContainer {
     display: grid;
     grid-row: 1;
-    grid-column: span 1 / -1;
-  }
+    grid-column: span 1 / -1; }
   .mapPlaces {
     display: grid;
     grid-row: 3;
     grid-column: span 1 / -1;
-    margin-left: 0px;
-  }
+    margin-left: 0px; }
   .mapDescription {
     display: grid;
     grid-row: 4;
-    grid-column: span 1 / -1;
-  }
-}
-/*# sourceMappingURL=index.css.map */
+    grid-column: span 1 / -1; } }

@@ -16,7 +16,7 @@ class App extends Component {
       places: [],
       searchTerm: 'food',
       pos: {},
-      query: '',
+      query: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)

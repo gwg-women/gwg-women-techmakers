@@ -16,10 +16,10 @@ class Sidebar extends Component {
    render() {
         return (
           <div>
-              <h4>Here are some places near you:</h4>
-              <ul>
-                  {this.renderList()}
-              </ul>
+            <h2>Here are some places near you:</h2>
+            <ul>
+              {this.renderList()}
+            </ul>
           </div>
         )
     }

@@ -65,25 +65,27 @@ class App extends Component {
       <div className="fullContainer">
         <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
 
+        <main className="mapContainer">
+          <div className="searchContainer">
+            <Search submit={this.handleSubmit} input={this.handleChange} />
+          </div>
 
-              <div className="mapContainer">
-                    <div className="searchContainer">
-                    <Search submit={this.handleSubmit} input={this.handleChange} />
-                    </div>
-                    <div className="map">
-                    <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
-                    </div>
-                    <div className="mapDescription">
-                    {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
+          <div className="map">
+            <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
+          </div>
 
-                    <Wiki currentCity={this.state.currentCity}/>
-                    </div>
-                    <div className="mapPlaces">
-                    <Container {...this.state} />
-                    </div>
-               </div>
+          <div className="mapDescription">
+            {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
 
-           <div className="footer"><Footer /></div>
+            <Wiki currentCity={this.state.currentCity}/>
+          </div>
+
+          <div className="mapPlaces">
+            <Container {...this.state} />
+          </div>
+        </main>
+
+        <footer className="footer"><Footer /></footer>
 
       </div>
     );

@@ -83,12 +83,12 @@ class HeaderContainer extends Component {
 
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?
-    `Welcome - You are in ${this.state.currentCity} and the temperature is ${this.state.currentWeather} °F` :
-    `Welcome`;
+    `Welcome to Mappa. You're in ${this.state.currentCity}. It is currently ${this.state.currentWeather}°F` :
+    `Welcome to Mappa.`;
     return(
-        <h3 className="header">
-          {message}
-      </h3>
+      <h1 className="header">
+        {message}
+      </h1>
     );
   }
 }

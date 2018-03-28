@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
+import {GoogleApiWrapper} from 'google-maps-react';
 
 
-export default class HeaderContainer extends Component {
+class HeaderContainer extends Component {
   state = {
   };
 
@@ -35,7 +36,7 @@ export default class HeaderContainer extends Component {
 
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
-      console.log('get location from cache');
+     // console.log('get location from cache');
        this.getCityWeather(pos.lat, pos.lng);
     }
 
@@ -46,7 +47,7 @@ export default class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      console.log('get location from getcurrent position');
+     // console.log('get location from getcurrent position');
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -68,13 +69,13 @@ export default class HeaderContainer extends Component {
 
 
 
-  componentDidUpdate(prevProps, prevState) {
+  componentWillUpdate(prevProps, prevState) {
     if (prevState.currentCity !== this.state.currentCity) {
       this.props.updateCurrentCity(this.state.currentCity);
     }
   }
   
-  componentWillMount() {
+  componentDidMount() {
     this.getMyLocation();
 
   }
@@ -82,15 +83,18 @@ export default class HeaderContainer extends Component {
 
   render () {
     const message = (this.state.currentCity && this.state.currentWeather) ?
-    `Welcome - You are in ${this.state.currentCity} and the temperature is ${this.state.currentWeather} °F` :
-    `Welcome`;
+    `Welcome to Mappa. You're in ${this.state.currentCity}. It is currently ${this.state.currentWeather}°F` :
+    `Welcome to Mappa.`;
     return(
-        <h3 className="header">
-          {message}
-      </h3>
+      <h1 className="header">
+        {message}
+      </h1>
     );
   }
 }
 
-// WEBPACK FOOTER //
-// src/components/Header.js
+export default GoogleApiWrapper({
+  apiKey: (process.env.REACT_APP_GKEY),
+  libraries: ['places'],
+  version: '3'
+})(HeaderContainer) 

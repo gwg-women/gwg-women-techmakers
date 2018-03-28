@@ -15,11 +15,11 @@ class Sidebar extends Component {
    
    render() {
         return (
-          <div className="sidebar">
-              <h4>Here are some places near you:</h4>
-              <ul>
-                  {this.renderList()}
-              </ul>
+          <div>
+            <h2>Here are some places near you:</h2>
+            <ul>
+              {this.renderList()}
+            </ul>
           </div>
         )
     }

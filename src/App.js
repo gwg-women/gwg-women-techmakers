@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import MapContainer from './components/InitialMap'
-import StaticMap from './components/StaticMap'
 import HeaderContainer from './components/Header'
 //import Sidebar from './components/Sidebar';
 import Search from './components/Search'
@@ -50,15 +49,8 @@ class App extends Component {
   updateCurrentCity = (currentCity) => {
     this.setState({ currentCity });
   }
- /* componentDidMount(){
-    console.log("getPlaces")
-     getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
-        this.setState({ places })
-    })
-  }
-*/
 
-/* The original css style names "App container", "row", "column column-75", "column column-25" */
+
   render() {
     //  <Sidebar places={this.state.places}/>
     return (
@@ -71,7 +63,6 @@ class App extends Component {
           </div>
 
           <div className="map">
-            <StaticMap pos={this.state.pos} />
             <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
           </div>
 

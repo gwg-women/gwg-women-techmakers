@@ -36,7 +36,7 @@ export class Wiki extends Component {
         })
         
     }
-    componentWillReceiveProps() {
+    componentWillMount() {
       this.getData();
 }
 

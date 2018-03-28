@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import MapContainer from './components/InitialMap';
+import React, { Component } from 'react'
+import MapContainer from './components/InitialMap'
+import StaticMap from './components/StaticMap'
 import HeaderContainer from './components/Header'
 //import Sidebar from './components/Sidebar';
 import Search from './components/Search'
@@ -64,13 +65,13 @@ class App extends Component {
 
       <div className="fullContainer">
         <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
-
         <main className="mapContainer">
           <div className="searchContainer">
             <Search submit={this.handleSubmit} input={this.handleChange} />
           </div>
 
           <div className="map">
+            <StaticMap pos={this.state.pos} />
             <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
           </div>
 

@@ -28,6 +28,7 @@ class App extends Component {
   }
 
   handleLocationChange = (pos) => {
+    //console.log('coordinates: ', pos);
     this.setState({
       pos
     })
@@ -48,13 +49,6 @@ class App extends Component {
   updateCurrentCity = (currentCity) => {
     this.setState({ currentCity });
   }
-
-  setCurrentCity = (city) => {
-    city = city !== undefined ? city[0] : city;
-    this.setState({ city });
-  }
-
-
  /* componentDidMount(){
     console.log("getPlaces")
      getPlaces(this.state.mapCenter.lat,this.state.mapCenter.lng,this.state.searchTerm).then((places) => {
@@ -69,7 +63,7 @@ class App extends Component {
     return (
 
       <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity} setCurrentCity = {this.setCurrentCity}/>
+        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity}/>
 
         <main className="mapContainer">
           <div className="searchContainer">
@@ -81,10 +75,9 @@ class App extends Component {
           </div>
 
           <div className="mapDescription">
-            {this.state.city}  Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
+            {this.state.currentCity} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
 
-            {this.state.city && <Wiki currentCity={this.state.city}/>}
-
+            <Wiki currentCity={this.state.currentCity}/>
           </div>
 
           <div className="mapPlaces">

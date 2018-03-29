@@ -61,7 +61,7 @@ Contains the styles of the App
 ## Motivation
 
 This project is made as part of the GROW With GOOGLE Challenge for practicing
-* Creating Progressive web apllications
+* Creating Progressive web applications
 * Registering and create a service worker
 * Creating a REACT web application
 * Colaborationg using GIT

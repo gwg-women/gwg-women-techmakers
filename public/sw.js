@@ -1,5 +1,5 @@
 // Set this to true for production
-const doCache = true;
+const doCache = false;
 
 const CACHE_NAME = 'maapa-cache-v6';
 
@@ -13,7 +13,6 @@ const urlsToCache =[
 
 // The first time the user starts up the app, 'install' is triggered.
 self.addEventListener('install', function(event) {
-  console.log('install service-worker event')
   if (doCache) {
     event.waitUntil(
       caches.open(CACHE_NAME)
@@ -27,18 +26,19 @@ self.addEventListener('install', function(event) {
 // When the webpage goes to fetch files, we intercept that request and serve up the matching files
 // if we have them
 self.addEventListener('fetch', function(event) {
+  if (doCache) {
       event.respondWith(
           caches.match(event.request).then(function(response) {
               return response || fetch(event.request);
           })
       );
+    }
 });
 
 
 
 //This is caching the static map on the first load, Called "Cache then network" recipe
 self.addEventListener('fetch', function (event) {
-
   const requestUrl = new URL(event.request.url)
   
   if (requestUrl.pathname.startsWith('/maps/api/staticmap')) {
@@ -61,7 +61,6 @@ self.addEventListener('fetch', function(event) {
   const requestUrl = new URL(event.request.url)
   
   if (requestUrl.pathname.startsWith('/maps/api/js')) {
-    console.log('intercepting api')
     event.respondWith(
       fetch(event.request).catch(function() {
         return caches.match('maps/api/staticmap')

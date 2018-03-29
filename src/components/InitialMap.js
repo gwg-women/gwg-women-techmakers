@@ -11,11 +11,12 @@ class MapContainer extends Component {
           places: this.props.places,
           showingInfoWindow: false,
           activeMarker: {},
-          selectedPlace: {}
+          selectedPlace: {},
+          //bounds: null,
       }
 
     // binding this to event-handler functions
-     this.onMarkerClick = this.onMarkerClick.bind(this)
+    this.onMarkerClick = this.onMarkerClick.bind(this)
     this.onMarkerOver = this.onMarkerOver.bind(this)
     this.onMarkerOut = this.onMarkerOut.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this);
@@ -69,7 +70,11 @@ class MapContainer extends Component {
   onMapReady = (mapProps, map) => {
     this.setState({map});
    // console.log('center : ' + map.center)
+  // console.log('searchTerm : ' + this.props.searchTerm )
     this.searchText(map,map.center,this.props.searchTerm)
+   /* map.fitBounds(this.props.bounds)
+    var zoom = map.getZoom();
+     map.setZoom(zoom > 6 ? 6 : zoom); */
   }
 
   searchText = (map, center, query) => {
@@ -85,21 +90,7 @@ class MapContainer extends Component {
     service.textSearch(request,(results, status)=>{
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         //console.log(results);
-       /* get PlaceDetails for each place, getting bad request and overlimit errors
-        results.map(place => {
-          let placeRequest = {
-            placeId: place.id
-          }
 
-          service.getDetails(placeRequest, (placeDetailsResult,status)=>{
-             if (status === google.maps.places.PlacesServiceStatus.OK) {
-               place.details = placeDetailsResult
-               console.log(JSON.stringify(placeDetailsResult))
-             }
-             console.log(status)
-          })
-        })
-       */
         this.setState({
           places: results,
           //center: center,
@@ -112,23 +103,34 @@ class MapContainer extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps){
+    if(this.props.searchTerm !== nextProps.searchTerm){
+      //console.log('searchTerm in componentWillRecieveProps: ' + nextProps.searchTerm )
+      this.setState({searchTerm: nextProps.searchTerm})
+      this.searchText(this.state.map,this.state.map.center,nextProps.searchTerm)
+    }
+  }
+
+
 
   render() {
     //const google_api = process.env.REACT_APP_GKEY;
     const {pos} = this.props
     const {places} = this.props
     const {google} = this.props
-    // const markerImageUrl = "../src/img/circleMarker.png"
+     // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if(!this.props.loaded){
+     //const bounds =  new google.maps.LatLngBounds();
         return  <StaticMap pos={pos} />
     }
+
     return (
       <div className = "theMap">
       <Map
         ref={this.onGoogleMapLoad}
         google={this.props.google}
-        zoom={14}
+        zoom={12}
         initialCenter={pos}
         center={pos}
         onReady={this.onMapReady}
@@ -177,7 +179,7 @@ class MapContainer extends Component {
           if( p.price_level !== undefined ){
             priceLevel = priceLevelDesc[p.price_level]
           }
-
+         // bounds.extend(p.geometry.location);
 
           return (
             <Marker
@@ -200,7 +202,10 @@ class MapContainer extends Component {
               onMouseover={this.onMarkerOver}
               onMouseout = {this.onMarkerOut}/>
           )
-          })}
+          })
+
+
+          }
 
           <InfoWindow
               marker={this.state.activeMarker}
@@ -221,7 +226,10 @@ class MapContainer extends Component {
           </InfoWindow>
       </Map>
       </div>
+
     );
+
+
   }
 }
 

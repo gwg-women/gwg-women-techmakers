@@ -19,8 +19,7 @@ class Container extends Component {
   constructor(props){
     super(props);
     this.state = {
-      places: [],
-     // pos:{}
+      places: this.props.places
     }
   }
 

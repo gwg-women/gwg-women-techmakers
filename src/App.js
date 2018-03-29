@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   handleSubmit() {
-    console.log('submitted word: ', this.state.query)
+    //console.log('submitted word: ', this.state.query)
     this.setState({searchTerm: this.state.query })
   }
 
@@ -66,6 +66,7 @@ class App extends Component {
 
   render() {
     //  <Sidebar places={this.state.places}/>
+    //
     return (
 
       <div className="fullContainer">
@@ -87,8 +88,8 @@ class App extends Component {
 
           </div>
 
-          <div className="mapPlaces">
-            <Container {...this.state} />
+         <div className="mapPlaces">
+              <Container {...this.state} />
           </div>
         </main>
 

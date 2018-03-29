@@ -1,5 +1,5 @@
 // Set this to true for production
-const doCache = true;
+const doCache = false;
 
 const CACHE_NAME = 'maapa-cache-v1';
 

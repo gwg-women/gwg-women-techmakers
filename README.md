@@ -64,7 +64,7 @@ This project is made as part of the GROW With GOOGLE Challenge for practicing
 * Creating Progressive web applications
 * Registering and create a service worker
 * Creating a REACT web application
-* Colaborationg using GIT
+* Collaborating using GIT
 * Interacting with API servers
 * Use of third-party libraries and APIs
 * Use Google Maps

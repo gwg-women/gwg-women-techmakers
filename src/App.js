@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   handleSubmit() {
-    console.log('submitted word: ', this.state.query)
+    //console.log('submitted word: ', this.state.query)
     this.setState({searchTerm: this.state.query })
   }
 

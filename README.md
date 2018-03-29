@@ -63,7 +63,7 @@ Contains the styles of the App
 This project is made as part of the GROW With GOOGLE Challenge for practicing
 * Creating Progressive web apllications
 * Registering and create a service worker
-* Creatinf a REACT web application
+* Creating a REACT web application
 * Colaborationg using GIT
 * Interacting with API servers
 * Use of third-party libraries and APIs

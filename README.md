@@ -2,7 +2,7 @@
 This is a Grow with Google project for an offline first app that provides information based on location and search.
 
 ## Getting Started
-Read the the [Set Up Instructions](https://github.com/gwg-women/gwg-women-techmakers/wiki/Set-Up-Instructions) on our wiki.
+Read the [Set Up Instructions](https://github.com/gwg-women/gwg-women-techmakers/wiki/Set-Up-Instructions) on our wiki.
 
 ## Contributing to the Project
 Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women-techmakers/wiki/Contribution-Guidelines) on the wiki to see how to get started with solving issues and creating pull requests.
@@ -10,13 +10,13 @@ Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women
 
 ## The repository uses the following files :
 
-* **public/index.html** : The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asyncronously.
+* **public/index.html** : The main HTML page. Contains links to all of the CSS resources needed to render the map and results. It also loads results of  Google Maps API asynchronously.
 
 * **src/index.js**: is the JavaScript entry point.
 
 * **src/components**: Contains all the controls.
 ***Description.js**
-Contains the Wiki component that displays the wikipedia information about the current city.
+Contains the Wiki component that displays the Wikipedia information about the current city.
 
 ***Header.js***
 Get's the current location and weather conditions and displays the information on the header.
@@ -25,7 +25,7 @@ Get's the current location and weather conditions and displays the information o
 Get's and displays the map with markers to the search results.
 
 ***Places.js***
-Displays the searchResults in the form of a list on the leftside of the app.
+Displays the searchResults in the form of a list on the left side of the app.
 
 ***PlacesListItem.js***
 Contains the ListItems control that displays all the list items. It displays the name address and opening hours of a place.

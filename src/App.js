@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import MapContainer from './components/InitialMap';
+import React, { Component } from 'react'
+import MapContainer from './components/InitialMap'
 import HeaderContainer from './components/Header'
 //import Sidebar from './components/Sidebar';
 import Search from './components/Search'
@@ -63,7 +63,7 @@ class App extends Component {
   }
 */
 
-/* The original css style names "App container", "row", "column column-75", "column column-25" */
+
   render() {
     //  <Sidebar places={this.state.places}/>
     return (

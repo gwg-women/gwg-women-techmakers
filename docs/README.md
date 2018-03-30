@@ -2,13 +2,14 @@
 This is a Grow with Google project for an offline first app that provides information based on location and search.
 
 ## Current Contributors Profiles
-See the current contributors [here](contributors.html)
+See the current contributors [here](contributors.md)
 
 ## Getting Started
-Read the [Set Up Instructions](https://github.com/gwg-women/gwg-women-techmakers/wiki/Set-Up-Instructions) on our wiki.
+Read the the [Set Up Instructions](Setupinstructions.md) on our wiki.
+
 
 ## Contributing to the Project
-Please read the [contribution guidelines](https://github.com/gwg-women/gwg-women-techmakers/wiki/Contribution-Guidelines) on the wiki to see how to get started with solving issues and creating pull requests.
+Please read the [contribution guidelines](contributionguidelines.md) on the wiki to see how to get started with solving issues and creating pull requests.
 
 
 ## The repository uses the following files :

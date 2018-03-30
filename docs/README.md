@@ -1,5 +1,5 @@
 # gwg-women-techmakers
-This is a Grow with Google project for an offline first app that provides information based on location and search.
+This is a Grow with Google project for an offline first app that provides information based on location and search. It provides useful information about restaurants and other places nearby that you might want to visit
 
 ## Current Contributors Profiles
 See the current contributors [here](contributors.md)

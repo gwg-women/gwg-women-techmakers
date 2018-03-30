@@ -7,6 +7,8 @@ import {GoogleApiWrapper} from 'google-maps-react';
 class HeaderContainer extends Component {
   state = {
   };
+  
+
 
   getCityWeather(latitude, longitude) {
     const {setCurrentCity} = this.props;
@@ -69,7 +71,7 @@ class HeaderContainer extends Component {
 
   componentWillUpdate(prevProps, prevState) {
     if (prevState.currentCity !== this.state.currentCity) {
-      this.props.updateCurrentCity(this.state.currentCity);
+      this.props.setCurrentCity(this.state.currentCity);
     }
   }
   

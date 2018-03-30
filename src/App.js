@@ -16,7 +16,8 @@ class App extends Component {
       places: [],
       searchTerm: 'food',
       pos: {},
-      query: ''
+      query: '',
+      mouseOverPlace: '',
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,41 +63,47 @@ class App extends Component {
     })
   }
 */
-
+  onPlaceSelected(id) {
+    if (this.state.mouseOverPlace !== id) {
+        this.setState({mouseOverPlace: id});
+    }
+  }
 
   render() {
-    //  <Sidebar places={this.state.places}/>
-    //
-    return (
+      //  <Sidebar places={this.state.places}/>
+      //
+      return (
 
-      <div className="fullContainer">
-        <HeaderContainer handleLocationChange={this.handleLocationChange} updateCurrentCity = {this.updateCurrentCity} setCurrentCity = {this.setCurrentCity}/>
+          <div className="fullContainer">
+              <HeaderContainer handleLocationChange={this.handleLocationChange}
+                               updateCurrentCity={this.updateCurrentCity} setCurrentCity={this.setCurrentCity}/>
 
-        <main className="mapContainer">
-          <div className="searchContainer">
-            <Search submit={this.handleSubmit} input={this.handleChange} />
+              <main className="mapContainer">
+                  <div className="searchContainer">
+                      <Search submit={this.handleSubmit} input={this.handleChange}/>
+                  </div>
+
+                  <div className="map">
+                      <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state}
+                                    onLoad={this.handleLoad} mouseOverPlace={this.state.mouseOverPlace}/>
+                  </div>
+
+                  <div className="mapDescription">
+                      {this.state.city} Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
+
+                      {this.state.city && <Wiki currentCity={this.state.city}/>}
+
+                  </div>
+
+                  <div className="mapPlaces">
+                      <Container {...this.state} onMouseOver={id => this.onPlaceSelected(id)}/>
+                  </div>
+              </main>
+
+              <footer className="footer"><Footer/></footer>
+
           </div>
-
-          <div className="map">
-            <MapContainer pos={this.state.pos} searchTerm={this.state.searchTerm} {...this.state} onLoad={this.handleLoad} />
-          </div>
-
-          <div className="mapDescription">
-            {this.state.city}  Coordinates: {this.state.pos.lat}, {this.state.pos.lng}
-
-            {this.state.city && <Wiki currentCity={this.state.city}/>}
-
-          </div>
-
-         <div className="mapPlaces">
-              <Container {...this.state} />
-          </div>
-        </main>
-
-        <footer className="footer"><Footer /></footer>
-
-      </div>
-    );
+      );
   }
 }
 

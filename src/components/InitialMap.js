@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import StaticMap from './StaticMap'
 
+const selectedIconUrl = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+const defaultIconUrl = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+const markerIconUrl = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
 class MapContainer extends Component {
   constructor(props){
@@ -28,7 +31,7 @@ class MapContainer extends Component {
     onMarkerOver= (props, marker, e) => {
         const {google} = this.props
           marker.setIcon ({
-                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  url: markerIconUrl,
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 })
@@ -38,7 +41,7 @@ class MapContainer extends Component {
     onMarkerOut= (props, marker, e) => {
        const {google} = this.props
        marker.setIcon ({
-                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  url: defaultIconUrl,
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 })
@@ -118,6 +121,7 @@ class MapContainer extends Component {
     const {pos} = this.props
     const {places} = this.props
     const {google} = this.props
+    const mouseOverPlace = this.props.mouseOverPlace;
      // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if(!this.props.loaded){
@@ -147,7 +151,7 @@ class MapContainer extends Component {
         priceLevel = {''}
         reference = {""}
         icon = {{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  url: markerIconUrl,
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
@@ -180,7 +184,10 @@ class MapContainer extends Component {
             priceLevel = priceLevelDesc[p.price_level]
           }
          // bounds.extend(p.geometry.location);
-
+          let iconUrl = defaultIconUrl;
+          if (mouseOverPlace === p.id) {
+              iconUrl = selectedIconUrl;
+          }
           return (
             <Marker
               key={p.id}
@@ -194,7 +201,7 @@ class MapContainer extends Component {
               //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
               photo={p.photos === undefined ? `http://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
                icon = {{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  url: iconUrl,
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}

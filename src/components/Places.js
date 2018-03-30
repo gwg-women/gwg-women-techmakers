@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { GoogleApiWrapper, } from 'google-maps-react';
 import PlacesListItem from './PlacesListItem.js'
 
-const Listing = ({places}) => {
-  return (
+const Listing = ({props}) => {
+    return (
     <ul>
-      {places && places.map(p => {
+      {props.places && props.places.map(p => {
         return (
-          <PlacesListItem key={p.id} place={p} />
+          <PlacesListItem key={p.id} place={p} onMouseOver={() => props.onMouseOver(p.id)} onMouseLeave={() => props.onMouseOver("")}/>
         )
       })}
     </ul>
@@ -29,7 +29,7 @@ class Container extends Component {
     }
 
     return (
-         <Listing places={this.props.places} />
+         <Listing props={this.props}/>
     )
   }
 

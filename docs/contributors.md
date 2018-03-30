@@ -202,18 +202,13 @@ var json_data= [
 
       
       
-var html = '<table class="table table-bordered"><thead><tr><th>Name</th><th>GitHub</th><tbody>'
+var html = '<table class="table table-bordered"><thead><tr><th>Name</th><th>GitHub</th><th>Followers</th><th>Following</th><th>Gists</th><th>Starred</th><th>Subscriptions</th><th>Organizations</th><th>Repos</th><th>Events</th><th>Received Events</th><th>Type</th><th>Side Admin</th><th>Contributions</th><tbody>'
 for (var i in json_data){
     html = html+"<tr><td><img style='width:150px;' src='" +json_data[i]["avatar_url"]+"'>"+"</td><td><a href='"+json_data[i]["html_url"]+"'>"+json_data[i]["login"]+"</a></td></tr>"
+    +"<td>"+json_data[i]["followers_url"]+"</td><td>"+json_data[i]["following_url"]+"</td><td>"+json_data[i]["gists_url"]+"</td><td>"+json_data[i]["starred_url"]+"</td>+<td>"+json_data[i]["subscriptions_url"]+"</td><td>"+json_data[i]["organizations_url"]+"</td><td>"+json_data[i]["repos_url"]+"</td><td>"+json_data[i]["events_url"]+"</td><td>"+json_data[i]["received_events_url"]+"</td><td>"+json_data[i]["type"]+"</td><td>"+json_data[i]["site_admin"]+"</td><td>"+json_data[i]["contributions"]"</td><td>"
 }
 html=html+'</tbody></table>'
 document.getElementById("display").innerHTML= html;
 
 </script>
 
-<style>
-.jumbotron{
- background-color: #4885ed;   
- color: white;
-}
-</style>

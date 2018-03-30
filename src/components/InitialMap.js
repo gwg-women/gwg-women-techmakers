@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import StaticMap from './StaticMap'
 
-const selectedIconUrl = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-const defaultIconUrl = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
-const markerIconUrl = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+const selectedIconUrl = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+const defaultIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
+const markerIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
 class MapContainer extends Component {
   constructor(props){
@@ -199,7 +199,7 @@ class MapContainer extends Component {
               reference = {""+p.place_id}
               position={p.geometry.location}
               //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
-              photo={p.photos === undefined ? `http://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
+              photo={p.photos === undefined ? `https://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
                icon = {{
                   url: iconUrl,
                   anchor:  google.maps.Point(10, 10),

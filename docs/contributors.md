@@ -206,7 +206,7 @@ var html = '<table class="table table-bordered"><thead><tr><th>Name</th><th>GitH
 for (var i in json_data){
     html = html+"<tr><td><img style='width:150px;' src='" +json_data[i]["avatar_url"]+"'>"+"</td><td><a href='"+json_data[i]["html_url"]+"'>"+json_data[i]["login"]+"</a></td>"
     +"<td><a href='"+json_data[i]["gists_url"].substring(0,json_data[i]["gists_url"].indexOf('{'))+"'>link</a></td><td><a href='"+json_data[i]["starred_url"].substring(0,json_data[i]["starred_url"].indexOf('{'))+"'>link</a>"+"</td><td><a href='"
-     +json_data[i]["subscriptions_url"]+"'>link</a></td><td><a href='"+json_data[i]["repos_url"]+"'>link</td><td>"+json_data[i]["contributions"]+"</td><td></tr>"
+     +json_data[i]["subscriptions_url"]+"'>link</a></td><td><a href='"+json_data[i]["repos_url"]+"'>link</td><td>"+json_data[i]["contributions"]+"</td></tr>"
 }
 html=html+'</tbody></table>'
 document.getElementById("display").innerHTML= html;

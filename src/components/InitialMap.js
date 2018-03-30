@@ -28,7 +28,7 @@ class MapContainer extends Component {
     onMarkerOver= (props, marker, e) => {
         const {google} = this.props
           marker.setIcon ({
-                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 })
@@ -38,7 +38,7 @@ class MapContainer extends Component {
     onMarkerOut= (props, marker, e) => {
        const {google} = this.props
        marker.setIcon ({
-                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 })
@@ -147,7 +147,7 @@ class MapContainer extends Component {
         priceLevel = {''}
         reference = {""}
         icon = {{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}
@@ -192,9 +192,9 @@ class MapContainer extends Component {
               reference = {""+p.place_id}
               position={p.geometry.location}
               //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
-              photo={p.photos === undefined ? `http://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
+              photo={p.photos === undefined ? `https://via.placeholder.com/100x100` : p.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100})}
                icon = {{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
                   anchor:  google.maps.Point(10, 10),
                   scaledSize: google.maps.Size(10, 17)
                 }}

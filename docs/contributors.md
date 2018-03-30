@@ -1,8 +1,6 @@
+# Contributors Profile
 
-
-  <h1>Contributors Profile</h1>
-
-
+## This is information about our wonderful contributors
 
 <div class="container">
 <div id="display"></div>

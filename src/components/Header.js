@@ -5,14 +5,8 @@ import {GoogleApiWrapper} from 'google-maps-react';
 
 
 class HeaderContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentCity: ''
+  state = {
   };
-
-
-  }
   
 
 

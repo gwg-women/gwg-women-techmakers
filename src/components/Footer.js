@@ -199,6 +199,25 @@ export class Footer extends Component {
                 "received_events_url": "https://api.github.com/users/resant18/received_events",
                 "type": "User",
                 "site_admin": false
+                },
+                {
+                  "login": "M0nica",
+                  "id": 6998954,
+                  "avatar_url": "https://avatars0.githubusercontent.com/u/6998954?v=4",
+                  "gravatar_id": "",
+                  "url": "https://api.github.com/users/M0nica",
+                  "html_url": "https://github.com/M0nica",
+                  "followers_url": "https://api.github.com/users/M0nica/followers",
+                  "following_url": "https://api.github.com/users/M0nica/following{/other_user}",
+                  "gists_url": "https://api.github.com/users/M0nica/gists{/gist_id}",
+                  "starred_url": "https://api.github.com/users/M0nica/starred{/owner}{/repo}",
+                  "subscriptions_url": "https://api.github.com/users/M0nica/subscriptions",
+                  "organizations_url": "https://api.github.com/users/M0nica/orgs",
+                  "repos_url": "https://api.github.com/users/M0nica/repos",
+                  "events_url": "https://api.github.com/users/M0nica/events{/privacy}",
+                  "received_events_url": "https://api.github.com/users/M0nica/received_events",
+                  "type": "User",
+                  "site_admin": false,
                 }
           ]
         // var myObject = JSON.parse(json_data);

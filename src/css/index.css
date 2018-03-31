@@ -48,8 +48,7 @@ h3 {
 
 /* Style for the actual map! */
 .map {
-  grid-area: map;
-  padding: .5em; }
+  grid-area: map; }
 
 .theMap {
   position: relative;
@@ -99,18 +98,18 @@ h3 {
 /****description bottom of the map */
 .mapDescription {
   grid-area: desc;
-  padding: .8em; }
+  padding: .5em; }
 
 /* This is the Search area */
 .searchContainer {
   grid-area: search;
-  padding: .8em;
-  align-items: flex-end; }
+  align-items: flex-end;
+  max-width: 90%; }
 
 .search {
   display: grid;
-  grid-template-columns: 80% 20%;
-  grid-gap: 1em .8em; }
+  grid-template-columns: 71% 28%;
+  grid-gap: 1em .3em; }
   .search button {
     background: var(--button-color);
     transition: .3s; }
@@ -128,12 +127,9 @@ h3 {
 /* This is the header section */
 .header {
   background: var(--header-color);
-  padding: 30px;
+  padding: 2em;
   font-weight: 200;
   text-align: center;
-  display: grid;
-  grid-column: 1 / -1;
-  min-height: 3.5em;
   align-items: center; }
 
 /*footer*/
@@ -158,11 +154,11 @@ h3 {
 
 @media screen and (max-width: 800px) {
   h1 {
-    font-size: 1.3rem; }
-  h2 {
     font-size: 1.2rem; }
+  h2 {
+    font-size: 1.125rem; }
   h3 {
-    font-size: 1.1rem; }
+    font-size: 1rem; }
   .fullContainer {
     display: grid;
     min-width: 400px;
@@ -171,4 +167,12 @@ h3 {
     display: grid;
     grid-template-areas: "search" "map" "places" "desc";
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } }
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); }
+  .theMap {
+    height: 400px; }
+  .searchContainer {
+    max-width: 100%; }
+  .search-box {
+    font-size: 1em; }
+  .header {
+    padding: .9em; } }

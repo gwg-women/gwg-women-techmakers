@@ -118,45 +118,55 @@ class MapContainer extends Component {
 
   render() {
     //const google_api = process.env.REACT_APP_GKEY;
-    const {pos} = this.props
-    const {places} = this.props
-    const {google} = this.props
-    const mouseOverPlace = this.props.mouseOverPlace;
-     // const markerImageUrl = "../src/img/circleMarker.png"
+    const {
+      pos, 
+      places, 
+      google, 
+      mouseOverPlace,
+      loaded
+    } = this.props
+
+    const {
+      activeMarker,
+      showingInfoWindow,
+      selectedPlace
+    } = this.state;
+
+    // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
-    if(!this.props.loaded){
+    if(!loaded){
      //const bounds =  new google.maps.LatLngBounds();
-        return  <StaticMap pos={pos} />
+      return  <StaticMap pos={pos} />
     }
 
     return (
       <div className = "theMap">
-      <Map
-        ref={this.onGoogleMapLoad}
-        google={this.props.google}
-        zoom={12}
-        initialCenter={pos}
-        center={pos}
-        onReady={this.onMapReady}
-        onClick={this.onMapClicked}
-      >
-      <Marker
-        name={'Current Location'}
-        title={'You are here'}
-        position={pos}
-        key={'001'}
-        address = {''}
-        openNow = {''}
-        rating = {5}
-        priceLevel = {''}
-        reference = {""}
-        icon = {{
-                  url: markerIconUrl,
-                  anchor:  google.maps.Point(10, 10),
-                  scaledSize: google.maps.Size(10, 17)
-                }}
-         >
-       </Marker>
+        <Map
+          ref={this.onGoogleMapLoad}
+          google={google}
+          zoom={12}
+          initialCenter={pos}
+          center={pos}
+          onReady={this.onMapReady}
+          onClick={this.onMapClicked}
+        >
+        <Marker
+          name={'Current Location'}
+          title={'You are here'}
+          position={pos}
+          key={'001'}
+          address = {''}
+          openNow = {''}
+          rating = {5}
+          priceLevel = {''}
+          reference = {""}
+          icon = {{
+                    url: markerIconUrl,
+                    anchor:  google.maps.Point(10, 10),
+                    scaledSize: google.maps.Size(10, 17)
+                  }}
+           >
+         </Marker>
 
         {
           places && places.map(p => {
@@ -188,6 +198,7 @@ class MapContainer extends Component {
           if (mouseOverPlace === p.id) {
               iconUrl = selectedIconUrl;
           }
+
           return (
             <Marker
               key={p.id}
@@ -209,34 +220,43 @@ class MapContainer extends Component {
               onMouseover={this.onMarkerOver}
               onMouseout = {this.onMarkerOut}/>
           )
-          })
+        })
+      }
 
-
-          }
-
-          <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-              >
-                <div id="info" style={{ backgroundColor: `yellow`, opacity: 0.75,  }}>
-                  <div >
-                     <img src={this.state.selectedPlace.photo} alt="" />
-                  </div>
-                  <div >
-                     <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>{this.state.selectedPlace.name}</div>
-                     <div>Ratings : <span style={{ fontWeight: `bold`}}> {this.state.selectedPlace.rating?this.state.selectedPlace.rating:""} </span>  Price Level : <span style={{ fontWeight: `bold`}} > {this.state.selectedPlace.priceLevel}  </span> </div>
-                     <div> {this.state.selectedPlace.address}</div>
-                     <div>{this.state.selectedPlace.openNow} </div>
-
-                  </div>
+      <InfoWindow
+        marker={activeMarker}
+        visible={showingInfoWindow}
+      >
+        <div id="info" style={{ backgroundColor: `yellow`, opacity: 0.75,  }}>
+          <div>
+            <img src={selectedPlace.photo} alt="" />
+          </div>
+          <div>
+            <div style={{ fontSize: `16px`, fontWeight: `bold`, fontColor: `#08233B` }}>
+              {selectedPlace.name}
+            </div>
+              <div>
+                  Ratings : 
+                    <span style={{ fontWeight: `bold`}}> 
+                      {selectedPlace.rating
+                        ? selectedPlace.rating
+                        : ""
+                      } 
+                    </span>  
+  
+                  Price Level : 
+                    <span style={{ fontWeight: `bold`}}> 
+                      {selectedPlace.priceLevel}  
+                    </span> 
                 </div>
+                <div> {selectedPlace.address}</div>
+                <div>{selectedPlace.openNow} </div>
+              </div>
+            </div>
           </InfoWindow>
-      </Map>
+        </Map>
       </div>
-
     );
-
-
   }
 }
 

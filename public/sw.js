@@ -5,7 +5,7 @@ const CACHE_NAME = 'maapa-cache-v6';
 
 const urlsToCache =[
   '/',
-  '/static/js/main.b8e0a68c.js',
+  '/static/js/main.ec4fa0f5.js',
   '/static/css/main.5600087f.css',
   '/index.html',
 ];

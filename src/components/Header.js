@@ -3,13 +3,19 @@ import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
 
-
 class HeaderContainer extends Component {
-  state = {
-  };
+  state = {};
+
+  componentDidMount() {
+    this.getMyLocation();
+  }
+
+  componentWillUpdate(prevProps, prevState) {
+    if (prevState.currentCity !== this.state.currentCity) {
+      this.props.setCurrentCity(this.state.currentCity);
+    }
+  }
   
-
-
   getCityWeather(latitude, longitude) {
     const {setCurrentCity} = this.props;
 
@@ -27,7 +33,6 @@ class HeaderContainer extends Component {
       console.log('Error retrieving the current weather: ', err);
     })
   }
-
 
   getMyLocation = () => {
     const {handleLocationChange} = this.props;
@@ -69,21 +74,12 @@ class HeaderContainer extends Component {
     }
   }
 
-  componentWillUpdate(prevProps, prevState) {
-    if (prevState.currentCity !== this.state.currentCity) {
-      this.props.setCurrentCity(this.state.currentCity);
-    }
-  }
-  
-  componentDidMount() {
-    this.getMyLocation();
-  }
-
-
   render () {
-    const message = (this.state.currentCity && this.state.currentWeather) ?
-    `Welcome to Mappa. You're in ${this.state.currentCity}. It is currently ${this.state.currentWeather}°F` :
-    `Welcome to Mappa.`;
+    const {currentCity, currentWeather} = this.state;
+    const message = (this.state.currentCity && this.state.currentWeather) 
+      ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F` 
+      : `Welcome to Mappa.`;
+
     return(
       <h1 className="header">
         {message}

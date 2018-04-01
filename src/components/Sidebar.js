@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import PlacesListItem from './PlacesListItem.js'
 
-
-class Sidebar extends Component {
-
-
+const Sidebar = (props) => {
   renderList(){
     let list = [];
-    this.props.places.map((place) => {
+    props.places.map((place) => {
       return <PlacesListItem place={place} />
     })
   }
    
-   render() {
-        return (
-          <div>
-            <h2>Here are some places near you:</h2>
-            <ul>
-              {this.renderList()}
-            </ul>
-          </div>
-        )
-    }
+  return (
+    <div>
+      <h2>Here are some places near you:</h2>
+      <ul>
+        {this.renderList}
+      </ul>
+    </div>
+  )
 }
 
 export default Sidebar;

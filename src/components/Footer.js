@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 // import jsonData from '../services/contributors.JSON';
 
-
 export class Footer extends Component {
-    constructor(props){
-        super(props);
-
-      this.state = {
-        members: []
-        
-      }
-
-
+  constructor(props){
+    super(props);
+    this.state = {
+        members: []  
     }
+  }
+
+  componentWillReceiveProps() {
+    this.getData();
+  }
 
   // the callback for fetching the information
-    getData() {
-        
-
-        var json_data = [
+  getData() {
+    var json_data = [
             {
               "login": "khusbuchandra",
               "id": 35678241,
@@ -219,42 +216,28 @@ export class Footer extends Component {
                   "type": "User",
                   "site_admin": false,
                 }
-          ]
-        // var myObject = JSON.parse(json_data);
-        let names = [];
-        for(var i = 0; i < json_data.length; i++) {
-            let sets = json_data[i].login;
-
-            names.push([`<a href="http://github.com/${sets}">${sets}</a> `])
-            // names.push(json_data[i].login);
-
-
-}
-
-this.setState({
-    members: names
-})
-}
-componentWillReceiveProps() {
-    this.getData();
-}
-        
-    
-    
-    render(){
-    
-    let usernames = this.state.members;
-    let together = usernames.join(" | ");
-        return (
-<div>
-<a href="https://github.com/gwg-women/gwg-women-techmakers"> Grow with Google Project</a>: <div dangerouslySetInnerHTML={{ __html: together}} />
-</div>
-          
-
-        )
+    ]
+    // var myObject = JSON.parse(json_data);
+    let names = [];
+    for(var i = 0; i < json_data.length; i++) {
+      let sets = json_data[i].login;
+      names.push([`<a href="http://github.com/${sets}">${sets}</a> `])
+      // names.push(json_data[i].login);
     }
+
+    this.setState({members: names})
+  }
+
+  render(){
+    const {members} = this.state;
+    let together = members.join(" | ");
+    
+    return (
+      <div>
+        <a href="https://github.com/gwg-women/gwg-women-techmakers"> Grow with Google Project</a>: <div dangerouslySetInnerHTML={{ __html: together}} />
+      </div>
+    )
+  }
 }
-
-
 
 export default Footer;

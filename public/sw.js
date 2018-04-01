@@ -1,12 +1,12 @@
 // Set this to true for production
-const doCache = false;
+const doCache = true;
 
 const CACHE_NAME = 'maapa-cache-v6';
 
 const urlsToCache =[
   '/',
-  '/static/js/',
-  '/static/css',
+  '/static/js/main.b8e0a68c.js',
+  '/static/css/main.5600087f.css',
   '/index.html',
 ];
 
@@ -32,7 +32,7 @@ self.addEventListener('fetch', function(event) {
               return response || fetch(event.request);
           })
       );
-    }
+  }
 });
 
 

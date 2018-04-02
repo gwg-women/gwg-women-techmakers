@@ -3,7 +3,8 @@
   --text-color: #202020;
   --button-color: #84347c;
   --button-color-hover: #6f6f6f;
-  --border-color: #c2c2c2; }
+  --border-color: #c2c2c2;
+  --text-open-sans: "Open Sans", Arial, Helvetica, sans-serif; }
 
 /******* Normalize *******/
 * {
@@ -15,13 +16,13 @@ html {
   height: 100%; }
 
 body {
-  display: grid;
-  min-height: 100%;
-  grid-template-rows: 1fr auto; }
+  max-width: 60em;
+  margin: 0 auto;
+  min-height: 100%; }
 
 /****** Typography ******/
 h1 {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: var(--text-open-sans);
   font-size: 1.6rem; }
 
 h2 {
@@ -32,24 +33,41 @@ h3 {
 
 /* This is the main content */
 .fullContainer {
-  display: grid;
-  grid-template-columns: 1fr;
   height: 100%;
   width: 100%; }
 
+/* This is the header section */
+.header {
+  background: var(--header-color);
+  padding: 2em;
+  font-weight: 200;
+  text-align: center; }
+
 /* This is the map part of the content */
 .mapContainer {
-  display: grid;
   background: white;
-  grid-template-columns: 65% 33%;
-  grid-template-areas: "search places" "map places" "desc places";
-  grid-gap: 1.3em;
   padding: .5em; }
 
-/* Style for the actual map! */
-.map {
-  grid-area: map; }
+/* This is the Search area */
+.searchContainer {
+  max-width: 88%; }
 
+.search button {
+  background: var(--button-color);
+  max-width: 10em;
+  transition: .3s; }
+  .search button:hover, .search button:focus {
+    background: var(--button-color-hover); }
+
+.search-box {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.3em;
+  text-overflow: ellipses;
+  padding: .8em; }
+
+/* Style for the actual map! */
 .theMap {
   position: relative;
   width: 100%;
@@ -58,7 +76,6 @@ h3 {
 /*******************this is the sidebar*/
 .mapPlaces {
   color: var(--text-color);
-  grid-area: places;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 850px; }
@@ -66,23 +83,10 @@ h3 {
     list-style: none; }
   .mapPlaces .listings {
     border-bottom: var(--border-color) 1px solid;
-    display: grid;
-    grid-template-columns: 1fr 149px;
-    grid-column: auto;
-    padding-bottom: 5px;
-    align-items: center; }
-    .mapPlaces .listings .listing-description {
-      display: grid;
-      grid-template-columns: minmax(100px, 300px);
-      grid-template-rows: 1fr 2fr; }
+    padding: .3em; }
     .mapPlaces .listings .listing-icon-div {
-      display: grid;
-      grid-column-start: 2;
-      grid-row-start: 1;
       min-height: 135px;
-      min-width: 135px;
-      align-items: center;
-      justify-content: center; }
+      min-width: 135px; }
     .mapPlaces .listings .listings-icon {
       width: 135px;
       height: 135px; }
@@ -97,48 +101,14 @@ h3 {
 
 /****description bottom of the map */
 .mapDescription {
-  grid-area: desc;
   padding: .5em; }
-
-/* This is the Search area */
-.searchContainer {
-  grid-area: search;
-  align-items: flex-end;
-  max-width: 90%; }
-
-.search {
-  display: grid;
-  grid-template-columns: 71% 28%;
-  grid-gap: 1em .3em; }
-  .search button {
-    background: var(--button-color);
-    transition: .3s; }
-    .search button:hover, .search button:focus {
-      background: var(--button-color-hover); }
-
-.search-box {
-  border: 1px solid transparent;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.3em;
-  text-overflow: ellipses;
-  padding: .8em; }
-
-/* This is the header section */
-.header {
-  background: var(--header-color);
-  padding: 2em;
-  font-weight: 200;
-  text-align: center;
-  align-items: center; }
 
 /*footer*/
 .footer {
-  grid-row-start: 3;
-  grid-row-end: 4;
+  clear: both;
   background: var(--header-color);
   color: black;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: var(--text-open-sans);
   padding: 1em .5em; }
   .footer div {
     padding: .5em; }
@@ -159,20 +129,68 @@ h3 {
     font-size: 1.125rem; }
   h3 {
     font-size: 1rem; }
-  .fullContainer {
-    display: grid;
-    min-width: 400px;
-    grid-template-columns: 1fr; }
-  .mapContainer {
-    display: grid;
-    grid-template-areas: "search" "map" "places" "desc";
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); }
-  .theMap {
-    height: 400px; }
+  .header {
+    padding: .9em; }
   .searchContainer {
     max-width: 100%; }
   .search-box {
     font-size: 1em; }
+  .theMap {
+    height: 400px; } }
+
+/* Target support for new grid layout, not -ms-grid */
+@supports (grid-area: auto) {
+  body {
+    display: grid;
+    max-width: 100%; }
+  .fullContainer {
+    display: grid;
+    grid-template-areas: "header" "main" "footer"; }
   .header {
-    padding: .9em; } }
+    align-items: center;
+    grid-area: header; }
+  .mapContainer {
+    grid-area: main;
+    grid-template-columns: 65% 33%;
+    grid-template-areas: "search places" "map places" "desc places";
+    grid-gap: 1.3em; }
+  .searchContainer {
+    grid-area: search;
+    align-items: flex-end; }
+  .search {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 1em .3em; }
+  .map {
+    grid-area: map; }
+  .mapPlaces {
+    grid-area: places; }
+    .mapPlaces .listings {
+      display: grid;
+      grid-template-columns: 1fr 149px;
+      grid-column: auto;
+      align-items: center; }
+      .mapPlaces .listings .listing-description {
+        display: grid;
+        grid-template-columns: minmax(100px, 300px);
+        grid-template-rows: 1fr 2fr; }
+      .mapPlaces .listings .listing-icon-div {
+        display: grid;
+        grid-column-start: 2;
+        grid-row-start: 1;
+        align-items: center;
+        justify-content: center; }
+  .mapDescription {
+    grid-area: desc; }
+  .footer {
+    grid-area: footer; }
+  @media screen and (max-width: 800px) {
+    .fullContainer {
+      display: grid;
+      min-width: 400px;
+      grid-template-columns: 1fr; }
+    .mapContainer {
+      display: grid;
+      grid-template-areas: "search" "map" "places" "desc";
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } } }

@@ -77,10 +77,12 @@ class App extends Component {
     //  <Sidebar places={this.state.places}/>
     return (
       <div className="fullContainer">
-        <HeaderContainer 
-          handleLocationChange={this.handleLocationChange} 
-          setCurrentCity = {this.setCurrentCity} 
-        />
+        <header className="header">
+          <HeaderContainer 
+            handleLocationChange={this.handleLocationChange} 
+            setCurrentCity = {this.setCurrentCity} 
+          />
+        </header>
         <main className="mapContainer">
           <div className="searchContainer">
             <Search submit={this.handleSubmit} input={this.handleChange} />

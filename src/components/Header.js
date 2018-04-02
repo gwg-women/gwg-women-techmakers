@@ -81,7 +81,7 @@ class HeaderContainer extends Component {
       : `Welcome to Mappa.`;
 
     return(
-      <h1 className="header">
+      <h1>
         {message}
       </h1>
     );

@@ -169,9 +169,9 @@ h3 {
 /*footer*/
 
 .footer {
-    grid-row-start: 3;
-    grid-row-end: 4;
+    display: flex;
     background: var(--header-color);
+    align-items: center;
     color: black;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     padding: 1em .5em;
@@ -190,7 +190,20 @@ h3 {
             border-radius: 10px;
         }
     }
-
+    & ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: left;
+    }
+    & li {
+        text-align: center;
+        line-height: 2em;
+    }
+    & .gwg-link {
+    font-size: 1.5em;
+    align-items: center;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -205,7 +218,6 @@ h3 {
     }
     .fullContainer {
         display: grid;
-        min-width: 400px;
         grid-template-columns: 1fr;
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import jsonData from '../services/contributors.JSON';
+
 
 export class Footer extends Component {
   constructor(props){
@@ -114,13 +114,12 @@ export class Footer extends Component {
             }
           
     ]
-    // var myObject = JSON.parse(json_data);
+
     let names = [];
     for(var i = 0; i < json_data.length; i++) {
       let sets = json_data[i].login;
       let jsonname = json_data[i].name;
-      names.push([`<li><a href="http://github.com/${sets}" target="_blank">${jsonname || sets}</a></li>`])
-      // names.push(json_data[i].login);
+      names.push([`<li><a href="http://github.com/${sets}" target="_blank">${jsonname || sets}</a> </li>`])
     }
 
     this.setState({members: names})
@@ -132,7 +131,7 @@ export class Footer extends Component {
     
     return (
       <div>
-        <h1 className="gwg-link"><a href="https://github.com/gwg-women/gwg-women-techmakers"> Grow with Google Project</a></h1> <ul dangerouslySetInnerHTML={{ __html: together}} />
+        <h2 className="gwg-link"><a href="https://github.com/gwg-women/gwg-women-techmakers"> Grow with Google Project</a></h2> <ul dangerouslySetInnerHTML={{ __html: together}} />
         </div>
     )
   }

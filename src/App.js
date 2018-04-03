@@ -36,16 +36,16 @@ class App extends Component {
   }
 */
 
-  handleSubmit() {
-    //console.log('submitted word: ', this.state.query)
-    this.setState({searchTerm: this.state.query })
+  handleSubmit(searchTerm) {
+    this.setState({searchTerm})
   }
 
-  handleChange(event) {
-    this.setState({query: event.target.value})
+  handleChange(pos) {
+    this.setState({pos});    
   }
 
   handleLocationChange(pos){
+    
     this.setState({
       pos
     })
@@ -83,7 +83,7 @@ class App extends Component {
         />
         <main className="mapContainer">
           <div className="searchContainer">
-            <Search submit={this.handleSubmit} input={this.handleChange} />
+            <Search submit={this.handleSubmit} input={this.handleChange} pos={pos} />
           </div>
 
           <div className="map">

@@ -18,6 +18,7 @@ class App extends Component {
       pos: {},
       query: '',
       mouseOverPlace: '',
+      userPos: {}
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +26,9 @@ class App extends Component {
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
     this.setCurrentCity = this.setCurrentCity.bind(this);
+    this.setUserPosition = this.setUserPosition.bind(this);
     this.onPlaceSelected = this.onPlaceSelected.bind(this);
+    this.recenterMyMap = this.recenterMyMap.bind(this);
   }
 
  /* componentDidMount(){
@@ -41,11 +44,18 @@ class App extends Component {
   }
 
   handleChange(pos) {
-    this.setState({pos});    
+    this.setState({pos});
+  }
+
+  recenterMyMap(){
+    const userPos = this.state.userPos;
+    let newPos = userPos;
+    newPos.lat += .001;
+    this.setState({pos: newPos})
+    console.log("in recenter map " + userPos)
   }
 
   handleLocationChange(pos){
-    
     this.setState({
       pos
     })
@@ -61,6 +71,12 @@ class App extends Component {
     this.setState({city});
   }
 
+  setUserPosition(userPos){
+    if(userPos.lat){
+      this.setState({userPos})
+    }
+  }
+
   onPlaceSelected(id) {
     if (this.state.mouseOverPlace !== id) {
         this.setState({mouseOverPlace: id});
@@ -69,8 +85,8 @@ class App extends Component {
 
   render() {
     const {
-      pos, 
-      searchTerm, 
+      pos,
+      searchTerm,
       mouseOverPlace,
       city
     } = this.state;
@@ -78,28 +94,30 @@ class App extends Component {
     return (
       <div className="fullContainer">
         <header className="header">
-          <HeaderContainer 
-            handleLocationChange={this.handleLocationChange} 
-            setCurrentCity = {this.setCurrentCity} 
+          <HeaderContainer
+            handleLocationChange={this.handleLocationChange}
+            setCurrentCity = {this.setCurrentCity}
+            setUserPosition = {this.setUserPosition}
           />
         </header>
         <main className="mapContainer">
           <div className="searchContainer">
             <Search submit={this.handleSubmit} input={this.handleChange} pos={pos} />
+            <button id="btnRecenter" onClick={this.recenterMyMap} >Recenter Map</button>
           </div>
 
           <div className="map">
-            <MapContainer 
-              pos={pos} 
+            <MapContainer
+              pos={pos}
               searchTerm={searchTerm} {...this.state}
-              onLoad={this.handleLoad} 
+              onLoad={this.handleLoad}
               mouseOverPlace={mouseOverPlace}
             />
           </div>
-        
+
           <div className="mapDescription">
             <p>{city}  Coordinates: {pos.lat}, {pos.lng}</p>
-            {city && 
+            {city &&
                 <Wiki currentCity={city} />
             }
           </div>

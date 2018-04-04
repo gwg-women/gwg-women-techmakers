@@ -7,7 +7,6 @@ import Search from './components/Search'
 import Container from './components/Places'
 import Wiki from './components/Description'
 import Footer from './components/Footer'
-import 'milligram';
 
 class App extends Component {
   constructor(props) {
@@ -96,12 +95,13 @@ class App extends Component {
               mouseOverPlace={mouseOverPlace}
             />
           </div>
-        
+          
           <div className="mapDescription">
-            <p>{city}  Coordinates: {pos.lat}, {pos.lng}</p>
+            <div className="mapCoords">{city}  Coordinates: {pos.lat}, {pos.lng}</div>
             {city && 
                 <Wiki currentCity={city} />
             }
+            
           </div>
 
           <div className="mapPlaces">

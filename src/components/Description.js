@@ -14,32 +14,40 @@ export class Wiki extends Component {
 
   // the callback for fetching the information
   getData(){
-    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${this.props.currentCity}`;
+    const wikiDefault = 'earth';
+    const link = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
+    const url = link + this.props.currentCity;
 
     fetch(url)
     .then(response => {
-      if(!response.ok){
-        this.setState({requestFailed: true})
-        console.log('error retrieving wiki information')
+      if(response.ok){
+        return response
       }
-      return response
+      else if (!response.ok) {
+        let location = this.props.currentCity;
+        location = location.split(',');
+        location = location[1];
+        console.log(location);
+        return fetch(link + location || wikiDefault)
+      }
     })
     .then(data => data.json()).then(data => {
       this.setState({
         currentCity: this.props.currentCity,
-        description: data.extract,
+        description: data.extract_html,
       })
+    })
+    .catch(error => {
+    console.log(error)      
     })    
   }
     
   render(){
-    if (this.state.requestFailed === true) 
-      return <h1>Wiki Request Failed</h1>
     
     const {description} = this.state;
     
     return (
-      <p>{description}</p> 
+      <div className="wikiDescription" dangerouslySetInnerHTML={{ __html: description}} />
     )
   }
 }

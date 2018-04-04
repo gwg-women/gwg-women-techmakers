@@ -23,6 +23,7 @@ class MapContainer extends Component {
     this.onMarkerOver = this.onMarkerOver.bind(this)
     this.onMarkerOut = this.onMarkerOut.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this);
+    this.recenterMyMap = this.recenterMyMap.bind(this);
     // this.onMapReady=this.onMapReady.bind(this)
 
   }
@@ -71,8 +72,8 @@ class MapContainer extends Component {
   }
 
   onMapReady = (mapProps, map) => {
-    this.setState({ map });
 
+    this.setState({ map });
     this.searchText(map, map.center, this.props.searchTerm)
     /* map.fitBounds(this.props.bounds)
      var zoom = map.getZoom();
@@ -117,10 +118,19 @@ class MapContainer extends Component {
     }
   }
 
+  componentWillMount(){
 
+  }
+
+ // recenter the map to User's current location
+ recenterMyMap(){
+  const {
+    userPos
+    } = this.props;
+  this.state.map.setCenter(userPos);
+ }
 
   render() {
-    //const google_api = process.env.REACT_APP_GKEY;
     const {
       pos,
       places,
@@ -135,7 +145,6 @@ class MapContainer extends Component {
       selectedPlace
     } = this.state;
 
-    // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if (!loaded) {
       //const bounds =  new google.maps.LatLngBounds();
@@ -148,8 +157,12 @@ class MapContainer extends Component {
          pos.lng = 0.0;
      }
 
+
     return (
+      <div>
+
       <div className="theMap">
+
         <Map
           ref={this.onGoogleMapLoad}
           google={google}
@@ -159,6 +172,27 @@ class MapContainer extends Component {
           onReady={this.onMapReady}
           onClick={this.onMapClicked}
         >
+        <button
+          id="btnRecenter"
+          onClick={this.recenterMyMap}
+          style={{
+              backgroundColor:`#fff`,
+              border: `2px solid #fff`,
+              borderRadius: `3px`,
+              cursor: `pointer`,
+              boxShadow: `0 2px 6px rgba(0,0,0,.3)`,
+              color: `black`,
+              fontFamily:`Roboto,Arial,sans-serif`,
+              padding: `0px 4px`,
+              margin: `7px`,
+              lineHeight: `24px`,
+              position: `absolute`,
+              left: `110px`,
+              top: `3px`,
+          }}
+      >
+          Recenter Map
+      </button>
           <Marker
             name={'Current Location'}
             title={'You are here'}
@@ -220,7 +254,7 @@ class MapContainer extends Component {
                   reference={"" + p.place_id}
                   position={p.geometry.location}
                   //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
-                  photo={p.photos === undefined ? `https://via.placeholder.com/100x100` : p.photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 100 })}
+                  photo={p.photos === undefined ? `` : p.photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 100 })}
                   icon={{
                     url: iconUrl,
                     anchor: google.maps.Point(10, 10),
@@ -265,6 +299,7 @@ class MapContainer extends Component {
             </div>
           </InfoWindow>
         </Map>
+      </div>
       </div>
     );
   }

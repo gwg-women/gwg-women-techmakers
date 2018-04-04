@@ -7,7 +7,7 @@ import Search from './components/Search'
 import Container from './components/Places'
 import Wiki from './components/Description'
 import Footer from './components/Footer'
-import 'milligram';
+//import 'milligram';
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class App extends Component {
     this.setCurrentCity = this.setCurrentCity.bind(this);
     this.setUserPosition = this.setUserPosition.bind(this);
     this.onPlaceSelected = this.onPlaceSelected.bind(this);
-    this.recenterMyMap = this.recenterMyMap.bind(this);
   }
 
  /* componentDidMount(){
@@ -45,14 +44,6 @@ class App extends Component {
 
   handleChange(pos) {
     this.setState({pos});
-  }
-
-  recenterMyMap(){
-    const userPos = this.state.userPos;
-    let newPos = userPos;
-    newPos.lat += .001;
-    this.setState({pos: newPos})
-    console.log("in recenter map " + userPos)
   }
 
   handleLocationChange(pos){
@@ -103,7 +94,6 @@ class App extends Component {
         <main className="mapContainer">
           <div className="searchContainer">
             <Search submit={this.handleSubmit} input={this.handleChange} pos={pos} />
-            <button id="btnRecenter" onClick={this.recenterMyMap} >Recenter Map</button>
           </div>
 
           <div className="map">

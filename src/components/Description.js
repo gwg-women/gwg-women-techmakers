@@ -13,7 +13,7 @@ export class Wiki extends Component {
   }
 
   // the callback for fetching the information
-  
+
   getData(){
     const wikiDefault = 'earth';
     const link = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
@@ -43,14 +43,14 @@ export class Wiki extends Component {
       })
     })
     .catch(error => {
-    console.log(error)      
-    })    
+    console.log(error)
+    })
   }
-    
+
   render(){
-    
+
     const {description} = this.state;
-    
+
     return (
       <div className="wikiDescription" dangerouslySetInnerHTML={{ __html: description}} />
     )

@@ -1,157 +1,115 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto");
 :root {
   --header-color: #D8E83D;
   --text-color: #202020;
   --button-color: #84347c;
   --button-color-hover: #6f6f6f;
   --border-color: #c2c2c2;
-}
+  --text-open-sans: "Open Sans", Arial, Helvetica, sans-serif;
+  --text-roboto: "Roboto", Arial, Helvetica, sans-serif; }
 
 /******* Normalize *******/
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 html {
-  height: 100%;
-}
+  height: 100%; }
 
 body {
-  display: grid;
-  min-height: 100%;
-  grid-template-rows: 1fr auto;
-}
+  max-width: 60em;
+  min-height: 100%; }
 
 /****** Typography ******/
 h1 {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-size: 1.6rem;
-}
+  font-family: var(--text-open-sans);
+  font-size: 1.6rem; }
 
 h2 {
-  font-size: 1.4rem;
-}
+  font-size: 1.4rem; }
 
 h3 {
-  font-size: 1.2rem;
-}
+  font-size: 1.2rem; }
 
 /* This is the main content */
 .fullContainer {
-  display: grid;
-  grid-template-columns: 1fr;
   height: 100%;
-  width: 100%;
-}
+  width: 100%; }
 
 /* This is the map part of the content */
 .mapContainer {
-  display: grid;
-  background: white;
-  grid-template-columns: 65% 33%;
-  grid-template-areas: "search places"
- "map places"
- "desc places";
-  grid-gap: 1.3em;
-  padding: .5em;
-}
+  background-color: white;
+  padding: .5em; }
 
 /* Style for the actual map! */
-.map {
-  grid-area: map;
-}
-
 .theMap {
   position: relative;
   width: 100%;
-  height: 600px;
-}
+  height: 600px; }
+
+#btnRecenter {
+  background-color: #fff;
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  color: black;
+  font-family: var(--text-roboto);
+  padding: .48em;
+  margin: 7px;
+  position: absolute;
+  left: 100px;
+  top: 3px; }
+  #btnRecenter:hover, #btnRecenter:focus {
+    background-color: #eee; }
 
 /*******************this is the sidebar*/
 .mapPlaces {
   color: var(--text-color);
-  grid-area: places;
   overflow: hidden;
   overflow-y: scroll;
-  max-height: 850px;
-}
-
-.mapPlaces li {
-  list-style: none;
-}
-
-.mapPlaces .listings {
-  border-bottom: var(--border-color) 1px solid;
-  display: grid;
-  grid-template-columns: 1fr 149px;
-  grid-column: auto;
-  padding-bottom: 5px;
-  align-items: center;
-}
-
-.mapPlaces .listings .listing-description {
-  display: grid;
-  grid-template-columns: minmax(100px, 300px);
-  grid-template-rows: 1fr 2fr;
-}
-
-.mapPlaces .listings .listing-icon-div {
-  display: grid;
-  grid-column-start: 2;
-  grid-row-start: 1;
-  min-height: 135px;
-  min-width: 135px;
-  align-items: center;
-  justify-content: center;
-}
-
-.mapPlaces .listings .listings-icon {
-  width: 135px;
-  height: 135px;
-}
-
-.mapPlaces .listings .listing-name {
-  color: #323232;
-  font-weight: 400;
-}
-
-.mapPlaces .listings .listings-info {
-  color: #336282;
-}
-
-.mapPlaces .listings .listing-open {
-  font-weight: bold;
-  color: var(--header-color);
-}
+  max-height: 850px; }
+  .mapPlaces li {
+    list-style: none; }
+  .mapPlaces .listings {
+    border-bottom: var(--border-color) 1px solid;
+    padding-bottom: 5px;
+    align-items: center; }
+    .mapPlaces .listings .listing-icon-div {
+      min-height: 135px;
+      min-width: 135px;
+      align-items: center;
+      justify-content: center; }
+    .mapPlaces .listings .listings-icon {
+      width: 135px;
+      height: 135px; }
+    .mapPlaces .listings .listing-name {
+      color: #323232;
+      font-weight: 400; }
+    .mapPlaces .listings .listings-info {
+      color: #336282; }
+    .mapPlaces .listings .listing-open {
+      font-weight: bold;
+      color: var(--header-color); }
 
 /****description bottom of the map */
 .mapDescription {
-  grid-area: desc;
-  padding: .5em;
-}
+  padding: .5em; }
 
 /* This is the Search area */
 .searchContainer {
-  grid-area: search;
   align-items: flex-end;
   max-width: 90%;
-}
-
-.search {
-  display: grid;
-  grid-template-columns: 71% 28%;
-  grid-gap: 1em .3em;
-}
+  margin-top: 1.3em; }
 
 .search button {
   background: var(--button-color);
-  transition: .3s;
-}
-
-.search button:hover, .search button:focus {
-  background: var(--button-color-hover);
-}
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: .3s; }
+  .search button:hover, .search button:focus {
+    background: var(--button-color-hover); }
 
 .search-box {
   border: 1px solid transparent;
@@ -159,8 +117,7 @@ h3 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   font-size: 1.3em;
   text-overflow: ellipses;
-  padding: .8em;
-}
+  padding: .8em; }
 
 /* This is the header section */
 .header {
@@ -168,8 +125,7 @@ h3 {
   padding: 2em;
   font-weight: 200;
   text-align: center;
-  align-items: center;
-}
+  align-items: center; }
 
 /*footer*/
 .footer {
@@ -177,78 +133,91 @@ h3 {
   background: var(--header-color);
   align-items: center;
   color: black;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  padding: 1em .5em;
-}
-
-.footer div {
-  padding: .5em;
-}
-
-.footer a {
-  color: black;
-  padding: 5px;
-  margin: 2px;
-  transition: .5s;
-}
-
-.footer a:hover, .footer a:focus {
-  background: white;
-  color: black;
-  border-radius: 10px;
-}
-
-.footer ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  justify-content: left;
-}
-
-.footer li {
-  text-align: center;
-  line-height: 2em;
-}
-
-.footer .gwg-link {
-  font-size: 1.5em;
-  align-items: center;
-}
+  font-family: var(--text-open-sans);
+  padding: 1em .5em; }
+  .footer div {
+    padding: .5em; }
+  .footer a {
+    color: black;
+    padding: 5px;
+    margin: 2px;
+    transition: .5s; }
+    .footer a:hover, .footer a:focus {
+      background: white;
+      color: black;
+      border-radius: 10px; }
+  .footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: left; }
+  .footer li {
+    text-align: center;
+    line-height: 2em; }
+  .footer .gwg-link {
+    font-size: 1.5em;
+    align-items: center; }
 
 @media screen and (max-width: 800px) {
   h1 {
-    font-size: 1.2rem;
-  }
+    font-size: 1.2rem; }
   h2 {
-    font-size: 1.125rem;
-  }
+    font-size: 1.125rem; }
   h3 {
-    font-size: 1rem;
-  }
+    font-size: 1rem; }
+  .theMap {
+    height: 400px; }
+  .searchContainer {
+    max-width: 100%; }
+  .search-box {
+    font-size: 1em; }
+  .header {
+    padding: .9em; } }
+
+/* Check for new grid support (not -ms-grid) */
+@supports (grid-area: auto) {
+  body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    max-width: 100%; }
   .fullContainer {
     display: grid;
-    grid-template-columns: 1fr;
-  }
+    grid-template-columns: 1fr; }
   .mapContainer {
     display: grid;
-    grid-template-areas: "search"
- "map"
- "places"
- "desc";
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
-  }
-  .theMap {
-    height: 400px;
-  }
+    grid-template-columns: 65% 33%;
+    grid-template-areas: "search places" "map places" "desc places";
+    grid-gap: 1.3em; }
   .searchContainer {
-    max-width: 100%;
-  }
-  .search-box {
-    font-size: 1em;
-  }
-  .header {
-    padding: .9em;
-  }
-}
-/*# sourceMappingURL=index.css.map */
+    grid-area: search; }
+  .search {
+    display: grid;
+    grid-template-columns: 71% 28%;
+    grid-gap: 1em .3em; }
+  .map {
+    grid-area: map; }
+  .mapDescription {
+    grid-area: desc; }
+  .mapPlaces {
+    grid-area: places; }
+    .mapPlaces .listings {
+      display: grid;
+      grid-template-columns: 1fr 149px;
+      grid-column: auto; }
+      .mapPlaces .listings .listing-icon-div {
+        display: grid;
+        grid-column-start: 2;
+        grid-row-start: 1; }
+      .mapPlaces .listings .listing-description {
+        display: grid;
+        grid-template-columns: minmax(100px, 300px);
+        grid-template-rows: 1fr 2fr; }
+  @media screen and (max-width: 800px) {
+    .fullContainer {
+      display: grid;
+      grid-template-columns: 1fr; }
+    .mapContainer {
+      display: grid;
+      grid-template-areas: "search" "map" "places" "desc";
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } } }

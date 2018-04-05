@@ -60,14 +60,12 @@ h3 {
 /* Style for the actual map! */
 .map {
   grid-area: map;
-
 }
 
 .theMap {
   position: relative;
   width: 100%;
   height: 600px;
- z-index: 1;
 }
 
 /*******************this is the sidebar*/

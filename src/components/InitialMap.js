@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import StaticMap from './StaticMap'
+import Button from './RecenterMapButton'
 
 const selectedIconUrl = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
 const defaultIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
 const markerIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
-
-const Button = props => {
-  const {recenterMyMap, mapCenter, ...other } = props;
-  return <button  id="btnRecenter"
-          {...other}
-          style={{
-              backgroundColor:`#fff`,
-              border: `2px solid #fff`,
-              borderRadius: `3px`,
-              cursor: `pointer`,
-              boxShadow: `0 2px 6px rgba(0,0,0,.3)`,
-              color: `black`,
-              fontFamily:`Roboto,Arial,sans-serif`,
-              padding: `0px 4px`,
-              margin: `7px`,
-              lineHeight: `24px`,
-              position: `absolute`,
-              left: `110px`,
-              top: `3px`,
-          }}
-      />
-
-};
 
 class MapContainer extends Component {
   constructor(props) {

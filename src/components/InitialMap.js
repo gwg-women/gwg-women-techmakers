@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import StaticMap from './StaticMap'
 
-const selectedIconUrl = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+const selectedIconUrl = 'https://maps.google.com/mapfiles/kml/paddle/red-circle.png';
 const defaultIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
 const markerIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
@@ -121,8 +121,8 @@ class MapContainer extends Component {
 
   render() {
     //const google_api = process.env.REACT_APP_GKEY;
+    let {pos} = this.props;
     const {
-      pos,
       places,
       google,
       mouseOverPlace,
@@ -153,7 +153,7 @@ class MapContainer extends Component {
         <Map
           ref={this.onGoogleMapLoad}
           google={google}
-          zoom={12}
+          initialZoom={15}
           initialCenter={pos}
           center={pos}
           onReady={this.onMapReady}

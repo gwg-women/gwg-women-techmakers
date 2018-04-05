@@ -79,6 +79,7 @@ h3 {
     max-height: 850px;
     li {
         list-style: none;
+        margin-bottom:0;
     }
     .listings {
         border-bottom: var(--border-color) 1px solid;
@@ -87,6 +88,7 @@ h3 {
         grid-column: auto;
         padding-bottom: 5px;
         align-items: center;
+        cursor: pointer;
         .listing-description {
             display: grid;
             grid-template-columns: minmax(100px, 300px);
@@ -115,6 +117,9 @@ h3 {
         .listing-open {
             font-weight: bold;
             color: var(--header-color);
+        }
+        &:hover {
+          background-color: #eceff1;
         }
     }
 }

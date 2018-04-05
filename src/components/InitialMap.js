@@ -6,6 +6,29 @@ const selectedIconUrl = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.pn
 const defaultIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
 const markerIconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
+const Button = props => {
+  const {recenterMyMap, mapCenter, ...other } = props;
+  return <button  id="btnRecenter"
+          {...other}
+          style={{
+              backgroundColor:`#fff`,
+              border: `2px solid #fff`,
+              borderRadius: `3px`,
+              cursor: `pointer`,
+              boxShadow: `0 2px 6px rgba(0,0,0,.3)`,
+              color: `black`,
+              fontFamily:`Roboto,Arial,sans-serif`,
+              padding: `0px 4px`,
+              margin: `7px`,
+              lineHeight: `24px`,
+              position: `absolute`,
+              left: `110px`,
+              top: `3px`,
+          }}
+      />
+
+};
+
 class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +38,7 @@ class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      //bounds: null,
+
     }
 
     // binding this to event-handler functions
@@ -24,8 +47,6 @@ class MapContainer extends Component {
     this.onMarkerOut = this.onMarkerOut.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this);
     this.recenterMyMap = this.recenterMyMap.bind(this);
-    // this.onMapReady=this.onMapReady.bind(this)
-
   }
 
   // change marker image to green on mouse over
@@ -72,18 +93,13 @@ class MapContainer extends Component {
   }
 
   onMapReady = (mapProps, map) => {
-
     this.setState({ map });
     this.searchText(map, map.center, this.props.searchTerm)
-    /* map.fitBounds(this.props.bounds)
-     var zoom = map.getZoom();
-      map.setZoom(zoom > 6 ? 6 : zoom); */
   }
 
   searchText = (map, center, query) => {
     const { google } = this.props
     const service = new google.maps.places.PlacesService(map)
-    //const detailsService = new google.maps.places.PlaceService(map)
     const request = {
       location: center,
       radius: '500',
@@ -96,7 +112,6 @@ class MapContainer extends Component {
 
         this.setState({
           places: results,
-          //center: center,
         })
 
         //console.log("results= " + JSON.stringify(results))
@@ -114,7 +129,7 @@ class MapContainer extends Component {
     }
 
     if (this.props.pos !== nextProps.pos) {
-      this.searchText(this.state.map, nextProps.pos, this.props.searchTerm);
+      this.searchText(this.state.map, nextProps.pos, this.props.searchTerm)
     }
   }
 
@@ -126,8 +141,8 @@ class MapContainer extends Component {
  recenterMyMap(){
   const {
     userPos
-    } = this.props;
-  this.state.map.setCenter(userPos);
+    } = this.props
+  this.state.map.setCenter(userPos)
  }
 
   render() {
@@ -147,7 +162,6 @@ class MapContainer extends Component {
 
     //console.log("places : " + JSON.stringify(places))
     if (!loaded) {
-      //const bounds =  new google.maps.LatLngBounds();
       return <StaticMap pos={pos} />
     }
 
@@ -159,6 +173,7 @@ class MapContainer extends Component {
 
 
     return (
+
       <div>
 
       <div className="theMap">
@@ -172,27 +187,12 @@ class MapContainer extends Component {
           onReady={this.onMapReady}
           onClick={this.onMapClicked}
         >
-        <button
-          id="btnRecenter"
-          onClick={this.recenterMyMap}
-          style={{
-              backgroundColor:`#fff`,
-              border: `2px solid #fff`,
-              borderRadius: `3px`,
-              cursor: `pointer`,
-              boxShadow: `0 2px 6px rgba(0,0,0,.3)`,
-              color: `black`,
-              fontFamily:`Roboto,Arial,sans-serif`,
-              padding: `0px 4px`,
-              margin: `7px`,
-              lineHeight: `24px`,
-              position: `absolute`,
-              left: `110px`,
-              top: `3px`,
-          }}
-      >
-          Recenter Map
-      </button>
+
+        <Button
+         onClick={this.recenterMyMap}
+         >
+         Recenter Map
+          </Button>
           <Marker
             name={'Current Location'}
             title={'You are here'}
@@ -237,7 +237,7 @@ class MapContainer extends Component {
               if (p.price_level !== undefined) {
                 priceLevel = priceLevelDesc[p.price_level]
               }
-              // bounds.extend(p.geometry.location);
+
               let iconUrl = defaultIconUrl;
               if (mouseOverPlace === p.id) {
                 iconUrl = selectedIconUrl;

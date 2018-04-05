@@ -50,7 +50,9 @@ h3 {
   display: grid;
   background: white;
   grid-template-columns: 65% 33%;
-  grid-template-areas: "search places" "map places" "desc places";
+  grid-template-areas: "search places"
+ "map places"
+ "desc places";
   grid-gap: 1.3em;
   padding: .5em;
 }
@@ -58,12 +60,14 @@ h3 {
 /* Style for the actual map! */
 .map {
   grid-area: map;
+
 }
 
 .theMap {
   position: relative;
   width: 100%;
   height: 600px;
+ z-index: 1;
 }
 
 /*******************this is the sidebar*/
@@ -229,7 +233,10 @@ h3 {
   }
   .mapContainer {
     display: grid;
-    grid-template-areas: "search" "map" "places" "desc";
+    grid-template-areas: "search"
+ "map"
+ "places"
+ "desc";
     grid-template-columns: 1fr;
     grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
   }

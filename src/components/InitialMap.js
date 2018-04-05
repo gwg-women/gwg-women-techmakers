@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import StaticMap from './StaticMap'
+import Button from './RecenterMapButton'
 
 const selectedIconUrl = 'https://maps.google.com/mapfiles/kml/paddle/red-circle.png';
 const defaultIconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
@@ -15,7 +16,7 @@ class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      //bounds: null,
+
     }
 
     // binding this to event-handler functions
@@ -23,8 +24,7 @@ class MapContainer extends Component {
     this.onMarkerOver = this.onMarkerOver.bind(this)
     this.onMarkerOut = this.onMarkerOut.bind(this)
     this.onMapClicked = this.onMapClicked.bind(this);
-    // this.onMapReady=this.onMapReady.bind(this)
-
+    this.recenterMyMap = this.recenterMyMap.bind(this);
   }
 
   // change marker image to green on mouse over
@@ -72,17 +72,12 @@ class MapContainer extends Component {
 
   onMapReady = (mapProps, map) => {
     this.setState({ map });
-
     this.searchText(map, map.center, this.props.searchTerm)
-    /* map.fitBounds(this.props.bounds)
-     var zoom = map.getZoom();
-      map.setZoom(zoom > 6 ? 6 : zoom); */
   }
 
   searchText = (map, center, query) => {
     const { google } = this.props
     const service = new google.maps.places.PlacesService(map)
-    //const detailsService = new google.maps.places.PlaceService(map)
     const request = {
       location: center,
       radius: '500',
@@ -95,7 +90,6 @@ class MapContainer extends Component {
 
         this.setState({
           places: results,
-          //center: center,
         })
 
         //console.log("results= " + JSON.stringify(results))
@@ -113,15 +107,26 @@ class MapContainer extends Component {
     }
 
     if (this.props.pos !== nextProps.pos) {
-      this.searchText(this.state.map, nextProps.pos, this.props.searchTerm);
+      this.searchText(this.state.map, nextProps.pos, this.props.searchTerm)
     }
   }
 
+  componentWillMount(){
 
+  }
+
+ // recenter the map to User's current location
+ recenterMyMap(){
+  const {
+    userPos
+    } = this.props
+  this.state.map.setCenter(userPos)
+ }
 
   render() {
     //const google_api = process.env.REACT_APP_GKEY;
     let {pos} = this.props;
+
     const {
       places,
       google,
@@ -135,10 +140,8 @@ class MapContainer extends Component {
       selectedPlace
     } = this.state;
 
-    // const markerImageUrl = "../src/img/circleMarker.png"
     //console.log("places : " + JSON.stringify(places))
     if (!loaded) {
-      //const bounds =  new google.maps.LatLngBounds();
       return <StaticMap pos={pos} />
     }
 
@@ -148,17 +151,28 @@ class MapContainer extends Component {
          pos.lng = 0.0;
      }
 
+
     return (
+
+      <div>
+
       <div className="theMap">
+
         <Map
           ref={this.onGoogleMapLoad}
           google={google}
-          initialZoom={15}
+          zoom={12}
           initialCenter={pos}
           center={pos}
           onReady={this.onMapReady}
           onClick={this.onMapClicked}
         >
+
+        <Button
+         onClick={this.recenterMyMap}
+         >
+         Recenter Map
+          </Button>
           <Marker
             name={'Current Location'}
             title={'You are here'}
@@ -203,7 +217,7 @@ class MapContainer extends Component {
               if (p.price_level !== undefined) {
                 priceLevel = priceLevelDesc[p.price_level]
               }
-              // bounds.extend(p.geometry.location);
+
               let iconUrl = defaultIconUrl;
               if (mouseOverPlace === p.id) {
                 iconUrl = selectedIconUrl;
@@ -220,7 +234,7 @@ class MapContainer extends Component {
                   reference={"" + p.place_id}
                   position={p.geometry.location}
                   //props.place.photos === undefined ?<img src={props.place.icon} alt= ""/> : <img src={props.place.photos[0].getUrl({'maxWidth': 135, 'maxHeight': 135})} alt="no image" />
-                  photo={p.photos === undefined ? `https://via.placeholder.com/100x100` : p.photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 100 })}
+                  photo={p.photos === undefined ? `` : p.photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 100 })}
                   icon={{
                     url: iconUrl,
                     anchor: google.maps.Point(10, 10),
@@ -265,6 +279,7 @@ class MapContainer extends Component {
             </div>
           </InfoWindow>
         </Map>
+      </div>
       </div>
     );
   }

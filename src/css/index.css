@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto");
 :root {
   --header-color: #D8E83D;
   --text-color: #202020;
   --button-color: #84347c;
   --button-color-hover: #6f6f6f;
-  --border-color: #c2c2c2; }
+  --border-color: #c2c2c2;
+  --text-open-sans: "Open Sans", Arial, Helvetica, sans-serif;
+  --text-roboto: "Roboto", Arial, Helvetica, sans-serif; }
 
 /******* Normalize *******/
 * {
@@ -15,13 +18,12 @@ html {
   height: 100%; }
 
 body {
-  display: grid;
-  min-height: 100%;
-  grid-template-rows: 1fr auto; }
+  max-width: 60em;
+  min-height: 100%; }
 
 /****** Typography ******/
 h1 {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: var(--text-open-sans);
   font-size: 1.6rem; }
 
 h2 {
@@ -32,55 +34,49 @@ h3 {
 
 /* This is the main content */
 .fullContainer {
-  display: grid;
-  grid-template-columns: 1fr;
   height: 100%;
   width: 100%; }
 
 /* This is the map part of the content */
 .mapContainer {
-  display: grid;
-  background: white;
-  grid-template-columns: 65% 33%;
-  grid-template-areas: "search places" "map places" "desc places";
-  grid-gap: 1.3em;
+  background-color: white;
   padding: .5em; }
 
 /* Style for the actual map! */
-.map {
-  grid-area: map; }
-
 .theMap {
   position: relative;
   width: 100%;
   height: 600px; }
 
+#btnRecenter {
+  background-color: #fff;
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  color: black;
+  font-family: var(--text-roboto);
+  padding: .48em;
+  margin: 7px;
+  position: absolute;
+  left: 100px;
+  top: 3px; }
+  #btnRecenter:hover, #btnRecenter:focus {
+    background-color: #eee; }
+
 /*******************this is the sidebar*/
 .mapPlaces {
   color: var(--text-color);
-  grid-area: places;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 850px; }
   .mapPlaces li {
-    list-style: none;
-    margin-bottom: 0; }
+    list-style: none; 
+    margin-bottom: 0;}
   .mapPlaces .listings {
     border-bottom: var(--border-color) 1px solid;
-    display: grid;
-    grid-template-columns: 1fr 149px;
-    grid-column: auto;
     padding-bottom: 5px;
-    align-items: center;
-    cursor: pointer; }
-    .mapPlaces .listings .listing-description {
-      display: grid;
-      grid-template-columns: minmax(100px, 300px);
-      grid-template-rows: 1fr 2fr; }
+    align-items: center; }
     .mapPlaces .listings .listing-icon-div {
-      display: grid;
-      grid-column-start: 2;
-      grid-row-start: 1;
       min-height: 135px;
       min-width: 135px;
       align-items: center;
@@ -101,24 +97,22 @@ h3 {
 
 /****description bottom of the map */
 .mapDescription {
-  grid-area: desc;
   padding: .5em; }
 
 /* This is the Search area */
 .searchContainer {
-  grid-area: search;
   align-items: flex-end;
-  max-width: 90%; }
+  max-width: 90%;
+  margin-top: 1.3em; }
 
-.search {
-  display: grid;
-  grid-template-columns: 71% 28%;
-  grid-gap: 1em .3em; }
-  .search button {
-    background: var(--button-color);
-    transition: .3s; }
-    .search button:hover, .search button:focus {
-      background: var(--button-color-hover); }
+.search button {
+  background: var(--button-color);
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: .3s; }
+  .search button:hover, .search button:focus {
+    background: var(--button-color-hover); }
 
 .search-box {
   border: 1px solid transparent;
@@ -142,7 +136,7 @@ h3 {
   background: var(--header-color);
   align-items: center;
   color: black;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: var(--text-open-sans);
   padding: 1em .5em; }
   .footer div {
     padding: .5em; }
@@ -174,14 +168,6 @@ h3 {
     font-size: 1.125rem; }
   h3 {
     font-size: 1rem; }
-  .fullContainer {
-    display: grid;
-    grid-template-columns: 1fr; }
-  .mapContainer {
-    display: grid;
-    grid-template-areas: "search" "map" "places" "desc";
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); }
   .theMap {
     height: 400px; }
   .searchContainer {
@@ -190,3 +176,56 @@ h3 {
     font-size: 1em; }
   .header {
     padding: .9em; } }
+
+/* Check for new grid support (not -ms-grid) */
+@supports (grid-area: auto) {
+  body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    max-width: 100%; }
+  .fullContainer {
+    display: grid;
+    grid-template-columns: 1fr; }
+  .mapContainer {
+    display: grid;
+    grid-template-columns: 65% 33%;
+    grid-template-areas: "search places" "map places" "desc places";
+    grid-gap: 1.3em; }
+  .searchContainer {
+    grid-area: search; }
+  .search {
+    display: grid;
+    grid-template-columns: 71% 28%;
+    grid-gap: 1em .3em; }
+  .map {
+    grid-area: map; }
+  #info {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: .5em; }
+  .mapDescription {
+    grid-area: desc; }
+  .mapPlaces {
+    grid-area: places; }
+    .mapPlaces .listings {
+      display: grid;
+      grid-template-columns: 1fr 149px;
+      grid-column: auto; }
+      .mapPlaces .listings .listing-icon-div {
+        display: grid;
+        grid-column-start: 2;
+        grid-row-start: 1; }
+      .mapPlaces .listings .listing-description {
+        display: grid;
+        grid-template-columns: minmax(100px, 300px);
+        grid-template-rows: 1fr 2fr; }
+  @media screen and (max-width: 800px) {
+    .fullContainer {
+      display: grid;
+      grid-template-columns: 1fr; }
+    .mapContainer {
+      display: grid;
+      grid-template-areas: "search" "map" "places" "desc";
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } } }
+

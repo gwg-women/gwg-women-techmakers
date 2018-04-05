@@ -15,7 +15,7 @@ class HeaderContainer extends Component {
       this.props.setCurrentCity(this.state.currentCity);
     }
   }
-  
+
   getCityWeather(latitude, longitude) {
     const {setCurrentCity} = this.props;
 
@@ -35,14 +35,17 @@ class HeaderContainer extends Component {
   }
 
   getMyLocation = () => {
-    const {handleLocationChange} = this.props;
+    const {
+      handleLocationChange,
+      setUserPosition
+    } = this.props;
     const pos = {
         lat: parseFloat(localStorage.getItem('lat')),
         lng: parseFloat(localStorage.getItem('lng'))
       }
 
     handleLocationChange(pos);
-
+    setUserPosition(pos);
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
        this.getCityWeather(pos.lat, pos.lng);
@@ -55,11 +58,17 @@ class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
+      const {
+        handleLocationChange,
+        setUserPosition
+      } = this.props
+
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      handleLocationChange(pos);
+      setUserPosition(pos)
+      handleLocationChange(pos)
 
       localStorage.setItem('lat', pos.lat);
       localStorage.setItem('lng', pos.lng);
@@ -76,8 +85,8 @@ class HeaderContainer extends Component {
 
   render () {
     const {currentCity, currentWeather} = this.state;
-    const message = (this.state.currentCity && this.state.currentWeather) 
-      ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F` 
+    const message = (this.state.currentCity && this.state.currentWeather)
+      ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
       : `Welcome to Mappa.`;
 
     return(
@@ -92,4 +101,4 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
   libraries: ['places'],
   version: '3'
-})(HeaderContainer) 
+})(HeaderContainer)

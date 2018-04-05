@@ -50,7 +50,9 @@ h3 {
   display: grid;
   background: white;
   grid-template-columns: 65% 33%;
-  grid-template-areas: "search places" "map places" "desc places";
+  grid-template-areas: "search places"
+ "map places"
+ "desc places";
   grid-gap: 1.3em;
   padding: .5em;
 }
@@ -229,7 +231,10 @@ h3 {
   }
   .mapContainer {
     display: grid;
-    grid-template-areas: "search" "map" "places" "desc";
+    grid-template-areas: "search"
+ "map"
+ "places"
+ "desc";
     grid-template-columns: 1fr;
     grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
   }

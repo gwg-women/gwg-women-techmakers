@@ -18,13 +18,11 @@ export class Wiki extends Component {
     const wikiDefault = 'earth';
     const link = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
     const url = link + this.props.currentCity;
-    let counter = 0;
     fetch(url)
     .then(response => {
       if(response.ok) return response;
       else if (!response.ok) {
         let location = this.props.currentCity;
-        counter++;
         location = location.split(',');
         location = location[1];
         return fetch(link + location)

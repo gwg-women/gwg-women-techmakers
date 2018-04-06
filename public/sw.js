@@ -1,7 +1,7 @@
 // Set this to true for production
 const doCache = false;
 
-const CACHE_NAME = 'maapa-cache-v12';
+const CACHE_NAME = 'maapa-cache-v13';
 
 const urlsToCache =[
   '/',
@@ -37,17 +37,15 @@ self.addEventListener('fetch', function(event) {
             cache.put(event.request, response.clone())
             return response
           })
+          .catch(function(){
+            if (requestUrl.pathname.startsWith('/maps/api/js')) {  
+              return caches.match('maps/api/staticmap')
+            }
+          })
         })
       })
     )
-  } else {
-  
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
-        })
-    );
-  }
+  } 
 });
 
 
@@ -73,17 +71,17 @@ self.addEventListener('fetch', function(event) {
 
 
 //this is hijacking the request to the maps api, and if it fails, it serves the static image (happinesssssssss)
-self.addEventListener('fetch', function(event) {
-  const requestUrl = new URL(event.request.url)
+// self.addEventListener('fetch', function(event) {
+//   const requestUrl = new URL(event.request.url)
   
-  if (requestUrl.pathname.startsWith('/maps/api/js')) {
-    event.respondWith(
-      fetch(event.request).catch(function() {
-        return caches.match('maps/api/staticmap')
-      })
-    )
-  }
-})
+//   if (requestUrl.pathname.startsWith('/maps/api/js')) {
+//     event.respondWith(
+//       fetch(event.request).catch(function() {
+//         return caches.match('maps/api/staticmap')
+//       })
+//     )
+//   }
+// })
 
 
 

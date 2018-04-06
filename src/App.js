@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import MapContainer from './components/InitialMap'
 import HeaderContainer from './components/Header'
-//import Sidebar from './components/Sidebar';
 import Search from './components/Search'
-// import getPlaces from './services/googlePlaces';
 import Container from './components/Places'
 import Wiki from './components/Description'
 import Footer from './components/Footer'
-//import 'milligram';
 
 class App extends Component {
   constructor(props) {
@@ -81,7 +78,6 @@ class App extends Component {
       mouseOverPlace,
       city
     } = this.state;
-    //  <Sidebar places={this.state.places}/>
     return (
       <div className="fullContainer">
         <header className="header">

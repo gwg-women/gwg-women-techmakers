@@ -86,11 +86,14 @@ h3 {
     max-height: 850px;
     li {
         list-style: none;
+        margin-bottom:0;
     }
     .listings {
         border-bottom: var(--border-color) 1px solid;
         padding-bottom: 5px;
         align-items: center;
+        cursor: pointer;
+        }
         .listing-icon-div {
             min-height: 135px;
             min-width: 135px;
@@ -111,6 +114,10 @@ h3 {
         .listing-open {
             font-weight: bold;
             color: var(--header-color);
+        }
+        &:hover, 
+        &:focus {
+          background-color: #eceff1;
         }
     }
 }

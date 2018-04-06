@@ -70,7 +70,8 @@ h3 {
   overflow-y: scroll;
   max-height: 850px; }
   .mapPlaces li {
-    list-style: none; }
+    list-style: none; 
+    margin-bottom: 0;}
   .mapPlaces .listings {
     border-bottom: var(--border-color) 1px solid;
     padding-bottom: 5px;
@@ -91,6 +92,8 @@ h3 {
     .mapPlaces .listings .listing-open {
       font-weight: bold;
       color: var(--header-color); }
+    .mapPlaces .listings:hover, .mapPlaces .listings:focus {
+      background-color: #eceff1; }
 
 /****description bottom of the map */
 .mapDescription {
@@ -225,3 +228,4 @@ h3 {
       grid-template-areas: "search" "map" "places" "desc";
       grid-template-columns: 1fr;
       grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } } }
+

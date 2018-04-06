@@ -48,6 +48,11 @@ class Search extends Component {
           placeholder="I'm looking for..."
           className="search-box"
           onChange={this.handleChange}
+          onKeyPress={event => {
+            if (event.key === 'Enter') {
+              this.handleSubmit()
+            }
+          }}
           aria-label="I'm looking for..."
         />
         <button onClick={this.handleSubmit}>Submit</button>

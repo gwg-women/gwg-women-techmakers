@@ -1,7 +1,7 @@
 // Set this to true for production
 const doCache = true;
 
-const CACHE_NAME = 'maapa-cache-v6';
+const CACHE_NAME = 'maapa-cache-v7';
 
 const urlsToCache =[
   '/',
@@ -17,7 +17,7 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
       caches.open(CACHE_NAME)
         .then(function(cache) {
-              cache.addAll(urlsToCache)
+            return cache.addAll(urlsToCache)
         })
     );
   }

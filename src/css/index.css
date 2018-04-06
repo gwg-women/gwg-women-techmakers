@@ -92,7 +92,7 @@ h3 {
     .mapPlaces .listings .listing-open {
       font-weight: bold;
       color: var(--header-color); }
-    .mapPlaces .listings:hover {
+    .mapPlaces .listings:hover, .mapPlaces .listings:focus {
       background-color: #eceff1; }
 
 /****description bottom of the map */

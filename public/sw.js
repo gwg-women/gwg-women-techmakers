@@ -5,8 +5,8 @@ const CACHE_NAME = 'maapa-cache-v7';
 
 const urlsToCache =[
   '/',
-  '/static/js/main.ec4fa0f5.js',
-  '/static/css/main.5600087f.css',
+  '/static/js/main.bd8fcf5f.js',
+  '/static/css/main.181bbb8b.css',
   '/index.html',
 ];
 
@@ -42,6 +42,7 @@ self.addEventListener('fetch', function (event) {
   const requestUrl = new URL(event.request.url)
   
   if (requestUrl.pathname.startsWith('/maps/api/staticmap')) {
+    console.log("caching static map")
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
         return cache.match(event.request).then(function(response) {

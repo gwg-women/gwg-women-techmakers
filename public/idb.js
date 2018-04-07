@@ -1,3 +1,4 @@
+import getWeather from '../src/services/weather.js';
 'use strict';
 
 (function () {
@@ -305,9 +306,6 @@ console.log("indexeddbpromised included")
 
 ////////////////////////////////////////////////////////////////////////////
 
-//IDB Test code
-console.log("I am here")
-
 
 const idb =
 
@@ -338,14 +336,15 @@ const idb =
       })
     }
 
+  function addWeather() {
+    if (!db) return;
 
-    function addWeather() {
-      if (!db) return;
-
-      var tx = db.transaction('weather', 'readwrite');
-      var store = tx.objectStore('weather');
-      store.put();
-    }
+    var tx = db.transaction('weather', 'readwrite');
+    var store = tx.objectStore('weather');
+    getWeather()
+    store.put();
+  }
+   
 
 
   }()

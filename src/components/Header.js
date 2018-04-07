@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import db from '../db'
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
 
 class HeaderContainer extends Component {
-  state = {};
+  state = {
+    currentWeather: 0
+  };
 
   componentDidMount() {
     this.getMyLocation();
+    
+    const that = this
+    if (!navigator.online){
+      db.weather.get(1, function(obj){
+        console.log(obj.temp)
+        return obj.temp
+        }).then(function(temp) {
+          console.log(temp)
+          that.setState({currentWeather: temp})
+      })
+    }
   }
 
   componentWillUpdate(prevProps, prevState) {
@@ -28,7 +42,9 @@ class HeaderContainer extends Component {
     });
 
     getWeather(latitude, longitude).then((weather) => {
-      this.setState({currentWeather: weather})
+      db.table('weather').add({temp: weather}).then(() => {
+        this.setState({currentWeather: weather})
+      })
     }).catch(function(err){
       console.log('Error retrieving the current weather: ', err);
     })
@@ -84,11 +100,13 @@ class HeaderContainer extends Component {
   }
 
   render () {
-    const {currentCity, currentWeather} = this.state;
+    
+    const {currentCity, currentWeather, idbTemp} = this.state;
     const message = (this.state.currentCity && this.state.currentWeather)
-      ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
-      : `Welcome to Mappa.`;
-
+    ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
+    : 
+    `Welcome to Mappa. It is currently ${currentWeather}°F`;
+  
     return(
       <h1>
         {message}

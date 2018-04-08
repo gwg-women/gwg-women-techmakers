@@ -147,8 +147,10 @@ class MapContainer extends Component {
 
     // This code to fix issue#157  where map is only partially loading when current position value has not returned yet.
      if(!pos.lat) {
-         pos.lat = 0.0;
-         pos.lng = 0.0;
+        //  pos.lat = 0.0;
+        //  pos.lng = 0.0;
+
+      return <div className="loadingIndicator"></div>
      }
 
 

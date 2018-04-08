@@ -5,26 +5,37 @@ import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
 
 class HeaderContainer extends Component {
-  state = {
-    currentWeather: 0
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      }
+    }
+
 
   componentDidMount() {
     this.getMyLocation();
-    
-    const that = this
-    if (!navigator.online){
-      db.weather.get(1, function(obj){
-        console.log(obj.temp)
-        return obj.temp
-        }).then(function(temp) {
-          console.log(temp)
-          that.setState({currentWeather: temp})
+
+    const that = this;
+    if (!navigator.online) {
+      db.weather.get(1, function(obj) {
+        that.setState({currentWeather: obj.temp})
+        }).catch(function(error){
+        console.log(error)
+      })
+
+      db.city.get(4, function(obj) {
+        that.setState({currentCity: obj.city})
+        console.log("state: " + that.state.currentCity)
+      }).catch(function(error){
+        console.log(error)
       })
     }
+    console.log(this.state.currentCity)
   }
 
   componentWillUpdate(prevProps, prevState) {
+    console.log("prev" + prevState.currentCity)
+    console.log("current"+ this.state.currentCity)
     if (prevState.currentCity !== this.state.currentCity) {
       this.props.setCurrentCity(this.state.currentCity);
     }
@@ -34,8 +45,10 @@ class HeaderContainer extends Component {
     const {setCurrentCity} = this.props;
 
     getCity(latitude, longitude).then((city) => {
-      this.setState({currentCity: city});
-      setCurrentCity(city);
+      db.table('city').add({city: city}).then(() => {
+        this.setState({currentCity: city});
+        setCurrentCity(city);
+      })
 
     }).catch(function(err) {
       console.log('Error retrieving the current city: ', err);
@@ -98,14 +111,15 @@ class HeaderContainer extends Component {
       alert('Sorry your browser doesn\'t support the Geolocation API');
     }
   }
-
+  
   render () {
     
-    const {currentCity, currentWeather, idbTemp} = this.state;
+    const {currentCity, currentWeather} = this.state;
+    console.log(currentCity)
     const message = (this.state.currentCity && this.state.currentWeather)
     ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
     : 
-    `Welcome to Mappa. It is currently ${currentWeather}°F`;
+    `Welcome to Mappa. It is currently ${currentWeather}°F. You're in ${currentCity}.`;
   
     return(
       <h1>

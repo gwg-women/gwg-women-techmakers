@@ -70,12 +70,13 @@ h3 {
   overflow-y: scroll;
   max-height: 850px; }
   .mapPlaces li {
-    list-style: none; 
-    margin-bottom: 0;}
+    list-style: none;
+    margin-bottom: 0; }
   .mapPlaces .listings {
     border-bottom: var(--border-color) 1px solid;
     padding-bottom: 5px;
-    align-items: center; }
+    align-items: center;
+    cursor: pointer; }
     .mapPlaces .listings .listing-icon-div {
       min-height: 135px;
       min-width: 135px;
@@ -228,4 +229,3 @@ h3 {
       grid-template-areas: "search" "map" "places" "desc";
       grid-template-columns: 1fr;
       grid-template-rows: repeat(auto-fit, minmax(50px, 1fr)); } } }
-

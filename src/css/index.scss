@@ -93,7 +93,6 @@ h3 {
         padding-bottom: 5px;
         align-items: center;
         cursor: pointer;
-        }
         .listing-icon-div {
             min-height: 135px;
             min-width: 135px;
@@ -115,13 +114,12 @@ h3 {
             font-weight: bold;
             color: var(--header-color);
         }
-        &:hover, 
+        &:hover,
         &:focus {
           background-color: #eceff1;
         }
     }
 }
-
 
 
 /****description bottom of the map */

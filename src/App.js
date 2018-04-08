@@ -55,7 +55,7 @@ class App extends Component {
 
   // call method to read currentCity from header
   setCurrentCity(city){
-    city = city !== undefined ? `${city[0]},  ${city[1]}` : city;
+    city = city !== undefined? `${city}` : city;
     this.setState({city});
   }
 

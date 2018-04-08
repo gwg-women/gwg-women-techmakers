@@ -24,7 +24,7 @@ export class Wiki extends Component {
       else if (!response.ok) {
         let location = this.props.currentCity;
         location = location.split(',');
-        location = location[1];
+        location = location[location.length -1];
         return fetch(link + location)
       }
 

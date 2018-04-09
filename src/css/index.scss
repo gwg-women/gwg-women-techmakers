@@ -16,10 +16,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--text-open-sans);
+    color: var(--text-color);
+    & a {
+        text-decoration: none;
+    }
 }
 
 html {
     height: 100%;
+
 }
 
 body {
@@ -124,7 +130,14 @@ h3 {
 
 /****description bottom of the map */
 .mapDescription {
-    padding: .5em;
+    padding: 0px;
+    & .mapCoords {
+        font-weight: bold;
+    }
+    & .wikiDescription {
+        padding-top: 2px;
+        
+    }
 }
 
 /* This is the Search area */
@@ -252,7 +265,7 @@ h3 {
             "search places"
             "map places"
             "desc places";
-        grid-gap: 1.3em;
+        grid-gap: .5em;
     }
     .searchContainer {
         grid-area: search;
@@ -272,6 +285,7 @@ h3 {
     }
     .mapDescription {
         grid-area: desc;
+        align-items: start;
     }
     .mapPlaces {
         grid-area: places;

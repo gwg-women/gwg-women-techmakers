@@ -15,23 +15,28 @@ export class Wiki extends Component {
   // the callback for fetching the information
 
   getData(){
-    const wikiDefault = 'earth';
     const link = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
     const url = link + this.props.currentCity;
     fetch(url)
     .then(response => {
       if(response.ok) return response;
+
       else if (!response.ok) {
         let location = this.props.currentCity;
-        location = location.split(',');
-        location = location[location.length -1];
+        location = location.split(',').map(string => string.trim());
+        location = `${[location[location.length -2]]}, ${[location[location.length -1]]}`;
         return fetch(link + location)
       }
 
     })
     .then(response => {
       if (response.ok) return response;
-      return fetch(link + wikiDefault);
+      else if (!response.ok) {
+        let location = this.props.currentCity;
+        location = location.split(',');
+        location = location[location.length -1];
+        return fetch(link + location)
+      }
     })
     .then(data => data.json())
     .then(data => {

@@ -16,10 +16,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--text-open-sans);
+    color: var(--text-color);
+    & a {
+        text-decoration: none;
+    }
 }
 
 html {
     height: 100%;
+
 }
 
 body {
@@ -51,6 +57,29 @@ h3 {
     background-color: white;
     padding: .5em;
 }
+
+/* The loading animation */
+
+.loadingIndicator {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #84347c;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite; 
+    margin: 50px auto;
+    }
+    
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
 
 /* Style for the actual map! */
 .theMap {
@@ -124,7 +153,14 @@ h3 {
 
 /****description bottom of the map */
 .mapDescription {
-    padding: .5em;
+    padding: 0px;
+    & .mapCoords {
+        font-weight: bold;
+    }
+    & .wikiDescription {
+        padding-top: 2px;
+        
+    }
 }
 
 /* This is the Search area */
@@ -252,7 +288,7 @@ h3 {
             "search places"
             "map places"
             "desc places";
-        grid-gap: 1.3em;
+        grid-gap: .5em;
     }
     .searchContainer {
         grid-area: search;
@@ -272,6 +308,7 @@ h3 {
     }
     .mapDescription {
         grid-area: desc;
+        align-items: start;
     }
     .mapPlaces {
         grid-area: places;

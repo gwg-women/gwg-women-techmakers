@@ -73,7 +73,9 @@ export function getCity(lat, lng){
         "WA": "Washington",
         "WI": "Wisconsin",
         "WV": "West Virginia",
-        "WY": "Wyoming"
+        "WY": "Wyoming",
+        //Countries with Acronyms
+        "UK": "United Kingdom"
           }
 
 
@@ -97,26 +99,15 @@ export function getCity(lat, lng){
           Object.keys(state).forEach(k => city = city.replace(new RegExp(`\\b${k}\\b`, 'g'), state[k]));
 
           //gets rid of 'unnamed road', 'USA', numbers with their word if connected, and -=
-          city = city.replace(/\b\w*?Unnamed Road|-|USA|[a-z]*\d+[a-z]*\w*?\b/gi, '');
+          city = city.replace(/\b\w*?Unnamed Road|Canada|-|USA|[a-z]*\d+[a-z]*\w*?\b/gi, '');
           //split by ','
           let citystate = city.split(',');
             
           //gets rid of those empty array elements as well as remove empty space in front and back of array elements.
           citystate = citystate.filter(entry => entry.trim() !== '').map(string => string.trim());
 
-              if (citystate.length >= 4) {
-                citystate = `${[citystate[citystate.length -3]]}, ${[citystate[citystate.length -2]]}, ${[citystate[citystate.length -1]]}`
-              }
-
-              else if (citystate.length === 3 || citystate.length === 2) {
+              if (citystate.length === 3 || citystate.length === 2 || citystate.length >= 4) {
                 citystate = `${[citystate[citystate.length -2]]}, ${[citystate[citystate.length -1]]}`;
-              }
-
-              else if (citystate.length === 1) {
-               citystate = `${citystate[0]}`
-              }
-              else {
-                citystate = 'Earth'
               }
             resolve(citystate);
         } else {

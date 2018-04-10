@@ -74,6 +74,39 @@ export function getCity(lat, lng){
         "WI": "Wisconsin",
         "WV": "West Virginia",
         "WY": "Wyoming",
+        //Mexico
+        "Ags.": "Aguascalientes",
+        "B.C.S.": "Baja California Sur",
+        "B.C.": "Baja California",
+        "Chi.": "Chihuahua",
+        "Col.": "Colima",
+        "Camp.": "Campeche",
+        "Coah.": "Coahuila",
+        "Chis.": "Chiapas",
+        "Dgo.": "Durango",
+        "Gro.": "Guerrero",
+        "Gto.": "Guanajuato",
+        "Hgo.": "Hidalgo",
+        "Jal.": "Jalisco",
+        "CDMX": "México City",
+        "Méx.": "México State",
+        "Mich.": "Michoacán",
+        "Mor.": "Morelos",
+        "Nay.": "Nayarit",
+        "N.L.": "Nuevo León",
+        "Oax.": "Oaxaca",
+        "Pue.": "Puebla",
+        "Qro.": "Querétaro",
+        "Q.R.": "Quintana Roo",
+        "Sin.": "Sinaloa",
+        "S.L.P.": "San Luis Potosí",
+        "Son.": "Sonora",
+        "Tab.": "Tabasco",
+        "Tlax": "Tlaxcala",
+        "Tamps.": "Tamaulipas",
+        "Ver.": "Veracruz",
+        "Yuc.": "Yucatán",
+        "Zac": "Zacatecas",
         //Countries with Acronyms
         "UK": "United Kingdom"
           }
@@ -96,10 +129,11 @@ export function getCity(lat, lng){
           city = results[0].formatted_address;
           console.log('this is the original location ' + city)
           // Replaces state abbreviation to full name using state object.
-          Object.keys(state).forEach(k => city = city.replace(new RegExp(`\\b${k}\\b`, 'g'), state[k]));
+          // Object.keys(state).forEach(k => city = city.replace(new RegExp(`\\b${k}\\b`, 'g'), state[k]));
+          Object.keys(state).forEach(k => city = city.replace(k, state[k]));
 
           //gets rid of 'unnamed road', 'USA', numbers with their word if connected, and -=
-          city = city.replace(/\b\w*?Unnamed Road|Canada|-|USA|[a-z]*\d+[a-z]*\w*?\b/gi, '');
+          city = city.replace(/\b\w*?Unnamed Road|Mexico|Canada|-|USA|[a-z]*\d+[a-z]*\w*?\b/gi, '');
           //split by ','
           let citystate = city.split(',');
             

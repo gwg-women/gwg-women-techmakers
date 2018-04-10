@@ -140,7 +140,7 @@ export function getCity(lat, lng){
           //gets rid of those empty array elements as well as remove empty space in front and back of array elements.
           citystate = citystate.filter(entry => entry.trim() !== '').map(string => string.trim());
 
-              if (citystate.length === 3 || citystate.length === 2 || citystate.length >= 4) {
+              if (citystate.length >= 2) {
                 citystate = `${[citystate[citystate.length -2]]}, ${[citystate[citystate.length -1]]}`;
               }
             resolve(citystate);

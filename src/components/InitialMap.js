@@ -150,7 +150,7 @@ class MapContainer extends Component {
         //  pos.lat = 0.0;
         //  pos.lng = 0.0;
 
-      return <div className="loadingIndicator"></div>
+      return <div className="loadingIndicator" role="status" aria-live="polite"></div>
      }
 
 

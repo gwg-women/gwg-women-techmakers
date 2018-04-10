@@ -17,25 +17,29 @@ export function getCity(lat, lng){
         if (results[0]) {
           
           city = results[0].formatted_address;
+          console.log('unmodified address: ' + city)
 
           //gets rid of 'unnamed road', 'USA', numbers with their word if connected, and -=
           city = city.replace(/\b\w*?Unnamed Road|-|USA|[a-z]*\d+[a-z]*\w*?\b/gi, '');
+          
 
             //split by ','
             let citystate = city.split(',');
             
             //gets rid of those empty array elements as well as remove empty space in front and back of array elements.
             citystate = citystate.filter(entry => entry.trim() !== '').map(string => string.trim());
-              if (citystate.length >= 3) {
+            console.log('fully modified address: ' + 'length: ' + citystate.length + ' location: ' + citystate)
+
+              if (citystate.length >= 4) {
                 citystate = `${[citystate[citystate.length -3]]}, ${[citystate[citystate.length -2]]}, ${[citystate[citystate.length -1]]}`
               }
 
-              else if (citystate.length === 2) {
-                citystate = `${[citystate[0]]}, ${[citystate[1]]}`;
+              else if (citystate.length === 3 || citystate.length === 2) {
+                citystate = `${[citystate[citystate.length -2]]}, ${[citystate[citystate.length -1]]}`;
               }
 
               else if (citystate.length === 1) {
-               citystate = [citystate[0]]
+               citystate = `${citystate[0]}`
               }
               else {
                 citystate = 'Earth'

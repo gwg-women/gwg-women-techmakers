@@ -21,6 +21,7 @@
     & a {
         text-decoration: none;
     }
+    
 }
 
 html {
@@ -215,10 +216,11 @@ h3 {
         padding: .5em;
     }
     a {
-        color: black;
+  
         padding: 5px;
         margin: 2px;
         transition: .5s;
+        text-decoration: none !important;
         &:hover,
         &:focus {
             background: white;
@@ -229,12 +231,13 @@ h3 {
     ul {
         display: flex;
         flex-wrap: wrap;
-        list-style: none;
+        list-style: none !important;
         justify-content: left;
     }
     li {
         text-align: center;
         line-height: 2em;
+        list-style: none !important;
     }
     .gwg-link {
         font-size: 1.5em;

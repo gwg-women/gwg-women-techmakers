@@ -227,10 +227,10 @@ h3 {
 }
 
 .footer a {
-  color: black;
   padding: 5px;
   margin: 2px;
   transition: .5s;
+  text-decoration: none;
 }
 
 .footer a:hover, .footer a:focus {
@@ -249,6 +249,7 @@ h3 {
 .footer li {
   text-align: center;
   line-height: 2em;
+  list-style-type: none !important;
 }
 
 .footer .gwg-link {
@@ -294,7 +295,9 @@ h3 {
   .mapContainer {
     display: grid;
     grid-template-columns: 65% 33%;
-    grid-template-areas: "search places" "map places" "desc places";
+    grid-template-areas: "search places"
+ "map places"
+ "desc places";
     grid-gap: .5em;
   }
   .searchContainer {
@@ -342,7 +345,10 @@ h3 {
     }
     .mapContainer {
       display: grid;
-      grid-template-areas: "search" "map" "places" "desc";
+      grid-template-areas: "search"
+ "map"
+ "places"
+ "desc";
       grid-template-columns: 1fr;
       grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
     }

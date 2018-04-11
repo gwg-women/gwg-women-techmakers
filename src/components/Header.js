@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
+import Image from '../img/24.png';
 
 class HeaderContainer extends Component {
   state = {};
@@ -86,12 +87,12 @@ class HeaderContainer extends Component {
   render () {
     const {currentCity, currentWeather} = this.state;
     const message = (this.state.currentCity && this.state.currentWeather)
-      ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
-      : `Welcome to Mappa.`;
+      ? ` You're in ${currentCity}. It is currently ${currentWeather}°F`
+      : ``;
 
     return(
       <h1>
-        {message}
+         <img src={Image} alt='' /> Welcome to Mappa. {message}
       </h1>
     );
   }

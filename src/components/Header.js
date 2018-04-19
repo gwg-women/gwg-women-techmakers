@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
-
+import Image from '../img/24.png';
 
 class HeaderContainer extends Component {
-  state = {
-  };
+  state = {};
+
+  componentDidMount() {
+    this.getMyLocation();
+  }
+
+  componentWillUpdate(prevProps, prevState) {
+    if (prevState.currentCity !== this.state.currentCity) {
+      this.props.setCurrentCity(this.state.currentCity);
+    }
+  }
 
   getCityWeather(latitude, longitude) {
     const {setCurrentCity} = this.props;
@@ -27,16 +36,18 @@ class HeaderContainer extends Component {
     })
   }
 
-
   getMyLocation = () => {
-    const {handleLocationChange} = this.props;
+    const {
+      handleLocationChange,
+      setUserPosition
+    } = this.props;
     const pos = {
         lat: parseFloat(localStorage.getItem('lat')),
         lng: parseFloat(localStorage.getItem('lng'))
       }
 
     handleLocationChange(pos);
-
+    setUserPosition(pos);
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
        this.getCityWeather(pos.lat, pos.lng);
@@ -49,11 +60,17 @@ class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
+      const {
+        handleLocationChange,
+        setUserPosition
+      } = this.props
+
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-      handleLocationChange(pos);
+      setUserPosition(pos)
+      handleLocationChange(pos)
 
       localStorage.setItem('lat', pos.lat);
       localStorage.setItem('lng', pos.lng);
@@ -68,24 +85,15 @@ class HeaderContainer extends Component {
     }
   }
 
-  componentWillUpdate(prevProps, prevState) {
-    if (prevState.currentCity !== this.state.currentCity) {
-      this.props.updateCurrentCity(this.state.currentCity);
-    }
-  }
-
-  componentDidMount() {
-    this.getMyLocation();
-  }
-
-
   render () {
-    const message = (this.state.currentCity && this.state.currentWeather) ?
-    `Welcome to Mappa. You're in ${this.state.currentCity}. It is currently ${this.state.currentWeather}°F` :
-    `Welcome to Mappa.`;
+    const {currentCity, currentWeather} = this.state;
+    const message = (this.state.currentCity && this.state.currentWeather)
+      ? ` You're in ${currentCity}. It is currently ${currentWeather}°F`
+      : ``;
+
     return(
-      <h1 className="header">
-        {message}
+      <h1>
+         <img src={Image} alt='' /> Welcome to Mappa. {message}
       </h1>
     );
   }

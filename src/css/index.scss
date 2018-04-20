@@ -16,10 +16,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--text-open-sans);
+    color: var(--text-color);
+    & a {
+        text-decoration: none;
+    }
+    
 }
 
 html {
     height: 100%;
+
 }
 
 body {
@@ -51,6 +58,29 @@ h3 {
     background-color: white;
     padding: .5em;
 }
+
+/* The loading animation */
+
+.loadingIndicator {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #84347c;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite; 
+    margin: 50px auto;
+    }
+    
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
 
 /* Style for the actual map! */
 .theMap {
@@ -86,11 +116,13 @@ h3 {
     max-height: 850px;
     li {
         list-style: none;
+        margin-bottom:0;
     }
     .listings {
         border-bottom: var(--border-color) 1px solid;
         padding-bottom: 5px;
         align-items: center;
+        cursor: pointer;
         .listing-icon-div {
             min-height: 135px;
             min-width: 135px;
@@ -112,14 +144,24 @@ h3 {
             font-weight: bold;
             color: var(--header-color);
         }
+        &:hover,
+        &:focus {
+          background-color: #eceff1;
+        }
     }
 }
 
 
-
 /****description bottom of the map */
 .mapDescription {
-    padding: .5em;
+    padding: 0px;
+    & .mapCoords {
+        font-weight: bold;
+    }
+    & .wikiDescription {
+        padding-top: 2px;
+        
+    }
 }
 
 /* This is the Search area */
@@ -174,10 +216,11 @@ h3 {
         padding: .5em;
     }
     a {
-        color: black;
+  
         padding: 5px;
         margin: 2px;
         transition: .5s;
+        text-decoration: none !important;
         &:hover,
         &:focus {
             background: white;
@@ -188,12 +231,13 @@ h3 {
     ul {
         display: flex;
         flex-wrap: wrap;
-        list-style: none;
+        list-style: none !important;
         justify-content: left;
     }
     li {
         text-align: center;
         line-height: 2em;
+        list-style: none !important;
     }
     .gwg-link {
         font-size: 1.5em;
@@ -247,7 +291,7 @@ h3 {
             "search places"
             "map places"
             "desc places";
-        grid-gap: 1.3em;
+        grid-gap: .5em;
     }
     .searchContainer {
         grid-area: search;
@@ -267,6 +311,7 @@ h3 {
     }
     .mapDescription {
         grid-area: desc;
+        align-items: start;
     }
     .mapPlaces {
         grid-area: places;

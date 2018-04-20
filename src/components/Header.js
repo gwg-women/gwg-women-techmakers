@@ -3,6 +3,7 @@ import db from '../db'
 import {getCity} from '../services/geolocation.js';
 import {getWeather} from '../services/weather.js';
 import {GoogleApiWrapper} from 'google-maps-react';
+import Image from '../img/24.png';
 
 class HeaderContainer extends Component {
   constructor(props){
@@ -123,7 +124,7 @@ class HeaderContainer extends Component {
   
     return(
       <h1>
-        {message}
+         <img src={Image} alt='' /> Welcome to Mappa. {message}
       </h1>
     );
   }

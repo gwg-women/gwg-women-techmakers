@@ -19,5 +19,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "now-start": "serve --single ./build"
+  },
+  "devDependencies": {
+    "react-axe": "^3.0.1"
   }
 }

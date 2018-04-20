@@ -55,7 +55,7 @@ class App extends Component {
 
   // call method to read currentCity from header
   setCurrentCity(city){
-    city = city !== undefined ? `${city[0]},  ${city[1]}` : city;
+    city = city !== undefined? `${city}` : city;
     this.setState({city});
   }
 
@@ -102,10 +102,15 @@ class App extends Component {
           </div>
 
           <div className="mapDescription">
-            <p>{city}  Coordinates: {pos.lat}, {pos.lng}</p>
-            {city &&
+            <div className="mapCoords">
+              <p>{city}</p>
+              <p>Coordinates: {pos.lat}, {pos.lng}</p>
+            </div>
+            <div className="wikiDescription">
+              {city &&
                 <Wiki currentCity={city} />
-            }
+              }
+            </div>
           </div>
 
           <div className="mapPlaces">

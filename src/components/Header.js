@@ -15,28 +15,9 @@ class HeaderContainer extends Component {
 
   componentDidMount() {
     this.getMyLocation();
-
-    const that = this;
-    if (!navigator.online) {
-      db.weather.get(1, function(obj) {
-        that.setState({currentWeather: obj.temp})
-        }).catch(function(error){
-        console.log(error)
-      })
-
-      db.city.get(4, function(obj) {
-        that.setState({currentCity: obj.city})
-        console.log("state: " + that.state.currentCity)
-      }).catch(function(error){
-        console.log(error)
-      })
-    }
-    console.log(this.state.currentCity)
   }
 
-  componentWillUpdate(prevProps, prevState) {
-    console.log("prev" + prevState.currentCity)
-    console.log("current"+ this.state.currentCity)
+  componentWillUpdate(prevProps, prevState) {  
     if (prevState.currentCity !== this.state.currentCity) {
       this.props.setCurrentCity(this.state.currentCity);
     }
@@ -65,10 +46,7 @@ class HeaderContainer extends Component {
   }
 
   getMyLocation = () => {
-    const {
-      handleLocationChange,
-      setUserPosition
-    } = this.props;
+    const { handleLocationChange, setUserPosition } = this.props;
     const pos = {
         lat: parseFloat(localStorage.getItem('lat')),
         lng: parseFloat(localStorage.getItem('lng'))
@@ -78,7 +56,7 @@ class HeaderContainer extends Component {
     setUserPosition(pos);
     // ***Get Location from Cache
     if (pos.lat && pos.lng) {
-       this.getCityWeather(pos.lat, pos.lng);
+    this.getCityWeather(pos.lat, pos.lng);
     }
 
 
@@ -88,10 +66,7 @@ class HeaderContainer extends Component {
 
     // ***Get Location from getCurrentPosition
     const currentLocation = (position) => {
-      const {
-        handleLocationChange,
-        setUserPosition
-      } = this.props
+      const { handleLocationChange, setUserPosition } = this.props
 
       const pos = {
         lat: position.coords.latitude,
@@ -111,16 +86,31 @@ class HeaderContainer extends Component {
     } else {
       alert('Sorry your browser doesn\'t support the Geolocation API');
     }
+
   }
   
   render () {
-    
+    const that = this;
+    if (!navigator.online) {
+      db.weather.get(1, function(obj) {
+        that.setState({currentWeather: obj.temp})
+        }).catch(function(error){
+        console.log(error)
+      })
+
+      db.city.get(2, function(obj) {
+        that.setState({currentCity: obj.city})
+        console.log("state: " + that.state.currentCity)
+      }).catch(function(error){
+        console.log(error)
+      })
+    }
+
     const {currentCity, currentWeather} = this.state;
-    console.log(currentCity)
     const message = (this.state.currentCity && this.state.currentWeather)
-    ? `Welcome to Mappa. You're in ${currentCity}. It is currently ${currentWeather}°F`
+    ? `You're in ${currentCity}. It is currently ${currentWeather}°F`
     : 
-    `Welcome to Mappa. It is currently ${currentWeather}°F. You're in ${currentCity}.`;
+    `It is currently ${currentWeather}°F. You're in ${currentCity}.`;
   
     return(
       <h1>
@@ -128,6 +118,7 @@ class HeaderContainer extends Component {
       </h1>
     );
   }
+
 }
 
 export default GoogleApiWrapper({

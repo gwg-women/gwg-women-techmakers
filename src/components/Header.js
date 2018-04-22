@@ -110,7 +110,7 @@ class HeaderContainer extends Component {
     const message = (this.state.currentCity && this.state.currentWeather)
     ? `You're in ${currentCity}. It is currently ${currentWeather}°F`
     : 
-    `It is currently ${currentWeather}°F. You're in ${currentCity}.`;
+    ``;
   
     return(
       <h1>

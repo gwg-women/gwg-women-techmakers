@@ -44,9 +44,7 @@ class App extends Component {
   }
 
   handleLocationChange(pos){
-    this.setState({
-      pos
-    })
+    this.setState({pos})
   }
 
   handleLoad(places){

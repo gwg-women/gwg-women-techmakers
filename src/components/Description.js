@@ -1,64 +1,63 @@
 import React, { Component } from 'react';
 
 export class Wiki extends Component {
-    constructor(props){
-        super(props);
-
-      this.state = {
+  constructor(props){
+    super(props);
+    this.state = {
         requestFailed: false,
       }
-
     }
+
+  componentWillMount() {
+    this.getData();
+  }
 
   // the callback for fetching the information
-    getData(){
 
-        const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${this.props.currentCity}`;
+  getData(){
+    const link = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
+    const url = link + this.props.currentCity;
+    fetch(url)
+    .then(response => {
+      if(response.ok) return response;
 
-        fetch(url)
-        .then(response => {
-            if(!response.ok){
-                
-                  this.setState({
-                    requestFailed: true
-                  })
-                
-                console.log('error retrieving wiki information')
-            }
-            return response
-        })
-        .then(data => data.json()).then(data =>
-          {
-            this.setState({
-                currentCity: this.props.currentCity,
-                description: data.extract,
-            })
-        })
-        
-    }
-    componentWillMount() {
-      this.getData();
+      else if (!response.ok) {
+        let location = this.props.currentCity;
+        location = location.split(',').map(string => string.trim());
+        location = `${[location[location.length -2]]}, ${[location[location.length -1]]}`;
+        return fetch(link + location)
+      }
+
+    })
+    .then(response => {
+      if (response.ok) return response;
+      else if (!response.ok) {
+        let location = this.props.currentCity;
+        location = location.split(',');
+        location = location[location.length -1];
+        return fetch(link + location)
+      }
+    })
+    .then(data => data.json())
+    .then(data => {
+      this.setState({
+        currentCity: this.props.currentCity,
+        description: data.extract_html,
+      })
+    })
+    .catch(error => {
+    console.log(error)
+    })
+  }
+
+  render(){
+
+    const {description} = this.state;
+
+    return (
+      <div className="wikiDescription" dangerouslySetInnerHTML={{ __html: description}} />
+    )
+  }
 }
-
-    
-    render(){
-      
-
-        if (this.state.requestFailed === true) return <h1>Wiki Request Failed</h1>
-
-        const description = this.state.description;
-    
-        return (
-
-          <p>
-          {description}
-          </p> 
-          
-
-        )
-    }
-}
-
-
 
 export default Wiki;

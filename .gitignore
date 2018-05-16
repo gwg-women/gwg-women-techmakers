@@ -66,5 +66,7 @@ dist/
 # vs code
 .vscode/
 
-# yarn 
+# yarn
 yarn.lock
+
+.DS_Store

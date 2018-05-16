@@ -1,39 +1,17 @@
-import React, { Component } from 'react';
-import { GoogleApiWrapper, } from 'google-maps-react';
-import PlacesListItem from './PlacesListItem.js'
+import React from 'react';
+import { GoogleApiWrapper } from 'google-maps-react';
+import Listing from "./Listing";
 
-const Listing = ({places}) => {
+const Container = (props) => {
+  const {pos} = props;
+    
+  if (!pos) {
+    return <div>Loading...</div>
+  }
+
   return (
-    <ul>
-      {places && places.map(p => {
-        return (
-          <PlacesListItem key={p.id} place={p} />
-        )
-      })}
-    </ul>
+    <Listing data={props}/>
   )
-}
-
-class Container extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      places: [],
-     // pos:{}
-    }
-  }
-
-  render(){
-    if (!this.props.pos) {
-      return <div>Loading...</div>
-    }
-
-    return (
-         <Listing places={this.props.places} />
-    )
-  }
-
 }
 
 export default GoogleApiWrapper({

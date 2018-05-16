@@ -9,7 +9,7 @@ export function getWeather(lat, lng){
             console.log('Please set up your weather key to return weather details.');
             reject();
         } else {
-            const url = `http://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?units=Imperial&lat=${lat}&lon=${lng}&APPID=${weather_api}`;
     
             http.get(url, (res) => {
                 res.setEncoding('utf8');

@@ -29,6 +29,7 @@ class HeaderContainer extends Component {
     });
 
     getWeather(latitude, longitude).then((weather) => {
+      weather = Math.round(weather);
       this.setState({currentWeather: weather})
     }).catch(function(err){
       console.log('Error retrieving the current weather: ', err);
@@ -102,4 +103,6 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GKEY),
   libraries: ['places'],
   version: '3'
+
 })(HeaderContainer)
+
